@@ -1,0 +1,24 @@
+html[data-theme="theme1"] {
+  /* --color-hBg: #dddaf8; */
+
+  /* //-- Загальні */
+  --color-bodyBg: #eeeef9;
+  --color-bodyText: #060214;
+
+  /* //-- headTape ------------ */
+  --color-hTapeBg: #6858f8;
+  --color-hTapeText: #fff;
+
+  /* //-- head ---------------- */
+  --color-hBg: #dddaf8;
+  --color-hBgHov: #c4c0e3;
+  --color-hText: #5a45f7;
+  --color-hTextHov: #4830fc;
+  --color-hTextImg: #d5d0f6;
+  --color-hTextImg1: #7c6bf7;
+  --color-hBorder: #c4c0e3;
+
+  /*  //-- drawer -------------------------------------------- */
+  --color-drawDropMenuBg: #e2e0f4;
+  --color-drawDropHr: #c4c0e3;
+}
