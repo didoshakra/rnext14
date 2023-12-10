@@ -4,7 +4,7 @@
 const HeaderTape = () => {
 
   return (
-    <div className="h-18 mx-auto my-auto mt-1 flex w-full flex-col justify-start  overflow-hidden bg-hTapeBg px-2 text-sm text-hTapeText dark:bg-hTapeBgD dark:text-hText md:h-6 md:flex-row md:justify-between ">
+    <div className="h-18 mx-auto my-auto mt-1 flex w-full flex-col justify-start  overflow-hidden bg-hTapeBg px-1 text-sm text-hTapeText dark:bg-hTapeBgD dark:text-hText md:h-6 md:flex-row md:justify-between md:px-2 ">
       <div className="flex justify-between space-x-1">
         <a
           className="flex items-center justify-start space-x-1 "
