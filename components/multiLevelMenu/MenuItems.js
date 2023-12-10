@@ -80,7 +80,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
           <>
             <button
               id={domId}
-              className="hover:text-itemHover flex no-underline"
+              className="hover:text-itemHover flex"
               type="button"
               aria-haspopup="menu" //тип інтерактивного спливаючого елемента
               aria-expanded={dropdown ? "true" : "false"} //елемент розгорнутий чи згорнутий
@@ -90,68 +90,11 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
               {items.title}
               {/* {dropdown ? <span> &raquo;</span> : <span> &#8595;</span>} */}
               {/* {dropdown ? <span> &#62;</span> : <span> &#8595;</span>} */}
-              <p onClick={onClick}>
-                {dropdown ? (
-                  // стрілка вверх
-                  <svg
-                    className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    {" "}
-                    <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="6 15 12 9 18 15" />
-                  </svg>
-                ) : (
-                  // стрілка вниз
-                  <svg
-                    className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    {" "}
-                    <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                )}
-              </p>
-            </button>
-            <Dropdown
-              depthLevel={depthLevel}
-              submenus={items.submenu}
-              dropdown={dropdown}
-              setDrawerOpen={setDrawerOpen}
-            />
-          </>
-        ) : // Субменю без посилання
-        items.submenu && depthLevel > 0 ? (
-          <>
-            <button
-              id={domId}
-              //   className="  hover:text-itemHover"
-              //   className="menu-items-button  hover:text-itemHover"
-              className={`${styleColor}  hover:text-itemHover flex text-center `}
-              type="button"
-              aria-haspopup="menu" //тип інтерактивного спливаючого елемента
-              aria-expanded={dropdown ? "true" : "false"} //елемент розгорнутий чи згорнутий
-              // onClick={() => setDropdown((prev) => !prev)}
-              onClick={onClick}
-            >
-              {items.title}
+              {/* <p onClick={onClick}> */}
               {dropdown ? (
                 // стрілка вверх
                 <svg
-                  className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+                  className="h-6 w-6"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -167,7 +110,64 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
               ) : (
                 // стрілка вниз
                 <svg
-                  className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+                  className="h-6 w-6 "
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="6 9 12 15 18 9" />
+                </svg>
+              )}
+              {/* </p> */}
+            </button>
+            <Dropdown
+              depthLevel={depthLevel}
+              submenus={items.submenu}
+              dropdown={dropdown}
+              setDrawerOpen={setDrawerOpen}
+            />
+          </>
+        ) : // Субменю без посилання
+        items.submenu && depthLevel > 0 ? (
+          <>
+            <button
+              id={domId}
+              //   className="  hover:text-itemHover"
+              //   className="menu-items-button  hover:text-itemHover"
+              className={`${styleColor}  hover:text-itemHover flex text-center`}
+              type="button"
+              aria-haspopup="menu" //тип інтерактивного спливаючого елемента
+              aria-expanded={dropdown ? "true" : "false"} //елемент розгорнутий чи згорнутий
+              // onClick={() => setDropdown((prev) => !prev)}
+              onClick={onClick}
+            >
+              {items.title}
+              {dropdown ? (
+                // стрілка вверх
+                <svg
+                  className="h-6 w-6"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="6 15 12 9 18 15" />
+                </svg>
+              ) : (
+                // стрілка вниз
+                <svg
+                  className="h-6 w-6"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"

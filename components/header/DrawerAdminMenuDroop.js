@@ -1,31 +1,25 @@
-//DrawerHeaderMenuDroop.js
+//drawerAdminMenuDroop.js
 //Меню в Drawer з Header
 
 "use client"
 import { useState} from "react"
-import Link from "next/link"
-import { headMenu } from "./dataMenu"
+// import Link from "next/link"
+import MenuItems from "@/components/multiLevelMenu/MenuItems"
+import { menuAdmin} from "@/components/multiLevelMenu/dataMultilevelMenu"
 
-const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
-  const [drawerHeaderMenuDroopOpen, setDrawerHeaderMenuDroopOpen] = useState(false)
+
+const drawerAdminMenuDroop = ({ setDrawerOpen }) => {
+  const [drawerAdminMenuDroopOpen, setDrawerAdminMenuDroopOpen] = useState(false)
 
   const tagleMenu = () => {
-    setDrawerHeaderMenuDroopOpen(false)
+    setDrawerAdminMenuDroopOpen(false)
     setDrawerOpen(false)
   }
   //випадаюче меню Налаштувань
   const renderMenu = () => {
-    return headMenu.map((item, index) => {
-      return (
-        <li
-          className="flex list-none flex-nowrap  items-center text-base font-medium text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
-          key={index}
-          //   onClick={() => setDrawerHeaderMenuDroopOpen(false)}
-          onClick={() => tagleMenu()}
-        >
-          <Link href={`${item.link}`}>{item.a}</Link>
-        </li>
-      )
+    return menuAdmin.map((menu, index) => {
+      const depthLevel = 0
+      return <MenuItems items={menu} key={index} idKey={index} depthLevel={depthLevel} setDrawerOpen={setDrawerOpen} />
     })
   }
 
@@ -33,12 +27,12 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
     <div className="m-0 items-center pb-2 ">
       <button
         className="font-bold  group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
-        onClick={() => setDrawerHeaderMenuDroopOpen(!drawerHeaderMenuDroopOpen)}
+        onClick={() => setDrawerAdminMenuDroopOpen(!drawerAdminMenuDroopOpen)}
         title="меню"
       >
         {/* іконка мобільного меню */}
-        <p className="pl-2 text-lg font-medium italic  text-hText dark:text-hTextD ">Головне меню</p>
-        {drawerHeaderMenuDroopOpen ? (
+        <p className="pl-2 text-lg font-medium italic  text-hText dark:text-hTextD ">Меню Адміністратора</p>
+        {drawerAdminMenuDroopOpen ? (
           // стрілка вверх
           <svg
             className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
@@ -74,11 +68,11 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
       </button>
 
       {/* список головного меню */}
-      <div className={`${drawerHeaderMenuDroopOpen ? "relative" : "hidden"} pl-4 `}>
+      <div className={`${drawerAdminMenuDroopOpen ? "relative" : "hidden"} pl-4 `}>
         <ul>{renderMenu()}</ul>
       </div>
     </div>
   )
 }
 
-export default DrawerHeaderMenuDroop
+export default drawerAdminMenuDroop

@@ -100,16 +100,16 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
   return (
     <div className="m-0 items-center">
       <button
-        className="font-bold  group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
+        className="font-bold  group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD "
         onClick={() => setDrawerSocialMenuDroop(!drawerSocialMenuDroop)}
         title="меню"
       >
         {/* іконка мобільного меню */}
-        <p className="pl-8 text-lg font-medium italic  text-hText dark:text-hTextD ">Контакти</p>
+        <p className="pl-2 text-lg font-medium italic  text-hText">Контакти</p>
         {drawerSocialMenuDroop ? (
           // стрілка вверх
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -125,7 +125,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
         ) : (
           // стрілка вниз
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6 "
             width="24"
             height="24"
             viewBox="0 0 24 24"
