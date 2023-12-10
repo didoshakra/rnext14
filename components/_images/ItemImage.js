@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function ProductImag({ item, fill, width, height }) {
+export default function ItemImag({ item, fill, width, height }) {
   const [loading, setLoading] = useState(true);
 
   return (
@@ -15,12 +15,11 @@ export default function ProductImag({ item, fill, width, height }) {
           src={item.image}
           alt={item.title}
           fill
-        //   className={`object-contain duration-700 ease-in-out group-hover:opacity-75 ${
-        //     loading
-        //       ? "scale-110 blur-2xl grayscale"
-        //       : "scale-100 blur-0 grayscale-0"
-        //   }}`}
-        //   onLoad={() => setLoading(false)}
+          className={`object-contain duration-700 ease-in-out group-hover:opacity-75 ${
+            loading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"
+          }}`}
+            onLoad={() => setLoading(false)}
+        //   onLoad={(e) => console.log("ProductImag/onLoad/naturalWidth1=", e.target.naturalWidth)}
         />
       ) : (
         <Image
@@ -28,15 +27,14 @@ export default function ProductImag({ item, fill, width, height }) {
           alt={item.title}
           width={width}
           height={height}
-        //   className={`object-contain duration-700 ease-in-out group-hover:opacity-75 ${
-        //     loading
-        //       ? "scale-110 blur-2xl grayscale"
-        //       : "scale-100 blur-0 grayscale-0"
-        //   }}`}
-        //   onLoad={() => setLoading(false)}
+          className={`object-contain duration-700 ease-in-out group-hover:opacity-75 ${
+            loading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"
+          }}`}
+            onLoad={() => setLoading(false)}
+        //   onLoad={(e) => console.log("ProductImag/onLoad/naturalWidth2=", e.target.naturalWidth)}
         />
       )}
       {/* </div> */}
     </>
-  );
+  )
 }

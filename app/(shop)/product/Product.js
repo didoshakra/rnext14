@@ -1,6 +1,6 @@
 //Ecomerc
 import Link from "next/link";
-import ProductImage from "../../../components/_images/ItemImage";
+import ItemImage from "@/components/_images/ItemImage";
 
 export default function Product({ product }) {
   //   console.log("************Product.js/product=", product)
@@ -12,7 +12,7 @@ export default function Product({ product }) {
     //   className="group flex h-96 flex-col rounded border p-5 transition-transform duration-200 ease-out hover:scale-105"
     >
       <div className="relative max-h-72 flex-1">
-        <ProductImage item={product} fill />
+        <ItemImage item={product} fill />
       </div>
 
       <div className="mb-1 mt-4 px-2 flex items-center justify-between font-semibold">
