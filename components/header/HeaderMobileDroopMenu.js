@@ -84,7 +84,7 @@ const HeaderMobileDroopMenu = () => {
       >
         <ul
           //   ref={ref_HeaderMobileDroopMenu}
-          className=" rounded-lg border border-menuBorder  bg-hBg p-1 drop-shadow-md dark:border-menuBorder dark:bg-hBgD"
+          className=" rounded-lg border border-hBorder  bg-hBg p-1 drop-shadow-md dark:border-hBorder dark:bg-hBgD"
         >
           {renderMenu()}
         </ul>

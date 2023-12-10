@@ -47,31 +47,9 @@ export const menuAdmin = [
           },
         ],
       },
-      {
-        id: 1,
-        title: "Документи",
-        submenu: [
-          {
-            id: 2,
-            title: "Продажі",
-            submenu: [
-              {
-                id: 3,
-                title: "Товарні чеки (doc_check_head)",
-                url: "/shop/docs/doc_check_head",
-              },
-              //   {
-              //     id: 4,
-              //     title: "Товарний чек/товари(doc_check_products))",
-              //     url: "/shop/docs/doc_check_products",
-              //   },
-            ],
-          },
-        ],
-      },
     ],
   },
-]
+];
 export const menuDocuments = [
   {
     id: 1,
