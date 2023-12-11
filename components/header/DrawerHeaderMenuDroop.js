@@ -18,7 +18,7 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
     return headMenu.map((item, index) => {
       return (
         <li
-          className="flex list-none flex-nowrap  items-center text-base font-medium text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+          className="flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
           key={index}
           //   onClick={() => setDrawerHeaderMenuDroopOpen(false)}
           onClick={() => tagleMenu()}
@@ -32,7 +32,7 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
   return (
     <div className="m-0 items-center pb-2 ">
       <button
-        className="font-bold  group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
+        className="group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
         onClick={() => setDrawerHeaderMenuDroopOpen(!drawerHeaderMenuDroopOpen)}
         title="меню"
       >

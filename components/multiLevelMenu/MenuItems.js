@@ -18,7 +18,6 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
     const handler = (event) => {
       //чи клацнули за межами спадного списку
       if (dropdown && ref.current && !ref.current.contains(event.target)) {
-        // alert("Клік поза елементом");
         setDropdown(false)
       } else {
         // чи клацнули по елементу, який відкрив  спадний список
@@ -52,10 +51,12 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
   //     dropdown && setDropdown(false)
   //   }
 
+
+
   const onClick = (e) => {
+    // console.lg("MenuItems/onClick/id=", e.currentTarget.id);
     setDropdown(true)
-    // console.log("MenuItems/onClick/id=", e.currentTarget.id);
-    console.log("MenuItems/onClick/id=", e.currentTarget.id);
+    console.log("MenuItems/onClick/id=", e.currentTarget.id)
     setCurrentID(e.currentTarget.id)
   }
 
@@ -67,7 +68,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
     <li
       key={domId}
       id={domId}
-      className="duration-300 ease-in-out text-base"
+      className="duration-300 ease-in-out text-base w-full border border-2 border-l-pink-600"
       //   className="relative bg-orange-300 text-base text-${depthLevel}"
       //   className="text-${depthLevel} relative text-base"
       ref={ref}

@@ -100,7 +100,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
   return (
     <div className="m-0 items-center">
       <button
-        className="font-bold  group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD "
+        className="group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD "
         onClick={() => setDrawerSocialMenuDroop(!drawerSocialMenuDroop)}
         title="меню"
       >
@@ -141,7 +141,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
         )}
       </button>
 
-      <div className={`${drawerSocialMenuDroop ? "relative" : "hidden"}  text-base font-medium px-2`}>
+      <div className={`${drawerSocialMenuDroop ? "relative" : "hidden"}  text-base font-normal px-2`}>
         <div>{renderMenu()}</div>
       </div>
     </div>
@@ -149,3 +149,4 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
 }
 
 export default DrawerSocialMenuDroop
+

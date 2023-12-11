@@ -44,18 +44,18 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
       if (!ref_HeaderThemesDroopMenu.current?.contains(event.target)) {
         // alert("Outside Clicked.");
         // console.log("Outside Clicked. ");
-        setThemesMenuOpen(false);
-        setSetingThemesMenuOpen(false);
+        setThemesMenuOpen(false)
+        setSetingThemesMenuOpen(false)
         // if (setSetingMenuOpen) setSetingMenuOpen(false);
       }
-    };
+    }
 
-    window.addEventListener("mousedown", handleOutSideClick);
+    window.addEventListener("mousedown", handleOutSideClick)
 
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
-    };
-  }, [ref_HeaderThemesDroopMenu]);
+      window.removeEventListener("mousedown", handleOutSideClick)
+    }
+  }, [ref_HeaderThemesDroopMenu, setThemesMenuOpen, setSetingThemesMenuOpen])
 
   //випадаюче меню Налаштувань
   const setSetingThemesMenuToggle = () => {
