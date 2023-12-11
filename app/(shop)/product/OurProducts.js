@@ -21,8 +21,8 @@ function ProductVeg({ item }) {
               {item.discontProc}%
             </div>
           )}
-          {/* <ItemImage item={item} width={350} height={280} /> */}
-          <ItemImage item={item} fill />
+          <ItemImage item={item} width={350} height={280} />
+          {/* <ItemImage item={item} fill /> */}
         </>
       </div>
 

@@ -19,8 +19,8 @@ function ProductVeg({ item }) {
           {item.discontProc > 0 && (
             <div className="absolute left-0 top-0 z-10 inline bg-hTapeBg text-base text-white">{item.discontProc}%</div>
           )}
-          {/* <ItemImage item={item} width={350} height={280} /> */}
-          <ItemImage item={item} fill />
+          <ItemImage item={item} width={350} height={280} />
+          {/* <ItemImage item={item} fill /> */}
         </>
       </div>
 

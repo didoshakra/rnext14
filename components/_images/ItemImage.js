@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function ItemImag({ item, fill, width, height }) {
   const [loading, setLoading] = useState(true);
-    console.log("ItemImag/item= ", item)
+    // console.log("ItemImag/item= ", item)
 
 
   return (
