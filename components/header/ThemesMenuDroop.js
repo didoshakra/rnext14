@@ -23,17 +23,17 @@ const ThemesMenuDroop = ({
         // alert("Outside Clicked.");
         // console.log("Outside Clicked. ");
         // setSetingMenuOpen(false);
-        setSetingThemesMenuOpen(false);
-        setThemesMenuOpen(false);
+        setSetingThemesMenuOpen(false)
+        setThemesMenuOpen(false)
       }
-    };
+    }
 
-    window.addEventListener("mousedown", handleOutSideClick);
+    window.addEventListener("mousedown", handleOutSideClick)
 
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
-    };
-  }, [ref_ThemesMenuDroop]);
+      window.removeEventListener("mousedown", handleOutSideClick)
+    }
+  }, [ref_ThemesMenuDroop, setSetingThemesMenuOpen, setThemesMenuOpen])
 
   const togleThemeDefault = (e) => {
     changeTheme("");

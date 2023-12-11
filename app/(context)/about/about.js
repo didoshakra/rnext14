@@ -1,4 +1,5 @@
 //About.js
+import Image from 'next/image';
 import { useContext } from "react";
 import { ComponentContext } from "../../context/ComponentContext";
 import Layout from "../../components/main/Layout";
@@ -10,10 +11,7 @@ const About = () => {
   const { t } = useTranslation();
   return (
     // <Layout title="Shops">
-    <Layout
-      title={t("pageAboutMe_title")}
-      description={t("pageAboutMe_description")}
-    >
+    <Layout title={t("pageAboutMe_title")} description={t("pageAboutMe_description")}>
       <div className="conteiner">
         {/* //<div>-потрібен для того що чітко окреслити розміри внутрішнього контейнера */}
         <div className="paper">
@@ -21,7 +19,8 @@ const About = () => {
           <div className="card__list">
             <div className="card__item">
               <h3 id="m1">{t("pageAboutMe_firstShop")}</h3>
-              <img src="/shops/Ctan2-500-375.jpg" alt="Ctan2" />
+              {/* <Image src="/shops/Ctan2-500-375.jpg" alt="Ctan2" width={100} height={24} priority /> */}
+              <Image src="/shops/Ctan2-500-375.jpg" alt="Ctan2" fill priority />
               <p>{t("pageShops_m1Descr")}</p>
             </div>
             <div className="card__item">
@@ -116,7 +115,7 @@ const About = () => {
         }
       `}</style>
     </Layout>
-  );
+  )
 };
 
 export default About;

@@ -64,19 +64,20 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
       {/* --- Список меню --<hr Divider/Роздільник-------------------------------- */}
       <hr className="h-0.5 min-w-full mt-2 bg-drawDropHr" />
       <DrawerHMenuDroop setDrawerOpen={setDrawerOpen} />
+      {/* ----------------------------------------------------------- */}
       <hr className="h-0.5 min-w-full bg-drawDropHr" />
+      <DrawerAdminMenuDroop setDrawerOpen={setDrawerOpen} />
+      {/* ----------------------------------------------------------- */}
+      <hr className="h-0.5 min-w-full bg-drawDropHr" />
+      {/* ----------------------------------------------------------- */}
+      <DrawerSocialMenuDroop />
       {/* <Navbar multilevelMenu={menuBig} title={"Багаторівнневе пробне меню"} setDrawerOpen={setDrawerOpen} /> */}
       {/* <hr className="h-0.5 min-w-full bg-drawDropHr" /> */}
-      <DrawerAdminMenuDroop setDrawerOpen={setDrawerOpen} />
       {/* <hr className="h-0.5 min-w-full bg-drawDropHr" /> */}
       {/* <Navbar multilevelMenu={menuAdmin} title={"Адмін"} setDrawerOpen={setDrawerOpen} /> */}
       {/* ----------------------------------------------------------- */}
       {/* <hr className="h-0.5 min-w-full bg-drawDropHr" /> */}
       {/* <Navbar multilevelMenu={menuDocuments} title={"Документи"} setDrawerOpen={setDrawerOpen} /> */}
-
-      <hr className="h-0.5 min-w-full bg-drawDropHr" />
-      {/* ----------------------------------------------------------- */}
-      <DrawerSocialMenuDroop />
     </div>
   )
 }

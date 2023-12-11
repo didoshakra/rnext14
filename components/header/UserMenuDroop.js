@@ -18,16 +18,16 @@ const UserMenuDroop = ({ setUserMenuOpen, setSetingMenuOpen }) => {
         // alert("Outside Clicked.");
         // console.log("Outside Clicked. ");
         // setSetingMenuOpen(false);
-        setUserMenuOpen(false);
+        setUserMenuOpen(false)
       }
-    };
+    }
 
-    window.addEventListener("mousedown", handleOutSideClick);
+    window.addEventListener("mousedown", handleOutSideClick)
 
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
-    };
-  }, [ref_UserMenuDroop]);
+      window.removeEventListener("mousedown", handleOutSideClick)
+    }
+  }, [ref_UserMenuDroop, setUserMenuOpen])
 
   const loginToggle = (e) => {
     // setLangMenuOpen(!langMenuOpen)
