@@ -2,11 +2,11 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { menuAdmin, menuDocuments, menuBig } from "@/components/multiLevelMenu/dataMultilevelMenu"
-import Navbar from "@/components/multiLevelMenu/Navbar"
+// import { menuAdmin, menuDocuments, menuBig } from "@/components/multiLevelMenu/dataMultilevelMenu"
+// import Navbar from "@/components/multiLevelMenu/Navbar"
 import DrawerHMenuDroop from "@/components/header/DrawerHeaderMenuDroop"
 import DrawerSocialMenuDroop from "@/components/header/DrawerSocialMenuDroop"
-import DrawerAdminMenuDroop from "@/components/header/DrawerAdminMenuDroop"
+// import DrawerAdminMenuDroop from "@/components/header/DrawerAdminMenuDroop"
 //***************************************************************** */
 export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
   //
@@ -67,7 +67,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
       <hr className="h-0.5 min-w-full bg-drawDropHr" />
       {/* <Navbar multilevelMenu={menuBig} title={"Багаторівнневе пробне меню"} setDrawerOpen={setDrawerOpen} /> */}
       {/* <hr className="h-0.5 min-w-full bg-drawDropHr" /> */}
-      <DrawerAdminMenuDroop setDrawerOpen={setDrawerOpen} />
+      {/* <DrawerAdminMenuDroop setDrawerOpen={setDrawerOpen} /> */}
       {/* <hr className="h-0.5 min-w-full bg-drawDropHr" /> */}
       {/* <Navbar multilevelMenu={menuAdmin} title={"Адмін"} setDrawerOpen={setDrawerOpen} /> */}
       {/* ----------------------------------------------------------- */}
