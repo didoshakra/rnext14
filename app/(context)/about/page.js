@@ -1,14 +1,42 @@
-// export const metadata = {
-//   title: "About",
-//   description: "About",
-// }
+//About.js
+import ItemImage from "@/components/_images/ItemImage"
 
-export default function About() {
-  return (
-    <main className="mx-auto mb-10 ">
-      <h1 className=" dark:text-hTextD text-center text-4xl font-bold text-hText">
-        About
-      </h1>
-    </main>
-  );
+const pageAboutMe_text1 = `"Станіславський" - мережа невеличких продуктових магазинів,
+    павільйонів і кіосків сімейного типу у м.Калуші. Перший наш магазин
+    відкрився у 2002 році який започаткував мережу "Станіславський", що тепер налічує
+    7 торгових точок.
+    З тих пір ми дбаємо про якість бренду "Станіславський", надаючи нашим покупцям
+    високу якість обслуговування та даруючи їм відчуття сімейного затишку та
+    повного задоволення. Ми завжди дбаємо про те, щоб наш покупець
+    залишав наші магазини тільки в хорошому настрої і з позитивними
+    емоціями. Ну і звичайно ж, з повними сумками якісних продуктів"`
+
+const pageAboutMe_text2 = `Щоро запрошуємо відвідати наші торгові точки. Ви не пошкодуєте!!!`
+
+export const item = {
+  title: "магазин Станіславський",
+  image: "/images/mstan/shops/Ctan2-500-375.jpg",
 }
+
+const About = () => {
+  console.log("About/item= ", item)
+  return (
+      <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText">
+        <h2 className=" text-4xl italic font-bold">Про нас</h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="relative h-96 flex-1">
+            {/* <ItemImage item={item} width={350} height={280} /> */}
+            <ItemImage item={item} fill />
+          </div>
+          {/* //leading-6: висота лінії
+          tracking-wide: інтервал між літерами. */}
+          <div className=" text-left">
+            <p className="text-2xl leading-8 tracking-wide font-medium">{pageAboutMe_text1}</p>
+            <p className="text-xl pt-4 font-bold leading-6 tracking-wide">{pageAboutMe_text2}</p>
+          </div>
+        </div>
+      </section>
+  )
+}
+
+export default About

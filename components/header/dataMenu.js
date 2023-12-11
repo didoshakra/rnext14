@@ -16,7 +16,11 @@
      link: "/about",
    },
    {
+     a: "Наші магазини",
+     link: "/our_shops",
+   },
+   {
      a: "Examples",
      link: "/examples",
    },
- ];
+ ]
