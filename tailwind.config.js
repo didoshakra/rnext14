@@ -47,20 +47,20 @@ module.exports = {
         // iconTBorderD: "var(--color-iconTBorderD)", //"#E7F4E0", // "#f64532",
         // iconTBgHov: "var(--color-iconTBgHov)", //"#E7F4E0",
         // iconTBgHovD: "var(--color-iconTBgHovD)", //"#E7F4E0",
-        // iconTHovBgCol: "var(--color-iconTHovBgCol)", // "#82AE46", //Іконки
-        // iconTHovBgColD: "var(--color-iconTHovBgColD)", //"#fff", //
+        // iconTHovBg: "var(--color-iconTHovBg)", // "#82AE46", //Іконки
+        // iconTHovBgD: "var(--color-iconTHovBgD)", //"#fff", //
         // iconT1: "var(--color-iconT1)", //"var(--color-bodyeclipseBg)", //"black",
         // iconT1D: "var(--color-iconT1D)", // "black",   iconTHov: "var(--color-iconTHov)", //"#6B8E23", /
 
         //--  IconH /hesder(main,drawer,) --------------------------------------------
-        IconH: "var(--color-IconH)", //1 "#82AE46", "rgba(23,25,25,1)",
-        IconHD: "var(--color-IconHD)", //"#9de160", //"#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
-        IconHHov: "var(--color-IconHHov)",
-        IconHHovD: "var(--color-IconHHovD)", //"red",
-        IconHBg: "var(--color- IconHBg)", //"rgba(65,69,69,1)",
-        IconHBgD: "var(--color- IconHBgD)", //"rgba(65,69,69,1)",
-        IconHBgHov: "var(--color-IconHBgHov)", //"#C9DFA7",
-        IconHBgHovD: "var(--color-IconHBgHovD)", //"#E8EFD3",
+        // IconH: "var(--color-IconH)", //1 "#82AE46", "rgba(23,25,25,1)",
+        // IconHD: "var(--color-IconHD)", //"#9de160", //"#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
+        // IconHHov: "var(--color-IconHHov)",
+        // IconHHovD: "var(--color-IconHHovD)", //"red",
+        // IconHBg: "var(--color- IconHBg)", //"rgba(65,69,69,1)",
+        // IconHBgD: "var(--color- IconHBgD)", //"rgba(65,69,69,1)",
+        // IconHBgHov: "var(--color-IconHBgHov)", //"#C9DFA7",
+        // IconHBgHovD: "var(--color-IconHBgHovD)", //"#E8EFD3",
 
         //-- headTape --------------------------------------------
         hTapeText: "var(--color-hTapeText)",
@@ -119,25 +119,26 @@ module.exports = {
         //-- table (th/tr/нижній підсумок) ------------------------------------------
         tabThBorder: "var(--color-tabThBorder)", //"#babfc7", //ag_Grid border(шапка)
         tabThBorderD: "var(--color-tabThBorderD)", //"#dde2eb", //ag_Grid border-secondery)(між рядками)
-        tabTrBorder: "var(--color-tabTrBorder)", //"#babfc7", //ag_Grid border(шапка)
-        tabTrBorderD: "var(--color-tabTrBorderD)", // "#dde2eb", //ag_Grid border-secondery)(між рядками)
-        //
-        tabThTexCol: "var(--color-tabThTexCol)", //"rgb(31 41 55)", //-Заголовок(text-gray-800)
-        tabThTexColD: "var(--color-tabThTexColD)", //"#d3d3d3", //-Заголовок(text-gray-400)
-        tabThBgCol: "var(--color-tabThBgCol)", //"rgb(214 211 209)", //(bg-stone-300)
-        tabThBgColD: "var(--color-tabThBgColD)", // "rgb(31 41 55)", ///"rgb(156 163 175)",
+        tabThText: "var(--color-tabThText)", //"rgb(31 41 55)", //-Заголовок(text-gray-800)
+        tabThTextD: "var(--color-tabThTextD)", //"#d3d3d3", //-Заголовок(text-gray-400)
+        tabThBg: "var(--color-tabThBg)", //"rgb(214 211 209)", //(bg-stone-300)
+        tabThBgD: "var(--color-tabThBgD)", // "rgb(31 41 55)", ///"rgb(156 163 175)",
 
         //Рядки
-        tabTrTexColD: "var(--color-tabTrTexColD)", //"#FFF", //(text-slate-200)
-        tabTrBgColD: "var(--color-tabTrBgColD)", //"rgb(55 65 81)", //(bg-gray-700)
-        tabTrBgHovCol: "var(--color-tabTrBgHovCol)", //"rgb(231 229 228)", //При наведенні(bg-stone-200)
-        tabTrBgHovColD: "var(--color-tabTrBgHovColD)", //"rgb(107 114 128)", //(bg-gray-500)
-        tabTrBgEveCol: "var(--color-tabTrBgEveCol)", //"rgb(245 245 244)", //Парні(bg-stone-100)
-        tabTrBgEveColD: "var(--color-tabTrBgEveColD)", // "rgb(75 85 99)", //(bg-gray-600)
-        tabTrBgSelCol: "var(--color-tabTrBgSelCol)", // "#E8EFD3", //Вибрані рядки
-        tabTrBgSelColD: "var(--color-tabTrBgSelColD)", // "#6B8E23", //
-        tabTrBgSelHovCol: "var(--color-tabTrBgSelHovCol)", //"#C9DFA7", //
-        tabTrBgSelHovColD: "var(--color-tabTrBgSelHovColD)", //"#82AE46", //
+        tabTrBorder: "var(--color-tabTrBorder)", //"#babfc7", //ag_Grid border(шапка)
+        tabTrBorderD: "var(--color-tabTrBorderD)", // "#dde2eb", //ag_Grid border-secondery)(між рядками)
+        tabTrText: "var(--color-tabTrText)", //"#FFF", //(text-slate-200)
+        tabTrTextD: "var(--color-tabTrTextD)", //"#FFF", //(text-slate-200)
+        tabTrBg: "var(--color-tabTrBg)", //"rgb(55 65 81)", //(bg-gray-700)
+        tabTrBgD: "var(--color-tabTrBgD)", //"rgb(55 65 81)", //(bg-gray-700)
+        tabTrBgHov: "var(--color-tabTrBgHov)", //"rgb(231 229 228)", //При наведенні(bg-stone-200)
+        tabTrBgHovD: "var(--color-tabTrBgHovD)", //"rgb(107 114 128)", //(bg-gray-500)
+        tabTrBgEve: "var(--color-tabTrBgEve)", //"rgb(245 245 244)", //Парні(bg-stone-100)
+        tabTrBgEveD: "var(--color-tabTrBgEveD)", // "rgb(75 85 99)", //(bg-gray-600)
+        tabTrBgSel: "var(--color-tabTrBgSel)", // "#E8EFD3", //Вибрані рядки
+        tabTrBgSelD: "var(--color-tabTrBgSelD)", // "#6B8E23", //
+        tabTrBgSelHov: "var(--color-tabTrBgSelHov)", //"#C9DFA7", //
+        tabTrBgSelHovD: "var(--color-tabTrBgSelHovD)", //"#82AE46", //
 
         // // Card - картинка колір
         // cardBg: "var(--color-hBgD)",

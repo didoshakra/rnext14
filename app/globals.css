@@ -23,62 +23,105 @@
 
 @layer base {
   html {
-    /* Для меню вибору тем */
+    /*== Міняються в темах ===========*/
+    /*-- Загальні */
+    --color-bodyBg: #f1f7ed;
+    --color-bodyText: #060214;
+    /*-- headTape  */
+    --color-hTapeBg: #6b8e23;
+    --color-hTapeText: #fff;
+    /*-- head */
+    --color-hBg: #e3fad6;
+    --color-hBgHov: #c9dfa7;
+    --color-hText: #6b8e23;
+    --color-hTextHov: #354d05;
+    --color-hTextImg: #b6f943;
+    --color-hTextImg1: #8fdf04;
+    --color-hBorder: #dcdcdc;
+    /*-- drawer */
+    --color-drawDropMenuBg: #e7f4e0;
+    --color-drawDropHr: #6b8e23;
+
+    /*== Постійні (Тільки в globals.css) =====*/
+    /* -- Для меню вибору тем --*/
     --color-themeDefBg: #e7f4e0;
     --color-theme1Bg: #e2e0f4;
     --color-theme2Bg: #f4e0e9;
     --color-theme3Bg: #e9d92d;
-
-    /* //-- Загальні */
-    --color-bodyBg: #f1f7ed;
+    /*-- Загальні --*/
     --color-bodyBgD: #414545;
-    --color-bodyText: #060214;
     --color-bodyTextD: #fff;
-
     --color-errorMsg: #f21e08;
     --color-errorMsgD: #f21e08;
-    --color-bodyeclipseBg: rgba(0, 0, 0, 0.4);
+    --color-bodyeclipseBg: rgba(36, 12, 12, 0.4);
 
-    /* //--  IconH /hesder(main,drawer,)-- */
-    --color-IconH: #6b8e23;
+    /*-- IconH /hesder(main,drawer,)-- */
+    /* --color-IconH: #6b8e23;
     --color-IconHD: #6b8e23;
     --color-IconHHov: red;
     --color-IconHHovD: red;
     --color-IconHBg: #414545;
     --color-IconHBgD: #414545;
     --color-IconHBgHov: #c9dfa7;
-    --color-IconHBgHovD: #e8efd3;
+    --color-IconHBgHovD: #e8efd3;  */
 
-    /* //--- iconT /Table,Form,Card, */
-    --color-iconT: #f64532;
-    --color-iconTD: #f64532;
-
-    /* //-- headTape -------------------------------------------- */
-    --color-hTapeText: #fff;
+    /*-- headTape --*/
     --color-hTapeTextD: #6b8e23;
-    --color-hTapeBg: #6b8e23;
     --color-hTapeBgD: #000;
     --color-hTapeTextHov: red;
     --color-color-hTapeTextHovD: red;
     --color-hTapeTextBgHov: #82ae46;
     --color-hTapeTextBgHovD: #171919;
-
-    /* //-- head -------------------------------------------- */
-    --color-hBg: #e3fad6;
+    /*-- head ==*/
     --color-hBgD: #171919;
-    --color-hBgHov: #c9dfa7;
     --color-hBgHovD: #c9dfa7;
-    --color-hText: #6b8e23;
     --color-hTextD: #6b8e23;
-    --color-hTextHov: #354d05;
     --color-hTextHovD: #354d05;
-    /* --color-hTextImg: #fff; */
-    --color-hTextImg: #b6f943;
-    --color-hTextImg1: #8fdf04;
-    --color-hBorder: #dcdcdc;
     --color-hBorderD: #dcdcdc;
+    /*-- drawer -- */
+    --color-drawDropMenuBgD: #141313;
+    --color-drawDropHrD: #615f5f;
 
-    /* //-- headMenu / + Всі випадаючі з head меню ??? */
+    /* Table */
+    /*-- iconT /Table,Form,Card, --*/
+    --color-iconT: #f64532;
+    --color-iconTD: #f64532;
+    /*-- table (Head) -- */
+    --color-tabHTitle: #6b8e23;
+    --color-tabHTitleD: #6b8e23;
+    --color-tabHText: #000;
+    --color-tabHTextD: #ffff;
+    --color-tabHBg: #f8f8f8;
+    --color-tabHBgD: #222628;
+    /*-- table (th/tr/нижній підсумок)  */
+
+    /*--/th/ */
+    --color-tabThBorder: rgb(115 115 115);
+    --color-tabThBorderD: rgb(115 115 115);
+    --color-tabThText: rgb(31 41 55);
+    --color-tabThTextD: #d3d3d3;
+    --color-tabThBg: #d6d3d1;
+    --color-tabThBgD: #1f2937;
+
+    /*--/tr/ Рядки */
+    --color-tabTrBorder: #babfc7;
+    --color-tabTrText: #000;
+    --color-tabTrBg: #fff;
+    --color-tabTrBgEve: #f5f5f4;
+    --color-tabTrBgHov: #e7e5e4;
+    --color-tabTrBgSel: #c5c4c3;
+    --color-tabTrBgSelHov: #aaa9a8;
+      /*  */
+    --color-tabTrBorderD: #dde2eb;
+    --color-tabTrTextD: #fff;
+    --color-tabTrBgD: #374151;
+    --color-tabTrBgEveD: #4b5563;
+    --color-tabTrBgHovD: #707885;
+    --color-tabTrBgSelD: #677485;
+    --color-tabTrBgSelHovD: #8694a6;
+
+
+    /*-- ???? Всі випадаючі з head меню ??? */
     /* --color-menuBg: #e7f4e0;
     --color-menuBgD: #171919;
     --color-menuBgHov: #82ae46;
@@ -91,44 +134,6 @@
     --color-menuTextHovD: #fff;
     --color-menuTextAct: red;
     --color-menuTextActD: red; */
-
-    /*  //-- drawer -------------------------------------------- */
-    --color-drawDropMenuBg: #e7f4e0;
-    --color-drawDropMenuBgD: #141313;
-    --color-drawDropHr: #6b8e23;
-    --color-drawDropHrD: #615f5f;
-
-    /* //-- table (title/icons)-------------------------------------------- */
-    --color-tabHTitle: #6b8e23;
-    --color-tabHTitleD: #6b8e23;
-    --color-tabHText: #000;
-    --color-tabHTextD: #ffff;
-    --color-tabHBg: #f8f8f8;
-    --color-tabHBgD: #222628;
-
-    /* //-- table (th/tr/нижній підсумок)  */
-    --color-tabThBorder: #babfc7;
-    --color-tabThBorderD: #dde2eb;
-    --color-tabTrBorder: #babfc7;
-    --color-tabTrBorderD: #dde2eb;
-    /* /th/ */
-    --color-tabThTexCol: rgb(31 41 5l5);
-    --color-tabThTexColD: #d3d3d3;
-    --color-tabThBgCol: #d6d3d1;
-    --color-tabThBgColD: #1f2937;
-    /* //Рядки */
-    --color-tabTrTexCol: #000;
-    --color-tabTrTexColD: #fff;
-    --color-tabTrBgCol: #fff;
-    --color-tabTrBgColD: #374151;
-    --color-tabTrBgHovCol: #e7e5e4;
-    --color-tabTrBgHovColD: #6b7280;
-    --color-tabTrBgEveCol: #f5f5f4;
-    --color-tabTrBgEveColD: #4b5563;
-    --color-tabTrBgSelCol: #e8efd3;
-    --color-tabTrBgSelColD: #6b8e23;
-    --color-tabTrBgSelHovCol: #c9dfa7;
-    --color-tabTrBgSelHovColD: #82ae46;
   }
   @import "@/styles/themes/theme1.css";
   @import "@/styles/themes/theme2.css";

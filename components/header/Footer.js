@@ -5,12 +5,13 @@ const Footer = () => {
   return (
     <section className="mx-auto max-w-full bg-bodyBg dark:bg-bodyBgD">
       <div className=" flex items-center justify-center p-1">
+        {/* стрілка */}
         <a
           href="#"
-          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg  hover:bg-hBgHov dark:bg-hBgD dark:hover:bg-hBgHovD"
+          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg  hover:bg-hBgHov dark:bg-hBg dark:hover:bg-hBgHov"
         >
           <svg
-            className="h-10 w-10 text-IconH dark:text-IconHD"
+            className="h-10 w-10 text-hText"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -27,15 +28,16 @@ const Footer = () => {
       </div>
       <div className="flex w-full flex-col items-start justify-between pt-10 md:flex-row">
         <div className="relative flex flex-col items-start justify-start text-left">
-          <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hTextD">
+          <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hText">
             RAtest
           </h2>
           <ul className="flex items-center justify-between">
             <li className="flex  flex-row items-center justify-start px-4">
-              <a href="https://www.facebook.com/profile.php?id=100017742340573">
+              <a className="group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHov dark:hover:text-hTextHov"
+               href="https://www.facebook.com/profile.php?id=100017742340573">
                 {/* Facebook */}
                 <svg
-                  className="h-6 w-6 text-IconH dark:text-IconHD"
+                  className="h-6 w-6 "
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -58,7 +60,7 @@ const Footer = () => {
           <ul className="text-hText dark:text-hText">
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                className="h-6 w-6 text-IconH dark:text-IconHD"
+                className="h-6 w-6 "
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -81,7 +83,7 @@ const Footer = () => {
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               {/* phone */}
               <svg
-                className="h-6 w-6 text-IconH dark:text-IconHD"
+                className="h-6 w-6 "
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -102,7 +104,7 @@ const Footer = () => {
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               {/* phone */}
               <svg
-                className="h-6 w-6 text-IconH dark:text-IconHD"
+                className="h-6 w-6 "
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -122,7 +124,7 @@ const Footer = () => {
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                className="h-6 w-6 text-IconH dark:text-IconHD"
+                className="h-6 w-6 "
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -145,7 +147,7 @@ const Footer = () => {
         Copyright © {new Date().getFullYear()}-{new Date().getMonth()}-{new Date().getDate()}
         {/* Серце*/}
         <svg
-          className="text-iconT dark:text-iconTD h-6 w-6"
+          className=" h-6 w-6"
           width="24"
           height="24"
           viewBox="0 0 24 24"

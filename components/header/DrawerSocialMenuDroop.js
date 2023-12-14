@@ -12,13 +12,13 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
     return (
       <>
         <a
-          className="group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
           href="https://www.facebook.com/profile.php?id=100004339204236"
           title="Facebook"
         >
           {/* Facebook */}
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
             //   className="h-6 w-6 text-hText dark:text-hText"
             viewBox="0 0 24 24"
             fill="none"
@@ -33,13 +33,13 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
           <p>Facebook</p>
         </a>
         <a
-          className=" group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
           href="https://github.com/didoshakra?tab=repositories"
           title="IconGitHub"
         >
           {/* GitHub */}
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -53,7 +53,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
           <p>GitHub</p>
         </a>
         <a
-          className="group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
           href="https://twitter.com/home?lang=uk"
           title="Twitter"
         >
@@ -73,7 +73,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
           <p>Twitter</p>
         </a>
         <a
-          className="group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
           href="https://www.facebook.com/profile.php?id=100017742340573"
           title="Instagram"
         >
@@ -99,8 +99,8 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
 
   return (
     <div className="m-0 items-center">
-      <button
-        className="group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD "
+      <div
+        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
         onClick={() => setDrawerSocialMenuDroop(!drawerSocialMenuDroop)}
         title="меню"
       >
@@ -139,7 +139,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
             <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="6 9 12 15 18 9" />
           </svg>
         )}
-      </button>
+      </div>
 
       <div className={`${drawerSocialMenuDroop ? "relative" : "hidden"}  text-base font-normal px-2`}>
         <div>{renderMenu()}</div>

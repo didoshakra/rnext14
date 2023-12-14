@@ -3,7 +3,7 @@
 // Переробив стилі з https://flowbite.com/docs/components/pagination/
 //Величина шрифта успадковується від батька
 
-import { useEffect } from "react";
+import { useEffect } from "react"
 
 // range- //Масив сторінок [1,2,3...]
 // slice- //Рядки текучої сторінки (.slice-кусок масиву БД)
@@ -19,14 +19,14 @@ const TableFooter = ({
   // console.log("TableFooter/range=", range);
   useEffect(() => {
     if (slice.length < 1 && page !== 1) {
-      setPage(page - 1);
+      setPage(page - 1)
     }
-  }, [slice, page, setPage, rowsPerPage]);
+  }, [slice, page, setPage, rowsPerPage])
   return (
     <nav className="my-2 flex flex-wrap items-center justify-between ">
       <div className="flex ">
         <div
-          className="flex items-center justify-center rounded-lg border border-gray-300 bg-white px-2  leading-tight text-gray-500   dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+          className="flex items-center justify-center rounded-lg border  px-2  leading-tight border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabTrBorderD dark:bg-tabTrBg "
           title="Інформація про рядки"
         >
           <svg
@@ -39,48 +39,35 @@ const TableFooter = ({
             strokeLinejoin="round"
           >
             {" "}
-            <line x1="21" y1="10" x2="3" y2="10" />{" "}
-            <line x1="21" y1="6" x2="3" y2="6" />{" "}
-            <line x1="21" y1="14" x2="3" y2="14" />{" "}
-            <line x1="21" y1="18" x2="3" y2="18" />
+            <line x1="21" y1="10" x2="3" y2="10" /> <line x1="21" y1="6" x2="3" y2="6" />{" "}
+            <line x1="21" y1="14" x2="3" y2="14" /> <line x1="21" y1="18" x2="3" y2="18" />
           </svg>
           {/* Показано: */}
-          <span
-            className="mx-2  text-gray-900 dark:text-white"
-            title="Номери рядків, що показані"
-          >
-            {rowsPerPage * (page - 1)} -{" "}
-            {rowsPerPage * page > maxRow ? maxRow : rowsPerPage * page}
+          <span className="mx-2  text-tabTrText dark:text-tabTrTextD" title="Номери рядків, що показані">
+            {rowsPerPage * (page - 1)} - {rowsPerPage * page > maxRow ? maxRow : rowsPerPage * page}
           </span>
           of
-          <span
-            className="ml-2  text-gray-900 dark:text-white"
-            title="Всього рядків"
-          >
+          <span className="ml-2  text-tabTrText dark:text-tabTrTextD" title="Всього рядків">
             {maxRow}
           </span>
         </div>
         {/*  */}
         <div
-          className=" ml-1 flex  items-center rounded-lg border border-gray-300 bg-gray-50   px-2 dark:bg-gray-700"
+          className=" ml-1 flex  items-center rounded-lg border border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabTrBorderD dark:bg-tabTrBg"
           title="К-сть рядків на сторінку"
         >
-          <div className=" flex  items-center rounded-lg border border-gray-300 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </div>
+          {/* <div className=" flex  items-center"> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-5 w-5"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          {/* </div> */}
 
           {/* <p>На сторінці:</p> */}
           <select
@@ -103,16 +90,16 @@ const TableFooter = ({
       </div>
 
       {/* pages */}
-      <div className="text inline-flex -space-x-px ">
+      <div className=" text  inline-flex -space-x-px borderborder-tabTrBorder bg-tabTrBg text-tabTrText  dark:text-tabTrTextD   dark:border-tabTrBorderD dark:bg-tabTrBg">
         <a
-          className="flex items-center justify-center rounded-l-lg border border-gray-300 bg-white px-2 py-1 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="flex  rounded-l rounded-lg items-center justify-center  hover:bg-tabTrBgHov dark:hover:bg-tabTrBgHovD "
           onClick={() => {
-            if (page > 1) setPage(page - 1);
+            if (page > 1) setPage(page - 1)
           }}
           title="Попередня"
         >
           <svg
-            className="mr-2 h-3.5 w-3.5"
+            className="mr-2 h-4 w-4"
             aria_hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -138,10 +125,10 @@ const TableFooter = ({
           el === page - 1 ? (
             <li
               key={index}
-              className={`flex items-center justify-center border border-gray-300 px-2 leading-tight dark:border-gray-700 ${
+              className={`flex items-center justify-center border border-tabTrBorder px-2 leading-tight dark:border-tabTrBorderD ${
                 page === el
-                  ? "bg-hbg text-white   "
-                  : "bg-white  text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white "
+                  ? "bg-tabTrBg text-tabTrText  "
+                  : "bg-tabTrBg  text-tabTrText hover:bg-tabTrBg hover:text-tabTrText dark:bg-tabTrBgD dark:text-tabTrTextD dark:hover:bg-tabTrBgHov dark:hover:tabTrBgHovD "
               }  `}
               onClick={() => setPage(el)}
             >
@@ -150,25 +137,25 @@ const TableFooter = ({
           ) : el === page - 2 || el === page + 2 ? (
             <li
               key={index}
-              className="flex  items-center justify-center border border-gray-300 bg-white px-2 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 "
+              className="flex  items-center justify-center border border-tabTrBorder bg-tabTrBg px-2 leading-tight text-tabTrText dark:border-tabTrBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
             >
               ...
             </li>
           ) : (
             ""
-          ),
+          )
         )}
         <a
-          className="flex items-center justify-center rounded-r-lg border border-gray-300 bg-white px-2 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="rounded-r rounded-lg px-2 flex items-center justify-center  hover:bg-tabTrBgHov dark:hover:bg-tabTrBgHovD "
           onClick={() => {
             //   if (page < range.length) setPage(page + 1);
-            if (page < Math.max(...range)) setPage(page + 1);
+            if (page < Math.max(...range)) setPage(page + 1)
           }}
           title="Наступна"
         >
           {/* Next */}
           <svg
-            className="ml-2 h-3.5 w-3.5"
+            className="ml-2 h-4 w-4"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -185,7 +172,7 @@ const TableFooter = ({
         </a>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default TableFooter;
+export default TableFooter

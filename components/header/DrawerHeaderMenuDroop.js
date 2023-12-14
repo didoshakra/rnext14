@@ -31,17 +31,17 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
 
   return (
     <div className="m-0 items-center pb-2 ">
-      <button
-        className="group flex list-none flex-nowrap items-center space-x-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
+      <div
+        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
         onClick={() => setDrawerHeaderMenuDroopOpen(!drawerHeaderMenuDroopOpen)}
         title="меню"
       >
         {/* іконка мобільного меню */}
-        <p className="pl-2 text-lg font-medium italic  text-hText dark:text-hTextD ">Головне меню</p>
+        <p className="pl-2 text-lg font-medium italic  text-hText dark:text-hText ">Головне меню</p>
         {drawerHeaderMenuDroopOpen ? (
           // стрілка вверх
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
         ) : (
           // стрілка вниз
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -71,7 +71,7 @@ const DrawerHeaderMenuDroop = ({ setDrawerOpen }) => {
             <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="6 9 12 15 18 9" />
           </svg>
         )}
-      </button>
+      </div>
 
       {/* список головного меню */}
       <div className={`${drawerHeaderMenuDroopOpen ? "relative" : "hidden"} pl-4 `}>

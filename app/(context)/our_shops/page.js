@@ -53,15 +53,15 @@ function OurShop({ item }) {
   //   console.log("************Product.js/P/item=", item);
   return (
     <div className=" border-hBorder group flex h-96 flex-col rounded  border-2  bg-white transition-transform duration-200 ease-out hover:scale-105">
-      <div className="relative max-h-72 flex-1 ">
+      <div className="m-2 relative max-h-72 flex-1 ">
         <h3 className="text-center font-serif font-normal uppercase">{item.title}</h3>
-        <div className="flex pt-2 max-h-96 flex-1 w-full items-center justify-center">
+        <div className="flex m-2 max-h-96 flex-1 w-full items-center justify-center">
           {/* <ItemImage item={item} width={350} height={280} /> */}
           <ItemImage item={item} fill />
         </div>
       </div>
       {/*line-clamp-2: Для затиску тексту до певної кількості рядків. */}
-      <p className="pt-3 line-clamp-2 px-4 text-base italic text-hTexr">Адреса:{item.address}</p>
+      <p className="pt-3 line-clamp-2 px-4 text-base italic text-hTexr">Адреса: {item.address}</p>
     </div>
   )
 }

@@ -4,7 +4,7 @@
 //20231128- показувати що вводити в залежності від typeData
 //      - ввід в 2-а рядка фільтрів/якщо заповнений перший то показувати і другий???
 
-import { useState } from "react"; //Vers 7.0.X:<input {...register('test', { required: true })} />
+import { useState } from "react" //Vers 7.0.X:<input {...register('test', { required: true })} />
 
 export default function DroopFifterForm({
   filterDataRow, //Рядок, що коригується(в DropdownFilterForm)
@@ -12,7 +12,7 @@ export default function DroopFifterForm({
   filterData,
   setFilterData,
 }) {
-  const valueType = filterDataRow.type; //Тип поля, що фільтрується
+  const valueType = filterDataRow.type //Тип поля, що фільтрується
   const [state, setState] = useState({
     filterFirst: filterDataRow.filterFirst,
     filterLast: filterDataRow.filterLast,
@@ -42,10 +42,10 @@ export default function DroopFifterForm({
     // logical: "",
     // comparisonFirst: "",
     // comparisonLast: "",
-  });
+  })
 
-  console.log("DroopFifterForm.js/valueType=", valueType);
-  const [inputError, setInputError] = useState(null);
+  console.log("DroopFifterForm.js/valueType=", valueType)
+  const [inputError, setInputError] = useState(null)
 
   const handleSubmit = () => {
     //Контроль
@@ -53,35 +53,34 @@ export default function DroopFifterForm({
       // //   setInputError("Помилка! Не задані значення для 1-го фільтру");
       //   alert("Помилка! Не задані значення для 1-го фільтру");
       // } else {
-      const nRow = filterDataRow._nrow;
+      const nRow = filterDataRow._nrow
       //--- Записуємо filter в filtered масиву(filterData) --------
-      let tempData = [...filterData]; //Копія робочого масиву обєктів щоб рендерило зміни
+      let tempData = [...filterData] //Копія робочого масиву обєктів щоб рендерило зміни
       // const targetObj = filterData.find((obj) => obj._nrow === nRow); //не ререндерить зміни
-      const targetObj = tempData.find((obj) => obj._nrow === nRow); //Шукажм рядок по _nrow=nRow
+      const targetObj = tempData.find((obj) => obj._nrow === nRow) //Шукажм рядок по _nrow=nRow
       if (targetObj) {
         // Записує безпосередньо в масив ????//Треба змінювати через setFilterData бо не ререндерить зміни
         //   targetObj.filter1 = `${state.comparisonFirst}${state.filterFirst}`;
 
-        targetObj.comparisonFirst = state.comparisonFirst;
-        targetObj.filterFirst = state.filterFirst;
-        targetObj.logical = state.logical;
-        targetObj.comparisonLast = state.comparisonLast;
-        targetObj.filterLast = state.filterLast;
+        targetObj.comparisonFirst = state.comparisonFirst
+        targetObj.filterFirst = state.filterFirst
+        targetObj.logical = state.logical
+        targetObj.comparisonLast = state.comparisonLast
+        targetObj.filterLast = state.filterLast
         //   console.log("DroopFifterForm.js/handleEdit/filterData=", filterData);
-        setFilterData(tempData); //ререндерить зміни
+        setFilterData(tempData) //ререндерить зміни
       }
     }
-    setIsDropdownFilterForm(false);
+    setIsDropdownFilterForm(false)
     // }
-  };
+  }
 
   function handleChange(evt) {
-    const value =
-      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
+    const value = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
     setState({
       ...state,
       [evt.target.name]: value,
-    });
+    })
     // console.log("DroopFifterForm.js/handleChange/state=", state);
   }
 
@@ -91,8 +90,8 @@ export default function DroopFifterForm({
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
           <button
-            className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD mx-2 flex items-center rounded-full border border-gray-400 px-1"
-            //   className="rounded-full hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD"
+            className="hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD mx-2 flex items-center rounded-full border border-gray-400 px-1"
+            //   className="rounded-full hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD"
             //   onClick={() => handleEdit()}
             type="submit"
             title="Добавте значення"
@@ -107,19 +106,17 @@ export default function DroopFifterForm({
               strokeLinejoin="round"
             >
               {" "}
-              <polyline points="9 10 4 15 9 20" />{" "}
-              <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+              <polyline points="9 10 4 15 9 20" /> <path d="M20 4v7a4 4 0 0 1-4 4H4" />
             </svg>
           </button>
 
           {/* <header className="flex text-red-700 "> */}
           <header className="flex items-center text-black ">
-            *<label className="px-1">{filterDataRow.name}</label> * (
-            <label className="px-1">{valueType}</label>)
+            *<label className="px-1">{filterDataRow.name}</label> * (<label className="px-1">{valueType}</label>)
             {/* <label className="px-1">({filterDataRow.accessor})</label> */}
           </header>
           <button
-            className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD rounded-full border border-gray-400"
+            className="hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD rounded-full border border-gray-400"
             onClick={(e) => setIsDropdownFilterForm(false)}
             title="Вийти без збереження"
           >
@@ -133,8 +130,7 @@ export default function DroopFifterForm({
               strokeLinejoin="round"
             >
               {" "}
-              <line x1="18" y1="6" x2="6" y2="18" />{" "}
-              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
         </div>{" "}
@@ -260,5 +256,5 @@ export default function DroopFifterForm({
       </div>
     </div>
     // </div>
-  );
+  )
 }

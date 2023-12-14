@@ -1,6 +1,6 @@
 //About.js
-import ItemImage from "@/components/_images/ItemImage"
-import Image from 'next/image'
+// import ItemImage from "@/components/_images/ItemImage"
+import Image from "next/image"
 
 const pageAboutMe_text1 = `"Станіславський" - мережа невеличких продуктових магазинів,
     павільйонів і кіосків сімейного типу у м.Калуші. Перший наш магазин
@@ -20,15 +20,22 @@ export const item = {
 }
 
 const About = () => {
-//   console.log("About/item= ", item)
+  //   console.log("About/item= ", item)
   return (
     <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText">
       <h2 className=" text-4xl italic font-bold">Про нас</h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="flex justify-center relative h-96 flex-1">
+        <div className="flex justify-center relative h-60 md:h-96 flex-1">
           {/* <ItemImage item={item} width={500} height={370} /> */}
           {/* <ItemImage item={item} fill /> */}
-          <Image fill src={item.image} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+          {/* //Заповнює весь контейнер */}
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="w-full h-auto" //Заповнює весь контейнер або
+            // style={{ objectFit: "cover" }} //Заповнює весь контейнер
+          />
         </div>
         {/* //leading-6: висота лінії
           tracking-wide: інтервал між літерами. */}

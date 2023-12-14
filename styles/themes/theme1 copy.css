@@ -108,23 +108,23 @@ html[data-theme="theme1"] {
   --color-tabTrBorder: #babfc7;
   --color-tabTrBorderD: #dde2eb;
   /* /th/ */
-  --color-tabThTexCol: rgb(31 41 55);
-  --color-tabThTexColD: #d3d3d3;
-  --color-tabThBgCol: rgb(214 211 209);
-  --color-tabThBgColD: rgb(31 41 55);
+  --color-tabThText: rgb(31 41 55);
+  --color-tabThTextD: #d3d3d3;
+  --color-tabThBg: rgb(214 211 209);
+  --color-tabThBgD: rgb(31 41 55);
   /* //Рядки */
-  --color-tabTrTexCol: #000;
-  --color-tabTrTexColD: #fff;
-  --color-tabTrBgCol: rgb(255 255 255);
-  --color-tabTrBgColD: rgb(55 65 81);
-  --color-tabTrBgHovCol: rgb(231 229 228);
-  --color-tabTrBgHovColD: rgb(107 114 128);
-  --color-tabTrBgEveCol: rgb(245 245 244);
-  --color-tabTrBgEveColD: rgb(75 85 99);
-  --color-tabTrBgSelCol: #e8efd3;
-  --color-tabTrBgSelColD: #6b8e23;
-  --color-tabTrBgSelHovCol: #c9dfa7;
-  --color-tabTrBgSelHovColD: #82ae46;
-  --color-iconTHovBgCol: #82ae46;
-  --color-iconTHovBgColD: #fff;
+  --color-tabTrText: #000;
+  --color-tabTrTextD: #fff;
+  --color-tabTrBg: rgb(255 255 255);
+  --color-tabTrBgD: rgb(55 65 81);
+  --color-tabTrBgHov: rgb(231 229 228);
+  --color-tabTrBgHovD: rgb(107 114 128);
+  --color-tabTrBgEve: rgb(245 245 244);
+  --color-tabTrBgEveD: rgb(75 85 99);
+  --color-tabTrBgSel: #e8efd3;
+  --color-tabTrBgSelD: #6b8e23;
+  --color-tabTrBgSelHov: #c9dfa7;
+  --color-tabTrBgSelHovD: #82ae46;
+  --color-iconTHovBg: #82ae46;
+  --color-iconTHovBgD: #fff;
 }

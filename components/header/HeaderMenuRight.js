@@ -1,6 +1,7 @@
 //HeaderMenuRight  /Верхнє меню
 //Викликає меню(з іконоками) :UserSwitcher/ThemeSwitcher/LocaleSwitcher
 
+// import ThemeSwitcher from "./ThemeSwitcher"
 import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu";
 import UserSwitcher from "./UserSwitcher.js";
 import HeaderSetingDroopMenu from "./HeaderSetingDroopMenu";
@@ -15,8 +16,9 @@ const HeaderMenuRight = () => {
       <div className="hidden md:flex">
         {/* User */}
         <UserSwitcher />
-        {/* тема */}
+        {/* тема тільки світла/темна */}
         {/* <ThemeSwitcher /> */}
+        {/*Всі теми */}
         <HeaderThemesDroopMenu />
       </div>
       {/* Випадаюче меню Seting(мобільне) */}
@@ -24,7 +26,7 @@ const HeaderMenuRight = () => {
         <HeaderSetingDroopMenu />
       </div>
     </div>
-  );
+  )
 }
 
 export default HeaderMenuRight
