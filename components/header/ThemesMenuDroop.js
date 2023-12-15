@@ -35,13 +35,13 @@ const ThemesMenuDroop = ({
     }
   }, [ref_ThemesMenuDroop, setSetingThemesMenuOpen, setThemesMenuOpen])
 
-  const togleTheme = (neme) => {
-    console.log("ThemesMenuDroop.js/togleTheme/neme=", neme)
-    changeTheme(neme)
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
+//   const togleTheme = (neme) => {
+//     console.log("ThemesMenuDroop.js/togleTheme/neme=", neme)
+//     changeTheme(neme)
+//     setSetingThemesMenuOpen(false)
+//     setThemesMenuOpen(false)
+//     if (setSetingMenuOpen) setSetingMenuOpen(false)
+//   }
   const togleThemeDefault = (e) => {
     changeTheme("")
     setSetingThemesMenuOpen(false)
