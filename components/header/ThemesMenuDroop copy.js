@@ -1,21 +1,21 @@
 //ThemesMenuDroop.js
 //Саме випадаюче меню вибору палітри тем
 
-import { useRef, useEffect } from "react"
-import { changeTheme } from "@/utils/helper"
+import {useRef, useEffect } from "react";
+import { changeTheme } from "@/utils/helper";
 
 const ThemesMenuDroop = ({
   setSetingMenuOpen, //0-рівень
   setThemesMenuOpen, //1-рівень
   setSetingThemesMenuOpen, //2-рівень
 }) => {
-  // console.log(
-  //   "ThemesMenuDroop/document.querySelector(html)?.=",
-  //   document.querySelector("html".data-theme)
-  // );
+    // console.log(
+    //   "ThemesMenuDroop/document.querySelector(html)?.=",
+    //   document.querySelector("html".data-theme)
+    // );
 
   //   //*************Для клацання поза обєктом
-  const ref_ThemesMenuDroop = useRef(null)
+  const ref_ThemesMenuDroop = useRef(null);
 
   useEffect(() => {
     const handleOutSideClick = (event) => {
@@ -35,71 +35,36 @@ const ThemesMenuDroop = ({
     }
   }, [ref_ThemesMenuDroop, setSetingThemesMenuOpen, setThemesMenuOpen])
 
-  const togleTheme = (neme) => {
-    console.log("ThemesMenuDroop.js/togleTheme/neme=", neme)
-    changeTheme(neme)
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
   const togleThemeDefault = (e) => {
-    changeTheme("")
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
+    changeTheme("");
+    setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
+  };
   const togleTheme1 = (e) => {
-    changeTheme("theme1")
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
+    changeTheme("theme1");
+    setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
+  };
   const togleTheme2 = (e) => {
-    changeTheme("theme2")
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
+    changeTheme("theme2");
+    setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
+  };
   const togleTheme3 = (e) => {
-    changeTheme("theme3")
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
-  const togleTheme4 = (e) => {
-    changeTheme("theme4")
-    setSetingThemesMenuOpen(false)
-    setThemesMenuOpen(false)
-    if (setSetingMenuOpen) setSetingMenuOpen(false)
-  }
+    changeTheme("theme3");
+    setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
+  };
 
-//   const themes = [
-//     { name: "", bg: "#f3dc8c" },
-//     { name: "Тема1", bg: "#f4e0e9" },
-//     { name: "Тема2", bg: "#e2e0f4" },
-//     { name: "Тема3", bg: "#f3dc8c" },
-//     { name: "Тема4", bg: "#e2e0f4" },
-//   ]
-
-  //випадаюче меню Налаштувань
-  const renderMenu = () => {
-    return themes.map((item, index) => {
-      return (
-        <button
-          key={index}
-          className="w-full bg-themeDefBg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
-          onClick={(e) => togleTheme(item.name)}
-        >
-          {item.name}
-        </button>
-      )
-    })
-  }
+components/header/ThemesMenuDroop.js
   return (
     <div ref={ref_ThemesMenuDroop} className="absolute right-0 z-10 m-0 p-0">
       <div className="grid place-items-center rounded-lg border border-hBorder bg-hBg drop-shadow-md dark:border-hBorderD dark:bg-hBgD">
         <div>
-          {/* <ul>{renderMenu()}</ul> */}
           <button
             className="w-full bg-themeDefBg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
             onClick={togleThemeDefault}
@@ -124,16 +89,10 @@ const ThemesMenuDroop = ({
           >
             Тема 3
           </button>
-          <button
-            className="w-full bg-theme4Bg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
-            onClick={togleTheme4}
-          >
-            Тема 4
-          </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ThemesMenuDroop
+export default ThemesMenuDroop;

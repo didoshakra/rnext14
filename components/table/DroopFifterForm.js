@@ -86,7 +86,7 @@ export default function DroopFifterForm({
 
   return (
     // <div className=" absolute z-10 w-full rounded-lg border border-gray-400  bg-gray-300 p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-200">
-    <div className=" absolute z-10 w-full rounded-lg border border-gray-400  bg-gray-300 p-1  dark:border-gray-300 dark:bg-gray-200">
+    <div className=" absolute z-10 w-full rounded-lg border border-gray-400  bg p-1  dark:border-gray-300 dark:bg-gray-200">
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
           <button

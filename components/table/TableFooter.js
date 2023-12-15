@@ -99,7 +99,7 @@ const TableFooter = ({
           title="Попередня"
         >
           <svg
-            className="mr-2 h-4 w-4"
+            className="mr-2 h-5 w-5"
             aria_hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -125,7 +125,7 @@ const TableFooter = ({
           el === page - 1 ? (
             <li
               key={index}
-              className={`flex items-center justify-center border border-tabTrBorder px-2 leading-tight dark:border-tabTrBorderD ${
+              className={`h-5 flex items-center justify-center border border-tabTrBorder px-2 leading-tight dark:border-tabTrBorderD ${
                 page === el
                   ? "bg-tabTrBg text-tabTrText  "
                   : "bg-tabTrBg  text-tabTrText hover:bg-tabTrBg hover:text-tabTrText dark:bg-tabTrBgD dark:text-tabTrTextD dark:hover:bg-tabTrBgHov dark:hover:tabTrBgHovD "
@@ -137,7 +137,7 @@ const TableFooter = ({
           ) : el === page - 2 || el === page + 2 ? (
             <li
               key={index}
-              className="flex  items-center justify-center border border-tabTrBorder bg-tabTrBg px-2 leading-tight text-tabTrText dark:border-tabTrBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
+              className="flex  h-5 items-center justify-center border border-tabTrBorder bg-tabTrBg px-2 leading-tight text-tabTrText dark:border-tabTrBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
             >
               ...
             </li>
@@ -155,7 +155,7 @@ const TableFooter = ({
         >
           {/* Next */}
           <svg
-            className="ml-2 h-4 w-4"
+            className="ml-2 h-5 w-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

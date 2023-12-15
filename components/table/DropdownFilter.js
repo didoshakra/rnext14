@@ -140,8 +140,8 @@ export default function DropdownFilter({
       <div className="w-ful">
         {/* <table className="table-fixed"> */}
         <table className="max-w-full table-auto overflow-auto">
-          {/* <thead className="bg-gray-300  text-left uppercase  text-tabThText dark:bg-gray-500 dark:text-white"> */}
-          <thead className="bg-gray-200  text-left uppercase text-tabThText dark:bg-gray-400  dark:text-black">
+          {/* <thead className="bg-gray-300  text-left uppercase  text- dark:bg-gray-500 dark:text-white"> */}
+          <thead className="bg-gray-200  text-left uppercase text-hText dark:bg-gray-400  dark:text-black">
             <tr>
               <th className={`${styleTableText} w-[40%]`}>Поле</th>
               {/* <th>Ключ</th> */}

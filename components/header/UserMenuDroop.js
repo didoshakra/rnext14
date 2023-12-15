@@ -87,8 +87,6 @@ const UserMenuDroop = ({ setUserMenuOpen, setSetingMenuOpen }) => {
           className="flex list-none flex-nowrap  items-center p-1  text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
           onClick={registrationToggle}
         >
-          {/* <a className="userMenuDroop__dropdown__item-p">Registration</a> */}
-          {/* <a className="hover:text-menuTextHover ml-2 flex items-center bg-menuBg p-0 text-menuText hover:bg-menuBgHov"> */}
           <a>Registration1</a>
         </li>
       </ul>

@@ -6,8 +6,7 @@ export const metadata = {
 export default function Grid() {
   return (
     <>
-      {/* <h1 className="text-4xl font-bold text-headMenuText text-center  bg-fuchsia-200">Grid CSS</h1> */}
-      <h1 className="text-4xl font-bold text-headMenuText text-center  bg-fuchsia-200">Grid CSS</h1>
+      <h1 className="text-4xl font-bold text-hText text-center  bg-fuchsia-200">Grid CSS</h1>
       <a
         href="https://refine.dev/blog/tailwind-grid/#introduction"
         className="text-sm font-bold underline hover:text-red-600 text-sky-600 flex justify-center align-center"

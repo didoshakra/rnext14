@@ -1,25 +1,13 @@
 html[data-theme="theme3"] {
-  /* --color-menuBg: #f7eecf; */
-
-  /* //-- Загальні */
-  --color-bodyBg: #f8f5ea;
-  --color-bodyText: #060214;
-
-  /* //-- headTape -------------------------------------------- */
-  --color-hTapeBg: #f6cb31;
-  --color-hTapeText: #fff;
-
-  /* //-- head -------------------------------------------- */
-  --color-hBg: #f7eecf;
-  --color-hBgHov: #f6e4a3;
-  --color-hText: #a28519;
-  --color-hTextHov: #7e6b25;
-  --color-hTextImg: #f3dc8c;
-  --color-hTextImg1: #f5d357;
-  --color-hBorder: #f6e4a3;
-
-   /*  //-- drawer -------------------------------------------- */
-  --color-drawDropMenuBg: #f8e7aa;
-  --color-drawDropHr: #eed784;
-
+  /* Amber 80-900*/
+  --color-pCol0: #fffbeb;
+  --color-pCol1: #fef3c7;
+  --color-pCol2: #fde68a;
+  --color-pCol3: #fcd34d;
+  /* --color-pCol4: #fbbf24; */
+  /* --color-pCol5: #f59e0b; */
+  --color-pCol6: #d97706;
+  /* --color-pCol7: #b45309; */
+  --color-pCol8: #92400e;
+  --color-pCol9: #78350f;
 }

@@ -23,125 +23,72 @@ module.exports = {
         itemHover: "#f64532",
         mainColor: "red",
 
-        //--Теми
-        themeDefBg: "var(--color-themeDefBg)", //
-        theme1Bg: "var(--color-theme1Bg)", //
-        theme2Bg: "var(--color-theme2Bg)", //
-        theme3Bg: "var(--color-theme3Bg)", //
+        /* -- Для меню вибору тем --*/
+        themeDefBg: "#bef264",
+        theme1Bg: "#a5b4fc",
+        theme2Bg: "#f9a8d4",
+        theme3Bg: "#fcd34d",
+        theme4Bg: "#86efac",
+
         //-- Загальні
-        bodyText: "var(--color-text)", //
-        bodyTextD: "var(--color-textD)",
-        bodyBg: "var(--color-bodyBg)",
-        bodyBgD: "var(--color-bodyBgD)",
-        infoMsg: "var(--color-errorMsg)",
-        errorMsg: "var(--color-errorMsg)",
-        errorMsgD: "var(--color-errorMsgD)",
-        eclipseBg: "var(--color-bodyeclipseBg)", //Затемнення екрану
+        bodyBg: "var(--color-pCol0)",
+        bodyBgD: "#414545",
+        infoMsg: "#13ff11",
+        errorMsg: "#f21e08",
+        errorMsgD: "#f21e08",
+        eclipseBg: "rgba(36, 12, 12, 0.4)", //Затемнення екрану
 
         //--- iconT /Table,Form,Card,
-        iconT: "var(--color-iconT)", //"#f64532",
-        iconTD: "var(--color-iconTD)", //"#f64532",
-        // iconTHov: "var(--color-iconTHov)", //"#6B8E23", //Поки не використав
-        // iconTHovD: "var(--color-iconTHovD)", //"#6B8E23", //Поки не використав
-        // iconTBorder: "var(--color-iconTBorder)", //"#E7F4E0", // "#f64532",
-        // iconTBorderD: "var(--color-iconTBorderD)", //"#E7F4E0", // "#f64532",
-        // iconTBgHov: "var(--color-iconTBgHov)", //"#E7F4E0",
-        // iconTBgHovD: "var(--color-iconTBgHovD)", //"#E7F4E0",
-        // iconTHovBg: "var(--color-iconTHovBg)", // "#82AE46", //Іконки
-        // iconTHovBgD: "var(--color-iconTHovBgD)", //"#fff", //
-        // iconT1: "var(--color-iconT1)", //"var(--color-bodyeclipseBg)", //"black",
-        // iconT1D: "var(--color-iconT1D)", // "black",   iconTHov: "var(--color-iconTHov)", //"#6B8E23", /
-
-        //--  IconH /hesder(main,drawer,) --------------------------------------------
-        // IconH: "var(--color-IconH)", //1 "#82AE46", "rgba(23,25,25,1)",
-        // IconHD: "var(--color-IconHD)", //"#9de160", //"#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
-        // IconHHov: "var(--color-IconHHov)",
-        // IconHHovD: "var(--color-IconHHovD)", //"red",
-        // IconHBg: "var(--color- IconHBg)", //"rgba(65,69,69,1)",
-        // IconHBgD: "var(--color- IconHBgD)", //"rgba(65,69,69,1)",
-        // IconHBgHov: "var(--color-IconHBgHov)", //"#C9DFA7",
-        // IconHBgHovD: "var(--color-IconHBgHovD)", //"#E8EFD3",
+        iconT: "#f64532",
+        iconTD: "#f64532",
 
         //-- headTape --------------------------------------------
-        hTapeText: "var(--color-hTapeText)",
-        hTapeTextD: "var(--color-hTapeTextD)", //"#9de160", //"#82AE46",
-        hTapeBg: "var(--color-hTapeBg)", //"#82AE46", //1 "#82AE46",
-        hTapeBgD: "var(--color-hTapeBgD)", //"rgba(65,69,69,1)",
-        // hTapeTextHov: "var(--color-hTapeTextHov)",
-        // hTapeTextHovD: "var(--color-hTapeTextHovD)",
-        // hTapeTextBgHov: "var(--color-hTapeTextBgHov)",
-        // hTapeTextBgHovD: "var(--color-hTapeTextBgHovD)",
+        hTapeText: "var(--color-pCol0)",
+        hTapeBg: "var(--color-pCol6)",
+        hTapeBgD: "rgba(65,69,69,1)",
 
         //-- head --------------------------------------------
-        hBorder: "var(--color-hBorder)", //"#DCDCDC", //1  "#82AE46",
-        hBorderD: "var(--color-hBorderD)", //"#DCDCDC", //1  "#82AE46",
-        hText: "var(--color-hText)", //1 "#82AE46",
-        hTextD: "var(--color-hTextD)", //білий
-        hTextHov: "var(--color-hTextHov)",
-        hTextHovD: "var(--color-hTextHovD)",
-        hTextImg: "var(--color-hTextImg)", //білий
-        hTextImg1: "var(--color-hTextImg1)", //білий
-        hBg: "var(--color-hBg)", // "#F4F4EB", "#fff", //білий
-        hBgD: "var(--color-hBgD)",
-        hBgHov: "var(--color-hBgHov)",
-        hBgHovD: "var(--color-hBgHovD)",
-        // hBgHovr: "var(--color-hBgHovr)",
-        // hBgHovD: "var(--color-hBgHovrD)", //білий
-
-        //-- menu / + Всі випадаючі з head меню ???
-        menuBorder: "var(--color-menuBorder)", //"#DCDCDC", //1  "#82AE46",
-        menuBorderD: "var(--color-menuBorderD)", //"#6B8E23", //1  "#82AE46",
-        menuText: "var(--color-menuText)", // "#6B8E23", // "#82AE46",
-        menuTextD: "var(--color-menuText)", // "#6B8E23", // "#82AE46",
-        menuTextHov: "var(--color-menuTextHov)", //"#fff",
-        menuTextHovD: "var(--color-menuTextHovD)", //"#fff",
-        menuTextAct: "var(--color-menuTextAct)", //"read",
-        menuTextActD: "var(--color-menuTextActD)", //"#fff",
-        menuBg: "var(--color-menuBg)", //"#E7F4E0",
-        menuBgD: "var(--color-menuBgD)", //"rgba(23,25,25,1)",
-        menuBgHov: "var(--color-menuBgHov)", //"#82AE46",
-        menuBgHovD: "var(--color-menuBgHovD)", // "#82AE46",
+        hBorder: "var(--color-pCol3)",
+        hBorderD: "#DCDCDC", //1
+        hText: "var(--color-pCol6)", //1 "#82AE46",
+        hTextHov: "var(--color-pCol8)",
+        hTextHovD: "#354d05",
+        hTextImg: "var(--color-pCol1)",
+        hTextImg1: "var(--color-pCol3)", //білий
+        hBg: "var(--color-pCol1)", // "#F4F4EB", "#fff", //білий
+        hBgD: "#171919",
+        hBgHov: "var(--color-pCol3)",
+        hBgHovD: "#615f5f",
 
         //Текст випадаючого меню
-        drawDropMenuBg: "var(--color-drawDropMenuBg)", //"#E7F4E0", // "#F4F4EB",
-        drawDropMenuBgD: "var(--color-drawDropMenuBgD)", //"#E7F4E0", // "#F4F4EB",
-        drawDropHr: "var(--color-drawDropHr)", // Лінії розмежування
-        drawDropHrD: "var(--color-drawDropHrD)", // Лінії розмежування
-
-        //-- table (Header)--------------------------------------------
-        tabHTitle: "var(--color- tabHTitle)", //"#6B8E23", //1 "#82AE46",
-        tabHeadTitleD: "var(--color- tabHTitleD)", //"#6B8E23", //1 "#82AE46",
-        tabHText: "var(--color-tabHText)", //"#000",
-        tabHTextD: "var(--color-tabHTextD)", // "#FFFF",
-        tabHBg: "var(--color-tabHBg)", //"#f8f8f8;", //agGrid-шапка
-        tabHBgD: "var(--color-tabHBgD)", //"#222628", //agGrid head "rgba(23,25,25,1)","#68686e",
+        drawDropMenuBg: "var(--color-pCol1)",
+        drawDropMenuBgD: "#141313",
+        drawDropHr: "var(--color-pCol3)", // Лінії розмежування
+        drawDropHrD: "#615f5f",
 
         //-- table (th/tr/нижній підсумок) ------------------------------------------
-        tabThBorder: "var(--color-tabThBorder)", //"#babfc7", //ag_Grid border(шапка)
-        tabThBorderD: "var(--color-tabThBorderD)", //"#dde2eb", //ag_Grid border-secondery)(між рядками)
-        tabThText: "var(--color-tabThText)", //"rgb(31 41 55)", //-Заголовок(text-gray-800)
-        tabThTextD: "var(--color-tabThTextD)", //"#d3d3d3", //-Заголовок(text-gray-400)
-        tabThBg: "var(--color-tabThBg)", //"rgb(214 211 209)", //(bg-stone-300)
-        tabThBgD: "var(--color-tabThBgD)", // "rgb(31 41 55)", ///"rgb(156 163 175)",
+        tabThBorder: "var(--color-pCol3)",
+        tabThBorderD: "rgb(115 115 115)",
+        tabThText: "var(--color-pCol9)",
+        tabThTextD: "var(--color-pCol3)",
+        tabThBg: "var(--color-pCol1)",
+        tabThBgD: "#1f2937",
 
         //Рядки
-        tabTrBorder: "var(--color-tabTrBorder)", //"#babfc7", //ag_Grid border(шапка)
-        tabTrBorderD: "var(--color-tabTrBorderD)", // "#dde2eb", //ag_Grid border-secondery)(між рядками)
-        tabTrText: "var(--color-tabTrText)", //"#FFF", //(text-slate-200)
-        tabTrTextD: "var(--color-tabTrTextD)", //"#FFF", //(text-slate-200)
-        tabTrBg: "var(--color-tabTrBg)", //"rgb(55 65 81)", //(bg-gray-700)
-        tabTrBgD: "var(--color-tabTrBgD)", //"rgb(55 65 81)", //(bg-gray-700)
-        tabTrBgHov: "var(--color-tabTrBgHov)", //"rgb(231 229 228)", //При наведенні(bg-stone-200)
-        tabTrBgHovD: "var(--color-tabTrBgHovD)", //"rgb(107 114 128)", //(bg-gray-500)
-        tabTrBgEve: "var(--color-tabTrBgEve)", //"rgb(245 245 244)", //Парні(bg-stone-100)
-        tabTrBgEveD: "var(--color-tabTrBgEveD)", // "rgb(75 85 99)", //(bg-gray-600)
-        tabTrBgSel: "var(--color-tabTrBgSel)", // "#E8EFD3", //Вибрані рядки
-        tabTrBgSelD: "var(--color-tabTrBgSelD)", // "#6B8E23", //
-        tabTrBgSelHov: "var(--color-tabTrBgSelHov)", //"#C9DFA7", //
-        tabTrBgSelHovD: "var(--color-tabTrBgSelHovD)", //"#82AE46", //
-
-        // // Card - картинка колір
-        // cardBg: "var(--color-hBgD)",
+        tabTrBorder: "#dde2eb",
+        tabTrBorderD: "#dde2eb",
+        tabTrText: "var(--color-pCol9)",
+        tabTrTextD: "var(--color-pCol0)",
+        tabTrBg: "#fff",
+        tabTrBgD: "rgb(55 65 81)",
+        tabTrBgEve: "var(--color-pCol0)",
+        tabTrBgEveD: "#4b5563",
+        tabTrBgHov: "var(--color-pCol1)",
+        tabTrBgHovD: "#707885",
+        tabTrBgSel: "var(--color-pCol2)", //Вибрані рядки
+        tabTrBgSelD: "#677485",
+        tabTrBgSelHov: "var(--color-pCol3)",
+        tabTrBgSelHovD: "#8694a6",
       },
     },
     keyframes: {

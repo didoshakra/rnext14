@@ -7,7 +7,7 @@ export default function TaillwqindCSS() {
   return (
     // <section className="flex flex-col space-y-8 pb-4  ">
     <>
-      <h1 className="text-headMenuText bg-fuchsia-200 text-center text-4xl  font-bold">
+      <h1 className="text-hText bg-fuchsia-200 text-center text-4xl  font-bold">
         Taillwqind CSS
       </h1>
       <a

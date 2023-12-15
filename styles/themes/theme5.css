@@ -1,0 +1,36 @@
+html[data-theme="theme3"] {
+  /* --color-menuBg: #f7eecf; */
+
+  /* //-- Загальні */
+  --color-bodyBg: #f5f5f4;
+
+  /* //-- headTape -------------------------------------------- */
+  --color-hTapeBg: #aaa9a8;
+  --color-hTapeText: #fff;
+
+  /* //-- head -------------------------------------------- */
+  --color-hBg: #f7eecf;
+  --color-hBgHov: #f6e4a3;
+  --color-hText: #a28519;
+  --color-hTextHov: #7e6b25;
+  --color-hTextImg: #f3dc8c;
+  --color-hTextImg1: #f5d357;
+  --color-hBorder: #f6e4a3;
+
+  /*  //-- drawer -------------------------------------------- */
+  --color-drawDropMenuBg: #f8e7aa;
+  --color-drawDropHr: #eed784;
+
+  /*  table   */
+  --color-tabThBg: #fef3c7;
+  --color-tabTrBg: #fff;
+ /* gray-500-500 */
+    --color-tabThBg: #f3f4f6;
+    --color-tabTrBgEve: #f9fafb;
+    --color-tabTrBgHov: #f3f4f6;
+    --color-tabTrBgSel: #e5e7eb;
+    --color-tabTrBgSelHov: #d1d5db;
+    /* --color-tabTrBgSelHov: #9ca3af;
+    --color-tabTrBgSelHov: #6b7280; */
+
+}
