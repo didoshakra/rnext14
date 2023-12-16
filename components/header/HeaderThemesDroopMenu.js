@@ -2,23 +2,23 @@
 // Коли треба показувати меню ThemesMenuDroop
 //*********************************************************************************** */
 
-"use client";
-import { useState, useRef, useEffect } from "react";
-import { useTheme } from "next-themes";
+"use client"
+import { useState, useRef, useEffect } from "react"
+import { useTheme } from "next-themes"
 // import UserSwitcherDroop from "./UserMenuDroop";
-import ThemesMenuDroop from "./ThemesMenuDroop";
+import ThemesMenuDroop from "./ThemesMenuDroop"
 
 const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
-//   console.log(
-//     "setSetingThemesMenuToggle/setSetingMenuOpen=",
-//     setSetingMenuOpen,
-//   );
+  //   console.log(
+  //     "setSetingThemesMenuToggle/setSetingMenuOpen=",
+  //     setSetingMenuOpen,
+  //   );
 
-  const { resolvedTheme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme()
   //   const [profile, setprofile] = useState("admin");
 
-  const [themesMenuOpen, setThemesMenuOpen] = useState(false); //Для випадання верхнього меню
-  const [setingThemesMenuOpen, setSetingThemesMenuOpen] = useState(false); //Для випадання меню вибору теми
+  const [themesMenuOpen, setThemesMenuOpen] = useState(false) //Для випадання верхнього меню
+  const [setingThemesMenuOpen, setSetingThemesMenuOpen] = useState(false) //Для випадання меню вибору теми
 
   //   console.log("profile=", profile);
   //   const setingThemesMenuOpenToggle = () => {
@@ -34,7 +34,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
   //   };
 
   //   *************Для клацання поза обєктом
-  const ref_HeaderThemesDroopMenu = useRef(null);
+  const ref_HeaderThemesDroopMenu = useRef(null)
 
   useEffect(() => {
     const handleOutSideClick = (event) => {
@@ -56,34 +56,31 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
 
   //випадаюче меню Налаштувань
   const setSetingThemesMenuToggle = () => {
-    setThemesMenuOpen(!themesMenuOpen);
-    setSetingThemesMenuOpen(false); //Закриваєм меню
+    setThemesMenuOpen(!themesMenuOpen)
+    setSetingThemesMenuOpen(false) //Закриваєм меню
     // console.log("setSetingThemesMenuToggle/themesMenuOpen=", themesMenuOpen);
-  };
+  }
   //Зміна в newTheme Context
   const themeMenuToggle = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-    setSetingThemesMenuOpen(false);
-    setThemesMenuOpen(false);
-    if (setSetingMenuOpen) setSetingMenuOpen(false);
-  };
+    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+    setSetingThemesMenuOpen(false)
+    setThemesMenuOpen(false)
+    if (setSetingMenuOpen) setSetingMenuOpen(false)
+  }
 
   return (
-    <div
-      ref={ref_HeaderThemesDroopMenu}
-      className="relative  list-none text-base font-medium"
-    >
+    <div ref={ref_HeaderThemesDroopMenu} className="relative  list-none text-base font-medium">
       {/* іконка seting*/}
       {/* <div className="HeaderThemesDroopMenu__icon" onClick={setSetingThemesMenuToggle}> */}
       <button className="flex items-center" onClick={setSetingThemesMenuToggle}>
         <p
-          className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHov"
+          className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={setSetingThemesMenuToggle}
         >
           {resolvedTheme === "dark" ? (
             // місяць
             <svg
-              className="h-8 w-8  dark:text-hText dark:hover:text-hTextHov"
+              className="h-8 w-8  dark:text-hTextD dark:hover:text-hTextHovD"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -94,16 +91,11 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
               strokeLinejoin="round"
             >
               {" "}
-              <path stroke="none" d="M0 0h24v24H0z" />{" "}
-              <circle cx="12" cy="12" r="3" />{" "}
-              <line x1="12" y1="5" x2="12" y2="3" />{" "}
-              <line x1="17" y1="7" x2="18.4" y2="5.6" />{" "}
-              <line x1="19" y1="12" x2="21" y2="12" />{" "}
-              <line x1="17" y1="17" x2="18.4" y2="18.4" />{" "}
-              <line x1="12" y1="19" x2="12" y2="21" />{" "}
-              <line x1="7" y1="17" x2="5.6" y2="18.4" />{" "}
-              <line x1="6" y1="12" x2="4" y2="12" />{" "}
-              <line x1="7" y1="7" x2="5.6" y2="5.6" />
+              <path stroke="none" d="M0 0h24v24H0z" /> <circle cx="12" cy="12" r="3" />{" "}
+              <line x1="12" y1="5" x2="12" y2="3" /> <line x1="17" y1="7" x2="18.4" y2="5.6" />{" "}
+              <line x1="19" y1="12" x2="21" y2="12" /> <line x1="17" y1="17" x2="18.4" y2="18.4" />{" "}
+              <line x1="12" y1="19" x2="12" y2="21" /> <line x1="7" y1="17" x2="5.6" y2="18.4" />{" "}
+              <line x1="6" y1="12" x2="4" y2="12" /> <line x1="7" y1="7" x2="5.6" y2="5.6" />
             </svg>
           ) : (
             // сонце
@@ -128,11 +120,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
       </button>
 
       {/* Випадаюче меню */}
-      <div
-        className={`${
-          themesMenuOpen ? "absolute" : "hidden"
-        } font-bol right-0 z-10 m-0 p-0 `}
-      >
+      <div className={`${themesMenuOpen ? "absolute" : "hidden"} font-bol right-0 z-10 m-0 p-0 `}>
         {/* <ul className="HeaderThemesDroopMenu__dropdown"> */}
         <ul
           //   ref={ref_HeaderThemesDroopMenu}
@@ -144,7 +132,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
         >
           <li
             // ref={ref_HeaderThemesDroopMenu}
-            className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHovD"
+            className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
             onClick={themeMenuToggle}
             //   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           >
@@ -158,7 +146,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
               {resolvedTheme === "dark" ? (
                 <svg
                   // group-hover - при наведенні на (group) буде змінюватись */
-                  className="h-8 w-8  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
+                  className="h-8 w-8  dark:hover:text-hTextHovD dark:group-hover:text-hTextHov"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -186,16 +174,11 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
                   strokeLinejoin="round"
                 >
                   {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <circle cx="12" cy="12" r="3" />{" "}
-                  <line x1="12" y1="5" x2="12" y2="3" />{" "}
-                  <line x1="17" y1="7" x2="18.4" y2="5.6" />{" "}
-                  <line x1="19" y1="12" x2="21" y2="12" />{" "}
-                  <line x1="17" y1="17" x2="18.4" y2="18.4" />{" "}
-                  <line x1="12" y1="19" x2="12" y2="21" />{" "}
-                  <line x1="7" y1="17" x2="5.6" y2="18.4" />{" "}
-                  <line x1="6" y1="12" x2="4" y2="12" />{" "}
-                  <line x1="7" y1="7" x2="5.6" y2="5.6" />
+                  <path stroke="none" d="M0 0h24v24H0z" /> <circle cx="12" cy="12" r="3" />{" "}
+                  <line x1="12" y1="5" x2="12" y2="3" /> <line x1="17" y1="7" x2="18.4" y2="5.6" />{" "}
+                  <line x1="19" y1="12" x2="21" y2="12" /> <line x1="17" y1="17" x2="18.4" y2="18.4" />{" "}
+                  <line x1="12" y1="19" x2="12" y2="21" /> <line x1="7" y1="17" x2="5.6" y2="18.4" />{" "}
+                  <line x1="6" y1="12" x2="4" y2="12" /> <line x1="7" y1="7" x2="5.6" y2="5.6" />
                 </svg>
               )}
             </p>
@@ -203,14 +186,14 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
           </li>
           <li
             //   ref={ref_HeaderThemesDroopMenu}
-            className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHovD"
+            className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
             onClick={() => setSetingThemesMenuOpen(!setingThemesMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
             {/* іконка валів/малювати */}
             <p>
               <svg
-                className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hText dark:group-hover:text-hTextHov"
+                className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHov"
                 // class="h-8 w-8 text-red-500"
                 width="24"
                 height="24"
@@ -222,8 +205,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
                 strokeLinejoin="round"
               >
                 {" "}
-                <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                <rect x="5" y="3" width="14" height="6" rx="2" />{" "}
+                <path stroke="none" d="M0 0h24v24H0z" /> <rect x="5" y="3" width="14" height="6" rx="2" />{" "}
                 <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />{" "}
                 <rect x="10" y="15" width="4" height="6" rx="1" />
               </svg>
@@ -260,7 +242,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HeaderThemesDroopMenu;
+export default HeaderThemesDroopMenu

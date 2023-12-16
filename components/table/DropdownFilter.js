@@ -47,18 +47,18 @@ export default function DropdownFilter({
     //drop-shadow-md-тінь
     <div
       style={{ "--sW": "calc(100vw - 20px)" }} //
-      className="absolute left-0 z-10 mx-2 max-w-[--sW] rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto"
+      className="absolute left-0 z-10 mx-2 max-w-[--sW] rounded-lg border border-fBorder bg-fBg  p-1  dark:border-fBorderD dark:bg-fBgD md:left-auto"
       //   className="absolute left-0 z-10 mx-2 max-w-[100px] rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto"
     >
       <div className="mb-1 flex justify-between">
         <button
-          className="hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD rounded-full border border-gray-400 dark:border-gray-300"
+          className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
           onClick={() => deleteFilterAll()}
           title="Очистити всі"
         >
           {/* кошик */}
           <svg
-            // className="h-6 w-6 text-red-500"
+            // className="h-6 w-6 text-iconT dark:text-iconTD"
             className="h-6 w-6 text-blue-600 "
             width="24"
             height="24"
@@ -93,13 +93,13 @@ export default function DropdownFilter({
           </svg> */}
         </button>
         <button
-          className="hover:bg-iconTHovBg  dark:hover:bg-iconTHovBgD  mx-2 flex items-center rounded-lg border border-gray-400 px-1 text-center dark:border-gray-300"
+          className="hover:bg-fBgHov  dark:hover:bg-fBgHovD  mx-2 flex items-center rounded-lg border border-fBorder px-1 text-center dark:border-fBorderD"
           onClick={() => applyFilters()}
           title="Застосувати фільтр"
         >
           {/* Enter */}
           <svg
-            className="h-6 w-6 text-red-500"
+            className="h-6 w-6 text-iconT dark:text-iconTD"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -113,17 +113,17 @@ export default function DropdownFilter({
           {/* <h1 className={`{styleTableText} font-bold uppercase text-red-500 `}>
             Застосувати фільтри
           </h1> */}
-          <h1 className={`{styleTableText} font-bold uppercase text-red-500 `}>Фільтри</h1>
+          <h1 className={`{styleTableText} font-bold uppercase text-fText dark:text-fTextD `}>Фільтри</h1>
         </button>
 
         <button
-          className="hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD rounded-full border border-gray-400 dark:border-gray-300"
+          className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
           onClick={(e) => setIsDropdownFilter(false)}
           title="Вийти без збереження"
         >
           {/* скасувати */}
           <svg
-            className="h-6 w-6 text-red-500"
+            className="h-6 w-6 text-iconT dark:text-iconTD"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -141,7 +141,7 @@ export default function DropdownFilter({
         {/* <table className="table-fixed"> */}
         <table className="max-w-full table-auto overflow-auto">
           {/* <thead className="bg-gray-300  text-left uppercase  text- dark:bg-gray-500 dark:text-white"> */}
-          <thead className="bg-gray-200  text-left uppercase text-hText dark:bg-gray-400  dark:text-black">
+          <thead className="bg-fBg  text-left uppercase text-fText dark:bg-fBgD  dark:text-fTextD">
             <tr>
               <th className={`${styleTableText} w-[40%]`}>Поле</th>
               {/* <th>Ключ</th> */}
@@ -158,7 +158,7 @@ export default function DropdownFilter({
               <tr
                 id={row._nrow}
                 key={index}
-                className={`${styleTableText} -medium bg-gray-200 font-sans text-tabTrText hover:bg-gray-300 dark:bg-gray-400 dark:text-white dark:hover:bg-gray-400`}
+                className={`${styleTableText} -medium bg-fBg font-sans text-fText hover:bg-fBgHov dark:bg-fBgD dark:text-fTextD dark:hover:bg-fBgHovD`}
                 onClick={(e) => editRows(e)}
               >
                 <td
@@ -169,7 +169,7 @@ export default function DropdownFilter({
                 </td>
                 {/* <td
                 id={row._nrow}
-                className={`${styleTableText} font-semibold text-tabTrText dark:text-tabTrTextD`}
+                className={`${styleTableText} font-semibold text-fText dark:text-fTextD`}
               >
                 {row.accessor}
               </td> */}

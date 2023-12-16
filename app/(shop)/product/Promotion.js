@@ -78,11 +78,13 @@ function ProductVeg({ item }) {
       </div>
       <div className="mb-1 mt-4 flex items-center justify-center gap-10 px-1 font-semibold">
         {item.discontProc > 0 && (
-          <p className="justify-center text-center text-base text-hText line-through">
+          <p className="justify-center text-center text-base text dark:text-hTextD line-through">
             {(item.price - (item.price * item.discontProc) / 100).toFixed(2)}
           </p>
         )}
-        <p className="justify-center text-center text-base font-bold text-hText">₴{item.price.toFixed(2)}</p>
+        <p className="justify-center text-center text-base font-bold text-hText dark:text-hTextD">
+          ₴{item.price.toFixed(2)}
+        </p>
       </div>
       {/*line-clamp-2: Для затиску тексту до певної кількості рядків. */}
       <p className="line-clamp-2 px-4 text-xs italic text-hTexr">{item.description}</p>
@@ -94,7 +96,7 @@ export default async function ProductsVeg() {
   const products = await getAllProductsPromotion()
   // console.log("Products.js/products=", products)
   return (
-    <section className="flex flex-col space-y-3 px-2 pb-5 pt-8 text-center text-hText">
+    <section className="flex flex-col space-y-3 px-2 pb-5 pt-8 text-center text-hText dark:text-hTextD">
       {/* <h1 className="tex-lg  font-serif italic">Акційні продукти</h1> */}
       <h2 className="text-4xl  font-bold">Акційні продукти</h2>
       <p>Завжди великі знижки на необхідні продукти</p>

@@ -10,14 +10,14 @@ const ThemeSwitcher = () => {
   return (
     <button
       type="button"
-      className="hover:bg-hBgHov dark:hover:bg-hBgHov flex items-center justify-center rounded-full p-2 transition-colors"
+      className="hover:bg-hBgHov dark:hover:bg-hBgHovD flex items-center justify-center rounded-full p-2 transition-colors"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       title="тема"
     >
       {resolvedTheme === "dark" ? (
         // сонце
         <svg
-          className="text-hText dark:text-hText h-8 w-8 "
+          className="text-hText dark:text-hTextD h-8 w-8 "
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ const ThemeSwitcher = () => {
       ) : (
         // місяць
         <svg
-          className="text-hText dark:text-hText h-8 w-8 "
+          className="text-hText dark:text-hTextD h-8 w-8 "
           width="24"
           height="24"
           viewBox="0 0 24 24"

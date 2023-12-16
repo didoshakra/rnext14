@@ -36,7 +36,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
           </Link>
           <Link
             href="/"
-            className="justify-begin  flex items-center px-4 text-2xl font-bold italic text-hText  dark:text-hText md:text-2xl"
+            className="justify-begin  flex items-center px-4 text-2xl font-bold italic text-hText  dark:text-hTextD md:text-2xl"
             title="RAMAG"
           >
             RAecom
@@ -45,7 +45,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         <div onClick={(e) => setDrawerOpen(false)} className="pr-2">
           {/* <IconCancel */}
           <svg
-            className="h-6 w-6 text-hText dark:text-hText"
+            className="h-6 w-6 text-hText dark:text-hTextD"
             width="24"
             height="24"
             viewBox="0 0 24 24"

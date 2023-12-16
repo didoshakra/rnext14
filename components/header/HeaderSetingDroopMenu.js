@@ -5,45 +5,45 @@
 // і відключення у всіх onClick(*togle) в самомк об'єкті.
 //********************************************************************************** */
 
-"use client";
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import UserMenuDroop from "./UserMenuDroop";
-import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu";
-import avatar from "@/public/avatar/2.jpg";
+"use client"
+import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
+import { useTheme } from "next-themes"
+import UserMenuDroop from "./UserMenuDroop"
+import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu"
+import avatar from "@/public/avatar/2.jpg"
 
 const HeaderSetingDroopMenu = () => {
-  const { resolvedTheme, setTheme } = useTheme();
-  const [profile, setprofile] = useState("admin");
+  const { resolvedTheme, setTheme } = useTheme()
+  const [profile, setprofile] = useState("admin")
 
-  const [setingMenuOpen, setSetingMenuOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [setingMenuOpen, setSetingMenuOpen] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
   //   const [themesDroopMenuOpen, setThemesDroopMenuOpen] = useState(false);
-//   console.log("sHeaderSetingDroopMenu/setingMenuOpen=", setingMenuOpen);
+  //   console.log("sHeaderSetingDroopMenu/setingMenuOpen=", setingMenuOpen);
 
   //   console.log("profile=", profile);
-//   const userMenuOpenToggle = () => {
-//     setUserMenuOpen(!userMenuOpen);
-//     let newUser = "admin";
-//     if (profile === "admin") {
-//       newUser = "user";
-//     }
-//     setprofile(newUser);
-//     // console.log("userSwitcher.js/newUser=", newUser)
-//     console.log("profile=", profile);
-//     // dispatch({ type: "PROFILE", payload: newUser }); //Змінюємо state.user
-//   };
+  //   const userMenuOpenToggle = () => {
+  //     setUserMenuOpen(!userMenuOpen);
+  //     let newUser = "admin";
+  //     if (profile === "admin") {
+  //       newUser = "user";
+  //     }
+  //     setprofile(newUser);
+  //     // console.log("userSwitcher.js/newUser=", newUser)
+  //     console.log("profile=", profile);
+  //     // dispatch({ type: "PROFILE", payload: newUser }); //Змінюємо state.user
+  //   };
 
   //*************Для клацання поза обєктом
-  const ref_HeaderSetingDroopMenu = useRef(null);
+  const ref_HeaderSetingDroopMenu = useRef(null)
 
   useEffect(() => {
     const handleOutSideClick = (event) => {
       if (!ref_HeaderSetingDroopMenu.current?.contains(event.target)) {
         // alert("Outside Clicked.");
         // console.log("Outside Clicked. ");
-        setSetingMenuOpen(false);
+        setSetingMenuOpen(false)
         setUserMenuOpen(false)
       }
     }
@@ -53,24 +53,24 @@ const HeaderSetingDroopMenu = () => {
     return () => {
       window.removeEventListener("mousedown", handleOutSideClick)
     }
-  }, [ref_HeaderSetingDroopMenu, setUserMenuOpen,setSetingMenuOpen])
+  }, [ref_HeaderSetingDroopMenu, setUserMenuOpen, setSetingMenuOpen])
 
   //випадаюче меню Налаштувань
   const onSetingMenu = () => {
-    setSetingMenuOpen(!setingMenuOpen);
-    setUserMenuOpen(false); //Закриваєм меню
+    setSetingMenuOpen(!setingMenuOpen)
+    setUserMenuOpen(false) //Закриваєм меню
     // console.log("onSetingMenu/setingMenuOpen=", setingMenuOpen);
-  };
+  }
 
   return (
     <div ref={ref_HeaderSetingDroopMenu} className="relative m-0 items-center p-0 md:hidden">
       <button
-        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHov"
+        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
         onClick={onSetingMenu}
       >
         {/* іконка три крапки по Y */}
         <svg
-          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hText dark:hover:text-hTextHov"
+          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hTextD dark:hover:text-hTextHovD"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -83,7 +83,7 @@ const HeaderSetingDroopMenu = () => {
           {/* іконка шестерня */}
         </svg>
         {/* <svg
-          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hText dark:hover:text-hTextHov"
+          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hTextD dark:hover:text-hTextHovD"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -105,11 +105,11 @@ const HeaderSetingDroopMenu = () => {
         <ul
           className={`m-0 w-[150px] rounded-lg  border border-hBorder bg-hBg p-1 text-base font-medium drop-shadow-md dark:border-hBorderD dark:bg-hBgD`}
         >
-          <li className="dark:text-hTex flex w-full list-none  items-center text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov">
+          <li className="dark:text-hTex flex w-full list-none  items-center text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
             <HeaderThemesDroopMenu setSetingMenuOpen={setSetingMenuOpen} />
           </li>
           <li
-            className="dark:text-hTex flex w-full list-none items-center space-x-2  px-2 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+            className="dark:text-hTex flex w-full list-none items-center space-x-2  px-2 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
@@ -146,6 +146,6 @@ const HeaderSetingDroopMenu = () => {
       </div>
     </div>
   )
-};
+}
 
-export default HeaderSetingDroopMenu;
+export default HeaderSetingDroopMenu

@@ -32,7 +32,7 @@ module.exports = {
 
         //-- Загальні
         bodyBg: "var(--color-pCol0)",
-        bodyBgD: "#414545",
+        bodyBgD: "#334155", // --color-pCol7: #334155;
         infoMsg: "#13ff11",
         errorMsg: "#f21e08",
         errorMsgD: "#f21e08",
@@ -45,34 +45,52 @@ module.exports = {
         //-- headTape --------------------------------------------
         hTapeText: "var(--color-pCol0)",
         hTapeBg: "var(--color-pCol6)",
-        hTapeBgD: "rgba(65,69,69,1)",
+        hTapeBgD: "#0f172a", //--color-pCol9: #0f172a;
+
+        //-- form --------------------------------------------
+        fBorder: "var(--color-pCol4)",
+        fBorderD: "#64748b", //--color-pCol5:#64748b;
+        fText: "var(--color-pCol6)",
+        fTextD: "var(--color-pCol2)",
+        fTextHov: "var(--color-pCol8)",
+        fTextHovD: "var(--color-pCol3)",
+        fBg: "var(--color-pCol2)",
+        fBgD: "#1e293b", //--color-pCol8: #1e293b;
+        fInputBg: "var(--color-pCol1)",
+        fInputBgD: "#475569", //  --color-pCol6: #475569;
+        fBgHov: "var(--color-pCol4)",
+        fBgHovD: "var(--color-pCol7)",
 
         //-- head --------------------------------------------
         hBorder: "var(--color-pCol3)",
-        hBorderD: "#DCDCDC", //1
+        hBorderD: "#64748b", //--color-pCol5:#64748b;
         hText: "var(--color-pCol6)",
+        hTextD: "var(--color-pCol3)",
         hTextHov: "var(--color-pCol8)",
-        hTextHovD: "#354d05",
+        hTextHovD: "var(--color-pCol3)",
         hTextImg: "var(--color-pCol1)",
         hTextImg1: "var(--color-pCol3)",
-        hBg: "var(--color-pCol1)",
-        hBgD: "#171919",
+        hBg: "var(--color-pCol2)",
+        hBgD: "#1e293b", //--color-pCol8: #1e293b;
         hBgHov: "var(--color-pCol3)",
-        hBgHovD: "#615f5f",
+        hBgHovD: "var(--color-pCol7)",
 
         //Текст випадаючого меню
         drawDropMenuBg: "var(--color-pCol1)",
-        drawDropMenuBgD: "#141313",
+        drawDropMenuBgD: "#1e293b", //--color-pCol8: #1e293b;
         drawDropHr: "var(--color-pCol3)", // Лінії розмежування
-        drawDropHrD: "#615f5f",
+        drawDropHrD: "#475569", // --color-pCol6: #475569;
 
         //-- table (th/нижній підсумок) ------------------------------------------
         tabThBorder: "var(--color-pCol3)",
-        tabThBorderD: "rgb(115 115 115)",
+        tabThBorderD: "#64748b", //--color-pCol5:#64748b;
+        // tabThBorderD: "#475569", //--color-pCol6;
         tabThText: "var(--color-pCol9)",
         tabThTextD: "var(--color-pCol3)",
         tabThBg: "var(--color-pCol1)",
-        tabThBgD: "#1f2937",
+        tabThBgD: "#1e293b", //--color-pCol8: #1e293b;
+        tabBgHov: "var(--color-pCol2)",
+        tabBgHovD: "var(--color-pCol7)",
 
         //-- table/tr Рядки
         tabTrBorder: "var(--color-pCol1)",

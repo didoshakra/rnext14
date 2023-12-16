@@ -475,7 +475,7 @@ export default function DProductTable({
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="dark:text-hText rounded-3xl border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+        <div className="dark:text-hTextD rounded-3xl border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
           <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
         </div>
       )}
@@ -490,7 +490,7 @@ export default function DProductTable({
           {/*Інформація про вибрані рядки  */}
           {/* {typeof p_selected !== "undefined" && p_selected && ( */}
           <button
-            className="ml-1 flex items-center rounded-lg border border-tabTrBorder dark:border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
+            className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
             onClick={onSelectAll}
             title="Вибрати всі"
           >
@@ -515,7 +515,7 @@ export default function DProductTable({
             <div>
               <button
                 //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-                className="ml-1 flex items-center rounded-lg border border-tabTrBorder dark:border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
+                className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
                 onClick={() => setIsDropdownFilter(!isDropdownFilter)}
               >
                 {/* Лійка */}
@@ -555,7 +555,7 @@ export default function DProductTable({
           )}
 
           {/* Вибір шрифта */}
-          <div className="ml-1 flex items-center rounded-lg border border-tabTrBorder dark:border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
+          <div className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
             <svg
               className="h-5 w-5 text-iconT dark:text-iconT"
               viewBox="0 0 24 24"
@@ -572,7 +572,7 @@ export default function DProductTable({
             {/* <p>Шрифт:</p> */}
             <p>:</p>
             <select
-              className="mx-1 block w-full  items-center border-tabTrBorder bg-tabTrBg align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-tabTrBorderD dark:bg-tabTrBgD dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="mx-1 block w-full  items-center border-tabThBorder bg-tabTrBg align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               defaultValue={tableFontSize}
               onChange={(e) => setTableFontSize(e.target.value)}
               //   id="page-size"
@@ -622,7 +622,7 @@ export default function DProductTable({
               //   onChange={(e) =>p_filterededp_searchAllRows onChangeSearch(e)} //Для Enter
               onChange={(e) => seachAllFilds(e)} //Пошук
               type="text"
-              className="block w-full items-center rounded-lg border border-tabTrBorder bg-tabTrBg p-1 pl-10 text-tabTrText dark:border-tabTrBorderD dark:bg-tabTrBgD dark:text-tabTrTextD"
+              className="block w-full items-center rounded-lg border border-tabThBorder bg-tabTrBg p-1 pl-10 text-tabTrText dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-tabTrTextD"
             />
           </div>
         )}
@@ -630,7 +630,7 @@ export default function DProductTable({
 
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
-        className=" max-h-[--sH] w-full overflow-auto border border-tabThBorder"
+        className=" max-h-[--sH] w-full overflow-auto border border-tabThBorder dark:border-tabThBorderD"
         style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
       >
         {/*border-collapse- обєднання границь ячейок "> */}

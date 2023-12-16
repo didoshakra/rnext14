@@ -4,10 +4,10 @@ html[data-theme="tPink"] {
   --color-pCol1: #fce7f3;
   --color-pCol2: #fbcfe8;
   --color-pCol3: #f9a8d4;
-  /* --color-pCol4: #f472b6; */
-  /* --color-pCol5: #ec4899; */
+  --color-pCol4: #f472b6;
+  --color-pCol5: #ec4899;
   --color-pCol6: #db2777;
-  /* --color-pCol7: #be185d; */
+  --color-pCol7: #be185d;
   --color-pCol8: #9d174d;
   --color-pCol9: #831843;
 }

@@ -75,7 +75,7 @@ const ThemesMenuDroop = ({
       return (
         <button
           key={index}
-          className="w-full bg-[--bg]  py-1 text-base text-hText   hover:text-itemHover dark:text-hTextD  dark:hover:text-itemHover"
+          className="w-full bg-[--bg]  py-1 text-base text-lime-900 hover:text-itemHover"
           style={{ "--bg": item.bg }}
           onClick={() => togleTheme(item.title)}
         >

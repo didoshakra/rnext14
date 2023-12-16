@@ -1,5 +1,5 @@
 //https://codesandbox.io/embed/form-functional-component-2lmxu?codemirror=1
-//(input+select)Без react-hook-form
+//(input+select)Без react-fook-form
 //css з //https://galaxies.dev/quickwin/react-tailwind-form
 //20231128- показувати що вводити в залежності від typeData
 //      - ввід в 2-а рядка фільтрів/якщо заповнений перший то показувати і другий???
@@ -85,19 +85,18 @@ export default function DroopFifterForm({
   }
 
   return (
-    // <div className=" absolute z-10 w-full rounded-lg border border-gray-400  bg-gray-300 p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-200">
-    <div className=" absolute z-10 w-full rounded-lg border border-gray-400  bg p-1  dark:border-gray-300 dark:bg-gray-200">
+    <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg p-1  dark:border-fBorderD dark:bg-fBgD">
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
           <button
-            className="hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD mx-2 flex items-center rounded-full border border-gray-400 px-1"
-            //   className="rounded-full hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD"
+            className="hover:bg-fHovBg dark:hover:bg-fHovBgD mx-2 flex items-center rounded-full border border-fBorder px-1"
+            //   className="rounded-full hover:bg-fBgHov dark:hover:bg-fBgHovD"
             //   onClick={() => handleEdit()}
             type="submit"
             title="Добавте значення"
           >
             <svg
-              className="h-6 w-6 text-red-500"
+              className="h-6 w-6 text-iconT dark:iconTD"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -111,17 +110,18 @@ export default function DroopFifterForm({
           </button>
 
           {/* <header className="flex text-red-700 "> */}
-          <header className="flex items-center text-black ">
-            *<label className="px-1">{filterDataRow.name}</label> * (<label className="px-1">{valueType}</label>)
+          <header className="flex items-center text-fText ">
+            <label className="px-1 font-semibold text-fText dark:text-fTextD">{filterDataRow.name}</label>(
+            <label className="px-1 text-xs font-sans text-fText dark:text-fTextD">{valueType}</label>)
             {/* <label className="px-1">({filterDataRow.accessor})</label> */}
           </header>
           <button
-            className="hover:bg-iconTHovBg dark:hover:bg-iconTHovBgD rounded-full border border-gray-400"
+            className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:fBorderD"
             onClick={(e) => setIsDropdownFilterForm(false)}
             title="Вийти без збереження"
           >
             <svg
-              className="h-6 w-6 text-red-500"
+              className="h-6 w-6 text-iconT dark:iconTD"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -138,11 +138,11 @@ export default function DroopFifterForm({
         <div>
           {/* filterFirst */}
           <div className="flex space-x-1 overflow-auto">
-            <label className="font-semibold text-gray-700">
+            <label className="font-semibold text-fText dark:text-fTextD">
               <div className=" text-center"> &gt;&lt;</div>{" "}
               <select
                 // appearance-none-не показувати стрілку селе
-                className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                className="block  appearance-none items-center rounded border border-fBorder bg-fInputBg p-1  align-middle  leading-tight text-fText focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-fInputBgD dark:text-fTextD dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 name="comparisonFirst"
                 onChange={handleChange}
                 value={state.comparisonFirst}
@@ -171,11 +171,11 @@ export default function DroopFifterForm({
               </select>
             </label>
             {/*  */}
-            <label className="w-full font-semibold text-gray-700">
+            <label className="w-full font-semibold text-fText dark:text-fTextD">
               <div className=" text-center">фільтр1</div>
               <input
-                //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-                className=" block w-full  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+                //leading-tight=line-feight: 1.25-(висотою лінії) елемента.
+                className=" block w-full  items-center rounded border border-fBorder bg-fInputBg p-1  align-middle leading-tight  text-fText dark:border-fBorderD dark:bg-fInputBgD dark:text-fTextD"
                 id="filterFirst"
                 required
                 type="text"
@@ -188,10 +188,10 @@ export default function DroopFifterForm({
 
           {/* filterLast */}
           <div className="flex space-x-1 ">
-            <label className=" font-semibold text-gray-700">
+            <label className=" font-semibold text-fText dark:text-fTextD">
               <div className=" text-center">or/and</div>
               <select
-                className=" block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                className=" block  appearance-none items-center rounded border border-fBorder bg-fInputBg p-1 align-middle  leading-tight text-fText focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-fInputBgD dark:text-fTextD dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 name="logical"
                 onChange={handleChange}
                 value={state.logical}
@@ -204,10 +204,10 @@ export default function DroopFifterForm({
           </div>
           <div className="flex space-x-1 overflow-auto">
             {/*  */}
-            <label className="font-semibold text-gray-700">
+            <label className="font-semibold text-fText dark:text-fTextD">
               <div className=" text-center"> &gt;&lt;</div>
               <select
-                className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                className="block  appearance-none items-center rounded border border-fBorder bg-fInputBg p-1  align-middle  leading-tight text-fText focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-fInputBgD dark:text-fTextD dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 name="comparisonLast"
                 onChange={handleChange}
                 value={state.comparisonLast}
@@ -234,11 +234,11 @@ export default function DroopFifterForm({
                 )}
               </select>
             </label>
-            <label className="w-full font-semibold text-gray-700">
+            <label className="w-full font-semibold text-fText dark:text-fTextD">
               <div className=" text-center">фільтр2 </div>
               <input
-                //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-                className="block w-full  items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+                //leading-tight=line-feight: 1.25-(висотою лінії) елемента.
+                className=" block w-full  items-center rounded border border-fBorder bg-fInputBg p-1  align-middle leading-tight  text-fText dark:border-fBorderD dark:bg-fInputBgD dark:text-fTextD"
                 type="text"
                 name="filterLast"
                 value={state.filterLast}
@@ -250,7 +250,7 @@ export default function DroopFifterForm({
         </div>
       </form>
       {/* <div className="flex max-w-xs overflow-auto px-2 text-red-500 dark:text-red-500 md:max-w-md"> */}
-      <div className="px-2 text-red-500 dark:text-red-500">
+      <div className="px-2 text-errorMsg dark:text-errorMsgD">
         {state.comparisonFirst}&nbsp; {state.filterFirst} {state.logical}
         &nbsp; {state.comparisonLast} &nbsp; {state.filterLast}
       </div>

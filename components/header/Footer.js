@@ -8,7 +8,7 @@ const Footer = () => {
         {/* стрілка */}
         <a
           href="#"
-          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg  hover:bg-hBgHov dark:bg-hBg dark:hover:bg-hBgHov"
+          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg  hover:bg-hBgHov dark:bg-hBg dark:hover:bg-hBgHovD"
         >
           <svg
             className="h-10 w-10 text-hText"
@@ -28,13 +28,15 @@ const Footer = () => {
       </div>
       <div className="flex w-full flex-col items-start justify-between pt-10 md:flex-row">
         <div className="relative flex flex-col items-start justify-start text-left">
-          <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hText">
+          <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hTextD">
             RAtest
           </h2>
           <ul className="flex items-center justify-between">
             <li className="flex  flex-row items-center justify-start px-4">
-              <a className="group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHov dark:hover:text-hTextHov"
-               href="https://www.facebook.com/profile.php?id=100017742340573">
+              <a
+                className="group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText  hover:text-hTextHov dark:text-hTextD  dark:hover:text-hTextHovD"
+                href="https://www.facebook.com/profile.php?id=100017742340573"
+              >
                 {/* Facebook */}
                 <svg
                   className="h-6 w-6 "
@@ -54,17 +56,12 @@ const Footer = () => {
         </div>
 
         <div className="relative flex flex-col items-start justify-start py-2 text-left">
-          <h2 className="flex  flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hText">
+          <h2 className="flex  flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hTextD">
             Є запитання?
           </h2>
-          <ul className="text-hText dark:text-hText">
+          <ul className="text-hText dark:text-hTextD">
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
-              <svg
-                className="h-6 w-6 "
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg className="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -123,6 +120,7 @@ const Footer = () => {
               </a>
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
+                {/* почна */}
               <svg
                 className="h-6 w-6 "
                 width="24"
@@ -138,12 +136,12 @@ const Footer = () => {
                 <path stroke="none" d="M0 0h24v24H0z" /> <rect x="3" y="5" width="18" height="14" rx="2" />{" "}
                 <polyline points="3 7 12 13 21 7" />
               </svg>
-              <span className="px-2">ra@gmail.com</span>
+              <span type="button" className="px-2">ra@gmail.com</span>
             </li>
           </ul>
         </div>
       </div>
-      <div className="flex w-full flex-row items-center justify-center pt-10 text-hText dark:text-hText">
+      <div className="flex w-full flex-row items-center justify-center pt-10 text-hText dark:text-hTextD">
         Copyright © {new Date().getFullYear()}-{new Date().getMonth()}-{new Date().getDate()}
         {/* Серце*/}
         <svg

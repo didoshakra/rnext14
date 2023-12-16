@@ -12,14 +12,14 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
     return (
       <>
         <a
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           href="https://www.facebook.com/profile.php?id=100004339204236"
           title="Facebook"
         >
           {/* Facebook */}
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
-            //   className="h-6 w-6 text-hText dark:text-hText"
+            className="h-6 w-6  dark:hover:text-hTextHovD "
+            //   className="h-6 w-6 text-hText dark:text-hTextD"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -33,13 +33,13 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
           <p>Facebook</p>
         </a>
         <a
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           href="https://github.com/didoshakra?tab=repositories"
           title="IconGitHub"
         >
           {/* GitHub */}
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
+            className="h-6 w-6  dark:hover:text-hTextHovD"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -53,13 +53,13 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
           <p>GitHub</p>
         </a>
         <a
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           href="https://twitter.com/home?lang=uk"
           title="Twitter"
         >
           {/* Twitter */}
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+            className="h-6 w-6  dark:hover:text-hTextHovD "
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -73,14 +73,13 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
           <p>Twitter</p>
         </a>
         <a
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           href="https://www.facebook.com/profile.php?id=100017742340573"
           title="Instagram"
         >
           {/* IconInstagram */}
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
-            viewBox="0 0 24 24"
+            className="h-6 w-6  dark:hover:text-hTextHovD"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -100,7 +99,7 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
   return (
     <div className="m-0 items-center">
       <div
-        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
         onClick={() => setDrawerSocialMenuDroop(!drawerSocialMenuDroop)}
         title="меню"
       >
@@ -149,4 +148,3 @@ const DrawerSocialMenuDroop = ({ setDrawerOpen }) => {
 }
 
 export default DrawerSocialMenuDroop
-

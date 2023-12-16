@@ -2,19 +2,18 @@
 //Меню в Drawer з Header
 
 "use client"
-import { useState} from "react"
+import { useState } from "react"
 // import Link from "next/link"
 import MenuItems from "@/components/multiLevelMenu/MenuItems"
-import { menuAdmin} from "@/components/multiLevelMenu/dataMultilevelMenu"
-
+import { menuAdmin } from "@/components/multiLevelMenu/dataMultilevelMenu"
 
 const DrawerAdminMenuDroop = ({ setDrawerOpen }) => {
   const [drawerAdminMenuDroopOpen, setDrawerAdminMenuDroopOpen] = useState(false)
 
-//   const tagleMenu = () => {
-//     setDrawerAdminMenuDroopOpen(false)
-//     setDrawerOpen(false)
-//   }
+  //   const tagleMenu = () => {
+  //     setDrawerAdminMenuDroopOpen(false)
+  //     setDrawerOpen(false)
+  //   }
 
   //випадаюче меню Налаштувань
   const renderMenu = () => {
@@ -27,16 +26,16 @@ const DrawerAdminMenuDroop = ({ setDrawerOpen }) => {
   return (
     <div className="m-0 items-center pb-2 ">
       <div
-        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
         onClick={() => setDrawerAdminMenuDroopOpen(!drawerAdminMenuDroopOpen)}
         title="меню"
       >
         {/* іконка мобільного меню */}
-        <p className="pl-2 text-lg font-medium italic  text-hText dark:text-hText ">Меню Адміністратора</p>
+        <p className="pl-2 text-lg font-medium italic  text-hText dark:text-hTextD ">Меню Адміністратора</p>
         {drawerAdminMenuDroopOpen ? (
           // стрілка вверх
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
+            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -52,7 +51,7 @@ const DrawerAdminMenuDroop = ({ setDrawerOpen }) => {
         ) : (
           // стрілка вниз
           <svg
-            className="h-6 w-6  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
+            className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
             width="24"
             height="24"
             viewBox="0 0 24 24"

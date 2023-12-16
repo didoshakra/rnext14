@@ -68,7 +68,7 @@ function OurShop({ item }) {
 
 export default function OurShops() {
   return (
-    <section className="flex flex-col space-y-3 px-1 md:px-4 pb-5 pt-5 text-center text-hText">
+    <section className="flex flex-col space-y-3 px-1 md:px-4 pb-5 pt-5 text-center text-hText dark:text-hTextD">
       <h2 className="text-4xl italic font-bold ">Наші магазини</h2>
       <div className="grid grid-cols-1 gap-6  md:grid-cols-3">
         {shops.map((item) => (

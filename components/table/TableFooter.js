@@ -26,7 +26,7 @@ const TableFooter = ({
     <nav className="my-2 flex flex-wrap items-center justify-between ">
       <div className="flex ">
         <div
-          className="flex items-center justify-center rounded-lg border  px-2  leading-tight border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabTrBorderD dark:bg-tabTrBg "
+          className="flex items-center justify-center rounded-lg border  px-2  leading-tight border-tabThBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabThBorderD dark:bg-tabTrBgD "
           title="Інформація про рядки"
         >
           <svg
@@ -53,7 +53,7 @@ const TableFooter = ({
         </div>
         {/*  */}
         <div
-          className=" ml-1 flex  items-center rounded-lg border border-tabTrBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabTrBorderD dark:bg-tabTrBg"
+          className=" ml-1 flex  items-center rounded-lg border border-tabThBorder bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabThBorderD dark:bg-tabTrBgD"
           title="К-сть рядків на сторінку"
         >
           {/* <div className=" flex  items-center"> */}
@@ -71,7 +71,7 @@ const TableFooter = ({
 
           {/* <p>На сторінці:</p> */}
           <select
-            className="mx-1 flex w-12 items-center align-middle"
+            className="mx-1 flex w-12 items-center align-middle   bg-tabTrBg text-tabTrText dark:text-tabTrTextD   dark:border-tabThBorderD dark:bg-tabTrBgD"
             defaultValue={rowsPerPage}
             onChange={(e) => setRowsPerPage(e.target.value)}
             title="К-сть рядків на сторінку"
@@ -90,9 +90,10 @@ const TableFooter = ({
       </div>
 
       {/* pages */}
-      <div className=" text  inline-flex -space-x-px borderborder-tabTrBorder bg-tabTrBg text-tabTrText  dark:text-tabTrTextD   dark:border-tabTrBorderD dark:bg-tabTrBg">
-        <a
-          className="flex  rounded-l rounded-lg items-center justify-center  hover:bg-tabTrBgHov dark:hover:bg-tabTrBgHovD "
+      <div className=" text  inline-flex -space-x-px borderborder-tabThBorder bg-tabTrBg text-tabTrText  dark:text-tabTrTextD dark:border-tabThBorderD dark:bg-tabTrBgD">
+        <p
+          //   className="flex  rounded-l items-center justify-center  hover:bg-tabTrBgHov dark:hover:bg-tabTrBgHovD "
+          className="rounded-l-lg flex  h-5 items-center justify-center border border-tabThBorder bg-tabTrBg  leading-tight text-tabTrText dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
           onClick={() => {
             if (page > 1) setPage(page - 1)
           }}
@@ -114,7 +115,7 @@ const TableFooter = ({
             />
           </svg>
           {/* Previous */}
-        </a>
+        </p>
         {range.map((el, index) =>
           range.length < 6 ||
           el == 1 ||
@@ -125,10 +126,10 @@ const TableFooter = ({
           el === page - 1 ? (
             <li
               key={index}
-              className={`h-5 flex items-center justify-center border border-tabTrBorder px-2 leading-tight dark:border-tabTrBorderD ${
+              className={`h-5 flex items-center justify-center border border-tabThBorder px-2 leading-tight dark:border-tabThBorderD ${
                 page === el
                   ? "bg-tabTrBg text-tabTrText  "
-                  : "bg-tabTrBg  text-tabTrText hover:bg-tabTrBg hover:text-tabTrText dark:bg-tabTrBgD dark:text-tabTrTextD dark:hover:bg-tabTrBgHov dark:hover:tabTrBgHovD "
+                  : "bg-tabTrBg  text-tabTrText hover:bg-tabTrBg hover:text-tabTrText dark:bg-tabTrBgD dark:text-tabTrTextD dark:hover:bg-tabTrBgHovD dark:hover:tabTrBgHovD "
               }  `}
               onClick={() => setPage(el)}
             >
@@ -137,7 +138,7 @@ const TableFooter = ({
           ) : el === page - 2 || el === page + 2 ? (
             <li
               key={index}
-              className="flex  h-5 items-center justify-center border border-tabTrBorder bg-tabTrBg px-2 leading-tight text-tabTrText dark:border-tabTrBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
+              className="flex  h-5 items-center justify-center border border-tabThBorder bg-tabTrBg px-2 leading-tight text-tabTrText dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
             >
               ...
             </li>
@@ -145,8 +146,8 @@ const TableFooter = ({
             ""
           )
         )}
-        <a
-          className="rounded-r rounded-lg px-2 flex items-center justify-center  hover:bg-tabTrBgHov dark:hover:bg-tabTrBgHovD "
+        <p
+          className="rounded-r-lg flex mr-2 h-5 items-center justify-center border border-tabThBorder bg-tabTrBg  leading-tight text-tabTrText dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
           onClick={() => {
             //   if (page < range.length) setPage(page + 1);
             if (page < Math.max(...range)) setPage(page + 1)
@@ -169,7 +170,7 @@ const TableFooter = ({
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
           </svg>
-        </a>
+        </p>
       </div>
     </nav>
   )
