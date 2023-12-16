@@ -154,5 +154,5 @@ import tailwindConfig from "@/tailwind.config"; //отримання змінн�
         - колоьри з globals.css- це кольори по замовчуванню для всіх тем, в тому числі і основної темної теми
         - у tailwind.config.js- можуть бути ще деякі кольори, яких нема у tailwind.config.js і theme.css
         - в APP використовуються змінні кольорів з tailwind.config.js
-    -
+    - Зроблено 23теми з Tailwind CSS Color Palette in different CSS color formats //https://redpixelthemes.com/blog/tailwindcss-colors-different-formats/#color-Orange
 

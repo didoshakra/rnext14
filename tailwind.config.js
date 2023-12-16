@@ -50,12 +50,12 @@ module.exports = {
         //-- head --------------------------------------------
         hBorder: "var(--color-pCol3)",
         hBorderD: "#DCDCDC", //1
-        hText: "var(--color-pCol6)", //1 "#82AE46",
+        hText: "var(--color-pCol6)",
         hTextHov: "var(--color-pCol8)",
         hTextHovD: "#354d05",
         hTextImg: "var(--color-pCol1)",
-        hTextImg1: "var(--color-pCol3)", //білий
-        hBg: "var(--color-pCol1)", // "#F4F4EB", "#fff", //білий
+        hTextImg1: "var(--color-pCol3)",
+        hBg: "var(--color-pCol1)",
         hBgD: "#171919",
         hBgHov: "var(--color-pCol3)",
         hBgHovD: "#615f5f",
@@ -66,7 +66,7 @@ module.exports = {
         drawDropHr: "var(--color-pCol3)", // Лінії розмежування
         drawDropHrD: "#615f5f",
 
-        //-- table (th/tr/нижній підсумок) ------------------------------------------
+        //-- table (th/нижній підсумок) ------------------------------------------
         tabThBorder: "var(--color-pCol3)",
         tabThBorderD: "rgb(115 115 115)",
         tabThText: "var(--color-pCol9)",
@@ -74,8 +74,8 @@ module.exports = {
         tabThBg: "var(--color-pCol1)",
         tabThBgD: "#1f2937",
 
-        //Рядки
-        tabTrBorder: "#dde2eb",
+        //-- table/tr Рядки
+        tabTrBorder: "var(--color-pCol1)",
         tabTrBorderD: "#dde2eb",
         tabTrText: "var(--color-pCol9)",
         tabTrTextD: "var(--color-pCol0)",

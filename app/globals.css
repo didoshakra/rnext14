@@ -23,22 +23,38 @@
 
 @layer base {
   html {
-    /* Lime-50-900 */
-    --color-pCol0: #f7fee7;
-    --color-pCol1: #ecfccb;
-    --color-pCol2: #d9f99d;
-    --color-pCol3: #bef264;
-    --color-pCol6: #65a30d;
-    --color-pCol8: #3f6212;
-    --color-pCol9: #14532d;
-
-    --color-pCol4: #a3e635;
-    --color-pCol5: #84cc16;
-    --color-pCol7: #4d7c0f;
+    /* Slate 80-900*/
+    --color-pCol0: #f8fafc;
+    --color-pCol1: #f1f5f9;
+    --color-pCol2: #e2e8f0;
+    --color-pCol3: #cbd5e1;
+    /* --color-pCol4:#94a3b8; */
+    /* --color-pCol5:#64748b; */
+    --color-pCol6: #475569;
+    /* --color-pCol7: #334155; */
+    --color-pCol8: #1e293b;
+    --color-pCol9: #0f172a;
   }
 
-  @import "@/styles/themes/theme1.css";
-  @import "@/styles/themes/theme2.css";
-  @import "@/styles/themes/theme3.css";
-  @import "@/styles/themes/theme4.css";
+  @import "@/styles/themes/tIndigo.css";
+  @import "@/styles/themes/tPink.css";
+  @import "@/styles/themes/tGreen.css";
+  @import "@/styles/themes/tAmber.css";
+  @import "@/styles/themes/tGray.css";
+  @import "@/styles/themes/tLime.css";
+  @import "@/styles/themes/tRed.css";
+  @import "@/styles/themes/tYellow.css";
+  @import "@/styles/themes/tEmerald.css";
+  @import "@/styles/themes/tTeal.css";
+  @import "@/styles/themes/tCyan.css";
+  @import "@/styles/themes/tSky.css";
+  @import "@/styles/themes/tBlue.css";
+  @import "@/styles/themes/tViolet.css";
+  @import "@/styles/themes/tPurple.css";
+  @import "@/styles/themes/tFuchsia.css";
+  @import "@/styles/themes/tRose.css";
+  @import "@/styles/themes/tOrange.css";
+  @import "@/styles/themes/tZinc.css";
+  @import "@/styles/themes/tNeutral.css";
+  @import "@/styles/themes/tStone.css";
 }
