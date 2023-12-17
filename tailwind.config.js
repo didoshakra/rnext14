@@ -47,19 +47,21 @@ module.exports = {
         hTapeBg: "var(--color-pCol6)",
         hTapeBgD: "#0f172a", //--color-pCol9: #0f172a;
 
-        //-- form --------------------------------------------
+        //-- form (Bg-для 2-х форм)-------
         fBorder: "var(--color-pCol4)",
         fBorderD: "#64748b", //--color-pCol5:#64748b;
-        fText: "var(--color-pCol6)",
+        fText: "var(--color-pCol7)",
         fTextD: "var(--color-pCol2)",
         fTextHov: "var(--color-pCol8)",
-        fTextHovD: "var(--color-pCol3)",
-        fBg: "var(--color-pCol2)",
+        fTextHovD: "var(--color-pCol8)",
+        fBg: "var(--color-pCol1)",
         fBgD: "#1e293b", //--color-pCol8: #1e293b;
-        fInputBg: "var(--color-pCol1)",
+        fBg1: "var(--color-pCol2)",
+        fBg1D: "#334155", //--color-pCol7: #334155;
+        fInputBg: "var(--color-pCol0)",
         fInputBgD: "#475569", //  --color-pCol6: #475569;
-        fBgHov: "var(--color-pCol4)",
-        fBgHovD: "var(--color-pCol7)",
+        fBgHov: "var(--color-pCol2)",
+        fBgHovD: "var(--color-pCol1)",
 
         //-- head --------------------------------------------
         hBorder: "var(--color-pCol3)",
@@ -102,7 +104,8 @@ module.exports = {
         tabTrBgEve: "var(--color-pCol0)",
         tabTrBgEveD: "#4b5563",
         tabTrBgHov: "var(--color-pCol1)",
-        tabTrBgHovD: "#707885",
+        // tabTrBgHovD: "#707885",
+        tabTrBgHovD: "var(--color-pCol4)",
         tabTrBgSel: "var(--color-pCol2)", //Вибрані рядки
         tabTrBgSelD: "#677485",
         tabTrBgSelHov: "var(--color-pCol3)",

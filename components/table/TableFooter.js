@@ -99,6 +99,7 @@ const TableFooter = ({
           }}
           title="Попередня"
         >
+          {/* Стрілка вліво */}
           <svg
             className="mr-2 h-5 w-5"
             aria_hidden="true"
@@ -128,9 +129,10 @@ const TableFooter = ({
               key={index}
               className={`h-5 flex items-center justify-center border border-tabThBorder px-2 leading-tight dark:border-tabThBorderD ${
                 page === el
-                  ? "bg-tabTrBg text-tabTrText  "
+                  ? "bg-tabTrBg text-tabTrText dark:bg-tabTrBgD dark:text-tabTrTextD"
                   : "bg-tabTrBg  text-tabTrText hover:bg-tabTrBg hover:text-tabTrText dark:bg-tabTrBgD dark:text-tabTrTextD dark:hover:bg-tabTrBgHovD dark:hover:tabTrBgHovD "
               }  `}
+              //   className="rounded-r-lg flex mr-2 h-5 items-center justify-center border border-tabThBorder bg-tabTrBg  leading-tight text-tabTrText dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-tabTrTextD "
               onClick={() => setPage(el)}
             >
               {el}
@@ -154,7 +156,7 @@ const TableFooter = ({
           }}
           title="Наступна"
         >
-          {/* Next */}
+          {/* Next /Стрілка вправо */}
           <svg
             className="ml-2 h-5 w-5"
             aria-hidden="true"

@@ -107,7 +107,7 @@ const HeaderTape = () => {
             </svg>
           </a>
         </div>
-        <span className="px-1 text-sm items-center">Next.js-14/Tailwindcss/PostgreSQL</span>
+        <span className="px-1 text-sm items-center">Next.js14/Tailwindcss/PgSQL</span>
       </div>
     </div>
   )

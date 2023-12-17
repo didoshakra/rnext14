@@ -85,18 +85,18 @@ export default function DroopFifterForm({
   }
 
   return (
-    <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg p-1  dark:border-fBorderD dark:bg-fBgD">
+    <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg1 p-1  dark:border-fBorderD dark:bg-fBg1D">
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
           <button
-            className="hover:bg-fHovBg dark:hover:bg-fHovBgD mx-2 flex items-center rounded-full border border-fBorder px-1"
-            //   className="rounded-full hover:bg-fBgHov dark:hover:bg-fBgHovD"
+            className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:fBorderD"
             //   onClick={() => handleEdit()}
             type="submit"
             title="Добавте значення"
           >
+            {/* Enter */}
             <svg
-              className="h-6 w-6 text-iconT dark:iconTD"
+              className="h-6 w-6 text-iconT dark:text-iconTD"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -115,13 +115,15 @@ export default function DroopFifterForm({
             <label className="px-1 text-xs font-sans text-fText dark:text-fTextD">{valueType}</label>)
             {/* <label className="px-1">({filterDataRow.accessor})</label> */}
           </header>
+
           <button
             className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:fBorderD"
             onClick={(e) => setIsDropdownFilterForm(false)}
             title="Вийти без збереження"
           >
+            {/* відмова(помножити) */}
             <svg
-              className="h-6 w-6 text-iconT dark:iconTD"
+              className="h-6 w-6 text-iconT dark:text-iconTD"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

@@ -158,7 +158,7 @@ export default function DropdownFilter({
               <tr
                 id={row._nrow}
                 key={index}
-                className={`${styleTableText} -medium bg-fBg font-sans text-fText hover:bg-fBgHov dark:bg-fBgD dark:text-fTextD dark:hover:bg-fBgHovD`}
+                className={`${styleTableText} -medium bg-fBg font-normal text-fText hover:text-fTextHov hover:bg-fBgHov dark:bg-fBgD dark:hover:text-fTextHovD dark:text-fTextD dark:hover:bg-fBgHovD`}
                 onClick={(e) => editRows(e)}
               >
                 <td
