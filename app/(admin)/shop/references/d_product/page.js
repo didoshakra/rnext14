@@ -53,7 +53,7 @@ export default function Products() {
       accessor: "skod",
       type: "date",
       sortable: true,
-      filtered: true,
+      filtered: true, 
       align: "center",
       minWith: "100px",
       With: "200px",

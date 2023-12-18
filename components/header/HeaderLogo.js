@@ -11,7 +11,9 @@ const HeaderLogo = () => {
       {/* <Link href="/" className=" w-[70px], h-[50px] items-center"> */}
       <Link href="/" className="items-center">
         <Image
-          src="/images/home/sun_man_hands-oval-ra-red-64-41.png"
+        //   src="/images/home/sun_man_hands-oval-ra-red-64-41.png"
+        //   src="/images/mstan/StanLogo-80.jpg"
+          src="/images/mstan/StanLogo-80-oval.png"
           height={41} //Завжди Avto?
           width={64} //Чомусь має пріорітет
           //   fill

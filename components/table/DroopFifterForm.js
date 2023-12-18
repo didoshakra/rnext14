@@ -11,11 +11,12 @@ export default function DroopFifterForm({
   setIsDropdownFilterForm,
   filterData,
   setFilterData,
+  setFilteredState, //Що у фільтрі є непусті записи
 }) {
   const valueType = filterDataRow.type //Тип поля, що фільтрується
   const [state, setState] = useState({
     filterFirst: filterDataRow.filterFirst,
-    filterLast: filterDataRow.filterLast,
+    filterTwo: filterDataRow.filterTwo,
     // logical: filterDataRow.logical,
     logical: filterDataRow.logical.length != 0 ? filterDataRow.logical : "or",
     // comparisonFirst: filterDataRow.comparisonFirst,
@@ -27,21 +28,14 @@ export default function DroopFifterForm({
         : valueType === "boolean"
         ? "true"
         : "include",
-    comparisonLast:
-      filterDataRow.comparisonLast.length != 0
-        ? filterDataRow.comparisonLast
+    comparisonTwo:
+      filterDataRow.comparisonTwo.length != 0
+        ? filterDataRow.comparisonTwo
         : valueType === "number" || valueType === "date"
         ? "=="
         : valueType === "boolean"
         ? "true"
         : "include",
-    //
-    // comparisonLast: filterDataRow.comparisonLast,
-    // filterFirst: "",
-    // filterLast: "",
-    // logical: "",
-    // comparisonFirst: "",
-    // comparisonLast: "",
   })
 
   console.log("DroopFifterForm.js/valueType=", valueType)
@@ -49,34 +43,35 @@ export default function DroopFifterForm({
 
   const handleSubmit = () => {
     //Контроль
-    if (state.filterFirst.length !== 0 && state.comparisonFirst.length !== 0) {
-      // //   setInputError("Помилка! Не задані значення для 1-го фільтру");
-      //   alert("Помилка! Не задані значення для 1-го фільтру");
-      // } else {
-      const nRow = filterDataRow._nrow
-      //--- Записуємо filter в filtered масиву(filterData) --------
-      let tempData = [...filterData] //Копія робочого масиву обєктів щоб рендерило зміни
-      // const targetObj = filterData.find((obj) => obj._nrow === nRow); //не ререндерить зміни
-      const targetObj = tempData.find((obj) => obj._nrow === nRow) //Шукажм рядок по _nrow=nRow
-      if (targetObj) {
-        // Записує безпосередньо в масив ????//Треба змінювати через setFilterData бо не ререндерить зміни
-        //   targetObj.filter1 = `${state.comparisonFirst}${state.filterFirst}`;
+    // if (state.filterFirst.length !== 0 && state.comparisonFirst.length !== 0) {
+    // //   setInputError("Помилка! Не задані значення для 1-го фільтру");
+    //   alert("Помилка! Не задані значення для 1-го фільтру");
+    // } else {
+    const nRow = filterDataRow._nrow
+    //--- Записуємо filter в filtered масиву(filterData) --------
+    let tempData = [...filterData] //Копія робочого масиву обєктів щоб рендерило зміни
+    // const targetObj = filterData.find((obj) => obj._nrow === nRow); //не ререндерить зміни
+    const targetObj = tempData.find((obj) => obj._nrow === nRow) //Шукажм рядок по _nrow=nRow
+    if (targetObj) {
+      // Записує безпосередньо в масив ????//Треба змінювати через setFilterData бо не ререндерить зміни
+      //   targetObj.filter1 = `${state.comparisonFirst}${state.filterFirst}`;
 
-        targetObj.comparisonFirst = state.comparisonFirst
-        targetObj.filterFirst = state.filterFirst
-        targetObj.logical = state.logical
-        targetObj.comparisonLast = state.comparisonLast
-        targetObj.filterLast = state.filterLast
-        //   console.log("DroopFifterForm.js/handleEdit/filterData=", filterData);
-        setFilterData(tempData) //ререндерить зміни
-      }
+      targetObj.comparisonFirst = state.comparisonFirst
+      targetObj.filterFirst = state.filterFirst
+      targetObj.logical = state.logical
+      targetObj.comparisonTwo = state.comparisonTwo
+      targetObj.filterTwo = state.filterTwo
+      //   console.log("DroopFifterForm.js/handleEdit/filterData=", filterData);
+      setFilterData(tempData) //заносим зміни в filterData
+      setFilteredState(1) //Що у фільтрі є непусті записи
+      //   }
     }
     setIsDropdownFilterForm(false)
-    // }
   }
 
   function handleChange(evt) {
-    const value = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
+    // const value = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
+    const value = evt.target.value
     setState({
       ...state,
       [evt.target.name]: value,
@@ -84,31 +79,34 @@ export default function DroopFifterForm({
     // console.log("DroopFifterForm.js/handleChange/state=", state);
   }
 
+  const deleteFilterRow = () => {}
+
   return (
-    <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg1 p-1  dark:border-fBorderD dark:bg-fBg1D">
+    <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg1 p-1  dark:border-fBorderD dark:bg-fBg1D overflow-auto">
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
-          <button
-            className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:fBorderD"
-            //   onClick={() => handleEdit()}
-            type="submit"
-            title="Добавте значення"
-          >
-            {/* Enter */}
-            <svg
-              className="h-6 w-6 text-iconT dark:text-iconTD"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <div className="flex justify-start space-x-1">
+            <button
+              className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:fBorderD"
+              //   onClick={() => handleEdit()}
+              type="submit"
+              title="Добавте значення"
             >
-              {" "}
-              <polyline points="9 10 4 15 9 20" /> <path d="M20 4v7a4 4 0 0 1-4 4H4" />
-            </svg>
-          </button>
-
+              {/* Enter */}
+              <svg
+                className="h-6 w-6 text-iconT dark:text-iconTD"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <polyline points="9 10 4 15 9 20" /> <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+              </svg>
+            </button>
+          </div>
           {/* <header className="flex text-red-700 "> */}
           <header className="flex items-center text-fText ">
             <label className="px-1 font-semibold text-fText dark:text-fTextD">{filterDataRow.name}</label>(
@@ -148,7 +146,7 @@ export default function DroopFifterForm({
                 name="comparisonFirst"
                 onChange={handleChange}
                 value={state.comparisonFirst}
-                required
+                // required
               >
                 {/* <option value=""></option> */}
                 {valueType === "number" || valueType === "date" ? (
@@ -179,7 +177,7 @@ export default function DroopFifterForm({
                 //leading-tight=line-feight: 1.25-(висотою лінії) елемента.
                 className=" block w-full  items-center rounded border border-fBorder bg-fInputBg p-1  align-middle leading-tight  text-fText dark:border-fBorderD dark:bg-fInputBgD dark:text-fTextD"
                 id="filterFirst"
-                required
+                // required
                 type="text"
                 name="filterFirst"
                 value={state.filterFirst}
@@ -188,7 +186,7 @@ export default function DroopFifterForm({
             </label>
           </div>
 
-          {/* filterLast */}
+          {/* filterTwo */}
           <div className="flex space-x-1 ">
             <label className=" font-semibold text-fText dark:text-fTextD">
               <div className=" text-center">or/and</div>
@@ -210,9 +208,9 @@ export default function DroopFifterForm({
               <div className=" text-center"> &gt;&lt;</div>
               <select
                 className="block  appearance-none items-center rounded border border-fBorder bg-fInputBg p-1  align-middle  leading-tight text-fText focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-fInputBgD dark:text-fTextD dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                name="comparisonLast"
+                name="comparisonTwo"
                 onChange={handleChange}
-                value={state.comparisonLast}
+                value={state.comparisonTwo}
               >
                 {/* <option value=""></option> */}
                 {valueType === "number" || valueType === "date" ? (
@@ -242,8 +240,8 @@ export default function DroopFifterForm({
                 //leading-tight=line-feight: 1.25-(висотою лінії) елемента.
                 className=" block w-full  items-center rounded border border-fBorder bg-fInputBg p-1  align-middle leading-tight  text-fText dark:border-fBorderD dark:bg-fInputBgD dark:text-fTextD"
                 type="text"
-                name="filterLast"
-                value={state.filterLast}
+                name="filterTwo"
+                value={state.filterTwo}
                 onChange={handleChange}
               />
             </label>
@@ -254,7 +252,7 @@ export default function DroopFifterForm({
       {/* <div className="flex max-w-xs overflow-auto px-2 text-red-500 dark:text-red-500 md:max-w-md"> */}
       <div className="px-2 text-errorMsg dark:text-errorMsgD">
         {state.comparisonFirst}&nbsp; {state.filterFirst} {state.logical}
-        &nbsp; {state.comparisonLast} &nbsp; {state.filterLast}
+        &nbsp; {state.comparisonTwo} &nbsp; {state.filterTwo}
       </div>
     </div>
     // </div>

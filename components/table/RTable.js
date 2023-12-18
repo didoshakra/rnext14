@@ -7,15 +7,22 @@
 //https://dev.to/franciscomendes10866/react-basic-search-filter-1fkh
 //Step-by-Step Guide: Building a Simple Search Filter with React
 //--------------------------------------------------------------------
+
 // Поля задаються в const initialСolumns = [
-//   { label: "In", accessor: "index", sortable: false, with: "15px" },
-//    { label: "Id", accessor: "id", sortable: true, with: "20px" },
+//  {label: "ШтрихКод", //Що буде відображатись в заголовку <th>
+//   accessor: "skod",//-значення з БД, (Якщо accessor: "index", то іде нумерація рядків на основі index)
+//   type: "date", //Для фільтру і вирівнюванню в рядку(string-вліво, numeric-вправо,date-по центу)
+//   sortable: true,//чи буде сортуватись колонка
+//   filtered: true,//чи буде фільтруватись
+//   align: "center",//Додпткове вирівнбвання в стстовбцю(має перевагу над type)
+//   minWith: "100px",//Ще не прпцює
+//   With: "200px",}//Ще не прпцює
 // ];
 //     { label: "Назва товару"-Заголовок
 //       accessor: "name"-значення з data,
 //       sortable: true- чи буде сортуватись колонка
 //       with: "200px"-???
-// Якщо accessor: "index", то іде нумерація рядків на основі index
+//
 //сортування/
 //  Створення className для сортування(bg-color+bg-icon)
 // 20231105-фіксовані <thead> i <tfoot> з вертикальним скролом
@@ -31,6 +38,7 @@
 // 20231127 // Фільтрування по багатьох полях/Відновлення БД до фільтрування/ При фівльтруванні для порівняння дані перетворюються у ті типи, які задані в initialСolumns.type
 // 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: numeric+boll=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
 //          // ВІдмітити(зняти) всі/
+// 20231217 ////<th>i<td>-whitespace-nowrap-щоб текст у комірці таблиці не переносився
 //--------------------------------------------------------------------------------------------------------------------
 
 //*** Типи даних ******* */(string,number,boolean,date-це об'єкт,але треба вказувати)
@@ -60,9 +68,9 @@ export default function DProductTable({
   const [tableFontSize, setTableFontSize] = useState("sm") //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0) //Попереднє значення рядка пошуку(Для відкату пошуку)
   const [beforSeachData, setBeforSeachData] = useState([]) //Зберігається БД перед пошуком (Для відкату пошуку)
-  const [beforFilterData, setBeforFilterData] = useState([]) //Зберігається БД перед фільтруванням (Для відкату фільтрування)
-  const [isDropdownFilter, setIsDropdownFilter] = useState(false) //Зберігається перед селектом
-  const [filteredIcon, setFilteredIcon] = useState("none") //Заповнення іконки фільтру(лійки)("none- не фільтрувалось/"carentColor- фільтрувалось )
+  const [beforFilterData, setBeforFilterData] = useState([]) //Зберігається БД перед фільтруванням (Для відкату)
+  const [isDropdownFilter, setIsDropdownFilter] = useState(false) //вікно фільтру
+  const [filteredState, setFilteredState] = useState(0) //Стан фільтрування (0-незаповнений фільтр і не було фільтрування/ 1-заповнений фільтр, але не було фільтрування / 2- було фільтрування)
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -118,10 +126,10 @@ export default function DProductTable({
 
   //== Підготовка масиву фільтрів по полях (filterData) */
   const preparedFilterData = useMemo(() => {
-    let resData = []
+    let resData = [] //масив об'єктів
     let nR = -1
     const temp = initialСolumns.map((data, idx) => {
-      let tempData = []
+      let tempData = {} // об’єкта
       if (data.filtered != undefined && data.filtered) {
         nR = nR + 1
         tempData._nrow = nR
@@ -132,8 +140,8 @@ export default function DProductTable({
         tempData.comparisonFirst = ""
         tempData.filterFirst = ""
         tempData.logical = ""
-        tempData.comparisonLast = ""
-        tempData.filterLast = ""
+        tempData.comparisonTwo = ""
+        tempData.filterTwo = ""
         resData.push(tempData) //Додаємо в масив
       }
     })
@@ -173,7 +181,7 @@ export default function DProductTable({
 
   //--- Задає режим сортування
   const handleSortingChange = (accessor) => {
-    console.log("RTable.js/handleSortingChange/accessor=", accessor)
+    // console.log("RTable.js/handleSortingChange/accessor=", accessor)
     const sortOrder =
       //   accessor === sortField && order === "asc" ? "desc" : "asc";
       accessor === sortField && order === "asc" ? "desc" : order === "desc" ? "default" : "asc"
@@ -265,16 +273,17 @@ export default function DProductTable({
   //== Фільтр множинний */
   //--- Формує (true/false) для стилю шоб показувати іконку фільтру біля назви в шапці, якщо є заданий фільтр по цьому полю
   const clasThFilter = (accessor) => {
-    let tempFilterData = [...filterData] //Копія робочого масиву обєктів
-    const targetObj = tempFilterData.find((obj) => obj.accessor === accessor) //Шукажмо запис
-    //
+    const targetObj = filterData.find((obj) => obj.accessor === accessor) //Шукажмо запис
+    // console.log("RTable.js.js/applyFilters/targetObj ==", targetObj)
     if (targetObj && targetObj.filterFirst.length > 0) {
       return true
     } else return false
   }
 
-  //--- Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
+  //---*** Сам фільтр/Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
+    setIsDropdownFilter(false)
+    if (filteredState != 1) return
     //--- Додаткові ф-ції
     //Як реалізувати оператор змінної в JavaScript? // https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
     //--- Об'єкт(набір змінних), що імітує оператори
@@ -296,7 +305,7 @@ export default function DProductTable({
         return false
       }
     }
-    //--- Ф-ція перетворення типів у відповідності до заданих типиві таблиці і у нижній регістр
+    //*-- Ф-ція перетворення типів у відповідності до заданих типиві таблиці і у нижній регістр
     const valToType = (value, type = "string") => {
       if (type == "number") return parseFloat(value)
       if (type == "date") return Date.parse(value)
@@ -306,54 +315,45 @@ export default function DProductTable({
     //--- Початок фільтруівання
     setIsDropdownFilter(false) //Закриваєм випадаюче вікно фільтрів
     // console.log("RTable.js.js/applyFilters/filterData=", filterData);
-    if (filteredIcon === "none") {
-      setBeforFilterData(workData) //Для відкату
+    let tempWorkData = []
+    if (filteredState != 2) {
+      setBeforFilterData(workData) //Для відкату(Початкове значення фільтру)
+      tempWorkData = [...workData] //Перший раз починаємо фільтрування з workData
+    } else {
+      tempWorkData = [...beforFilterData] //Повертаємо початкове значення workData
     }
     //
-    const tempWorkData = [...workData]
-    // console.log("RTable.js.js/applyFilters/workData=", workData);
+    // console.log("RTable.js.js/applyFilterstempWorkData=", tempWorkData)
     const nowData = []
     //*** Цикл по рядках
     // const attributes = Object.keys(tempWorkData[0]); //Це рядок заголовку(масив)
     // console.log("RTable.js.js/ApplyFilters/attributes=", attributes);
-    let tempFilterData = [...filterData] //Копія робочого масиву обєктів
-    // console.log("RTable.js.js/ApplyFilters/tempFilterData=", tempFilterData);
+    console.log("RTable.js.js/ApplyFilters/for2/filterData=", filterData)
     for (const current of tempWorkData) {
-      //   console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
+      // console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current)
       //++++ Принцип виходу з атрибуту(for2) при невідповідностях
-      //Цикл по колонках
+      //Цикл по колонках \\ Щоб не бігти по масиву ро
       let rowFilterted = false
-      for (const rowColumn of tempFilterData) {
-        const attribute = rowColumn.accessor
-        // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
-        // break;
-
+      for (const column of filterData) {
+        const attribute = column.accessor
+        // console.log("RTable.js.js/ApplyFilters/for2/rowColumn=", column)
+        // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute)
         // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
-        const targetObj = tempFilterData.find((obj) => obj.accessor === attribute)
-
+        const targetObj = filterData.find((obj) => obj.accessor === attribute)
         //===============================
-        if (targetObj && targetObj.filterFirst.length > 0) {
+        if (targetObj.filterFirst.length > 0) {
           //   console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
-          const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`
+          const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonTwo}/${targetObj.filterTwo}`
           //   console.log("RTable.js.js/ApplyFilters/for2/targetObj: ", targetObj);
           //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
 
-          //--- Задаєм змінну типу поля
-          const valueType = targetObj.type === undefined ? "string" : targetObj.type //Тип змінної, якщо не заданий то "string"
+          //--- Задаєм змінну типу поля //Тип змінної, якщо не заданий то "string"
+          const valueType = targetObj.type === undefined ? "string" : targetObj.type//Ф-ція що задає типи
           //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
-          const valueData = valToType(current[attribute], valueType)
-          const filterFirst = valToType(targetObj.filterFirst, valueType)
-          const filterLast = valToType(targetObj.filterLast, valueType)
-          //   console.log(
-          //     "RTable.js.js/ApplyFilters/filterFirst=",
-          //     filterFirst + " /valueData=",
-          //     valueData,
-          //   );
-          //   console.log(
-          //     "RTable.js.js/ApplyFilters/typeof/type_filterFirst=",
-          //     typeof filterFirst + "/type-valueData=",
-          //     typeof valueData,
-          //   );
+          const valueData = valToType(current[attribute], valueType) //Значення поля робочої БД
+          const filterFirst = valToType(targetObj.filterFirst, valueType) //Значення фільтру1
+          console.log("RTable.js.js/ApplyFilters/typeof /valueData=", valueData + "/", typeof valueData)
+          console.log("RTable.js.js/ApplyFilters/filterFirst=", filterFirst + "/", typeof filterFirst)
 
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
@@ -363,73 +363,72 @@ export default function DProductTable({
           let compareFirst = false
           if (valueType === "number" || valueType === "date") {
             compareFirst = doCompare(valueData, filterFirst, targetObj.comparisonFirst)
-          } else compareFirst = valueData.includes(filterFirst.toLowerCase())
+          } else compareFirst = valueData.includes(filterFirst.toLowerCase()) //Порівняння (чивходить)
           if (compareFirst) {
             rowFilterted = true
-            console.log(
-              "RTable.js.js/applyFilters/iFcompareFirst/filterRow: ",
-              filterRow + " /current._nRow:",
-              current._nRow
-            )
+            // console.log("RTable.js.js/applyFilters/iFcompareFirst/filterRow: ", filterRow + " /current._nRow:", current)
           }
 
-          //--- Якщо є filterLast.length
-          if (filterLast.length > 0) {
-            // console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
+          //--- Якщо є filterTwo.length
+          if (targetObj.filterTwo.length> 0) {
+            //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
+            const filterTwo = valToType(targetObj.filterTwo, valueType) //Значення фільтру1
+            // console.log("RTable.js.js/applyFilters/Two/filterRow=", filterRow);
 
-            let compareLast = false
+            let compareTwo = false
             if (valueType === "numeric" || valueType === "date") {
-              compareLast = doCompare(valueData, filterLast, targetObj.comparisonLast)
-            } else compareLast = valueData.includes(filterLast.toLowerCase())
+              compareTwo = doCompare(valueData, filterTwo, targetObj.comparisonTwo)
+            } else compareTwo = valueData.includes(filterTwo.toLowerCase())
             // console.log(
-            //   "RTable.js.js/applyFilters/compareLast=",
-            //   compareLast + " /valueType=",
+            //   "RTable.js.js/applyFilters/compareTwo=",
+            //   compareTwo + " /valueType=",
             //   valueType,
             //   +" /valueData=",
             //   valueData,
-            //   +" /filterLast=",
-            //   filterLast,
+            //   +" /filterTwo=",
+            //   filterTwo,
             // );
-            if (compareLast) {
-              console.log("RTable.js.js/applyFilters/(compareLast)/current._nRow:", current._nRow)
+            //вірне порівняння з 2-м фільтром
+            if (compareTwo) {
+              //   console.log("RTable.js.js/applyFilters/(compareTwo)/current._nRow:", current._nRow)
 
-              //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
-              //          (||-> First|| Last)-додаєм, якщо хоч один = true -> а так як compareLast = true, то додаєм всі
-              //          (First = false || Last = true) 4-додаєм всі
+              //Варіанти: (&&-> First &&Two)1-додаєм якщо обидва== true -> решта НІ
+              //          (||-> First|| Two)-додаєм, якщо хоч один = true -> а так як compareTwo = true, то додаєм всі
+              //          (First = false || Two = true) 4-додаєм всі
 
-              // порівнюємо тільки compareFirst, бо compareLast = true
+              // порівнюємо тільки compareFirst, бо compareTwo = true
               if (targetObj.logical === "&&") {
                 if (compareFirst) rowFilterted = true
                 else {
                   rowFilterted = false //Має бути бо за For при rowFilterted = true; зробиться Push
-                  break //(filterFirct=false && filterLast==true) Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
+                  break //(filterFirct=false && filterTwo==true) Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
                 }
-              } else rowFilterted = true // Якщо не && то При || додаєм всі бо compareLast = true
+              } else rowFilterted = true // Якщо не && то При || додаєм всі бо compareTwo = true
             }
-            // !(compareLast)
+            // !(compareTwo)
             else if (compareFirst && targetObj.logical === "||") {
               console
                 .log
-                // "* RTable.js.js/ApplyFilters/!(compareLast)ElseiF(compareFirst &&/_nRow: ",
+                // "* RTable.js.js/ApplyFilters/!(compareTwo)ElseiF(compareFirst &&/_nRow: ",
                 // current._nrow + "/ targetObj.logical",
                 // targetObj.logical,
                 ()
               rowFilterted = true
-              // Варіанти:(First = true  || Last = false)-додаєм
-              //          (First = false || Last = false)-ні
-              //          (First = true  && Last = false)-ні
-              //          (First = false && Last = false)-ні
+              // Варіанти:(First = true  || Two = false)-додаєм
+              //          (First = false || Two = false)-ні
+              //          (First = true  && Two = false)-ні
+              //          (First = false && Two = false)-ні
             } else {
               //   console.log(
-              //     "* RTable.js.js/ApplyFilters/!(compareLast)elseIfElse(compareFirst &&/_nRow: ",
+              //     "* RTable.js.js/ApplyFilters/!(compareTwo)elseIfElse(compareFirst &&/_nRow: ",
               //     current._nrow,
               //   );
               rowFilterted = false //Має бути бо за For при rowFilterted = true; зробиться Push
-              break //Бо filterFirct=false && filterLast=false, отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
+              break //Бо filterFirct=false && filterTwo=false, отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
             }
           } else if (!compareFirst) {
             rowFilterted = false //Має бути бо за For при rowFilterted = true; зробиться Push
-            break //filterFirct=false, а filterLast нема. Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
+            break //filterFirct=false, а filterTwo нема. Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
           }
         }
         //-- fEndor2
@@ -443,29 +442,29 @@ export default function DProductTable({
       //   console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
       if (rowFilterted) {
         nowData.push(current) // Добавляємо текучий рядок в новий масив
-        console.log("RTable.js.js/ApplyFilters/Endfor1/if(rowFilterted)***/_nRow: ", current._nrow)
+        // console.log("RTable.js.js/ApplyFilters/Endfor1/if(rowFilterted)***/_nRow: ", current._nrow)
       }
     }
-    console.log("RTable.js.js/ApplyFilters/Endfor1/")
+    // console.log("RTable.js.js/ApplyFilters/Endfor1/")
     setWorkData(nowData)
-    setFilteredIcon("currentColor") //Колір хаповнення іконки фільтру
+    setFilteredState(2) //Колір заповнення іконки фільтру
   }
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
   const deleteFilterAll = () => {
-    console.log("RTable.js/deleteFilterAll/")
+    // console.log("RTable.js/deleteFilterAll/")
     let tempFilterData = [...filterData]
     const temp = tempFilterData.map((data) => {
       data.comparisonFirst = ""
       data.filterFirst = ""
       data.logical = ""
-      data.comparisonLast = ""
-      data.filterLast = ""
+      data.comparisonTwo = ""
+      data.filterTwo = ""
     })
     setFilterData(tempFilterData) //Перезаписуєм масив фільтрів
-    setWorkData(beforSeachData) //Відкат даних до фільтру
+    // setWorkData(beforSeachData) //Відкат даних до фільтру
     setIsDropdownFilter(false) //Закриваємо випадаюче вікно
-    setFilteredIcon("none") //Іконка
+    setFilteredState(0) //Іконка
     setWorkData(beforFilterData) //Відновлюємо робочу БД до фільтрування
   }
   //----------------------------------------------------
@@ -523,7 +522,9 @@ export default function DProductTable({
                   // className="h-4 w-4 text-gray-500 dark:text-red-500"
                   className="h-5 w-5 text-iconT dark:text-iconT"
                   viewBox="0 0 24 24"
-                  fill={filteredIcon}
+                  //   fill={filteredState}
+                  //   fill={filteredState === 2 ? "currentColor" : filteredState === 1 ? "rgb(77, 10, 235)" : "none"}
+                  fill={filteredState === 2 ? "currentColor" : filteredState === 1 ? "green" : "none"}
                   // fill="none"
                   // fill="currentColor"
                   stroke="currentColor"
@@ -542,13 +543,13 @@ export default function DProductTable({
               {/* Dropdown menu */}
               {isDropdownFilter && (
                 <DropdownFilter
-                  filterData={filterData}
+                  filterData={filterData} //Дані фільтру(тільки ті поля по яких задано )
                   setFilterData={setFilterData}
                   setIsDropdownFilter={setIsDropdownFilter}
                   styleTableText={styleTableText}
-                  initialСolumns={initialСolumns}
-                  applyFilters={applyFilters}
+                  applyFilters={applyFilters} //Застосувати фільтр
                   deleteFilterAll={deleteFilterAll}
+                  setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
                 />
               )}
             </div>
@@ -658,11 +659,11 @@ export default function DProductTable({
 
                 return (
                   <th
-                    // uppercase- текст у верхній регістр
-                    className={`${styleTableText} border-r dark:border-neutral-500`}
+                    //whitespace-nowrap-щоб текст у комірці таблиці не переносився
+                    className={`${styleTableText} border-r dark:border-neutral-500 whitespace-nowrap`}
                     key={accessor}
                   >
-                    {/* <div className="flex justify-center divide-x divide-current text-center align-middle uppercase "> */}
+                    {/* // uppercase- текст у верхній регістр */}
                     <div className="flex justify-center text-center align-middle uppercase ">
                       <div className="flex uppercase ">
                         <button className="flex" onClick={sortable ? () => handleSortingChange(accessor) : null}>
@@ -698,7 +699,6 @@ export default function DProductTable({
                         </div>
                       )}
                     </div>
-
                     {/*Dropdown menu  */}
                     {/* {typeof filtered !== "undefined" && filtered && (
                       <DropdownFilterMenu />
@@ -729,12 +729,6 @@ export default function DProductTable({
                   const tData = accessor === "index" ? rowIndex : row[accessor]
                   //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
 
-                  //   const clasTextAlign =
-                  //     type == "number"
-                  //       ? "text-right"
-                  //       : type == "date"
-                  //       ? "text-center"
-                  //       : "text-left";
                   const clasTextAlign =
                     align == "right"
                       ? "text-right"
@@ -752,7 +746,8 @@ export default function DProductTable({
                     <td
                       id={row._nrow}
                       key={accessor}
-                      className={`${styleTableText} ${clasTextAlign} text-tabTrText dark:text-tabTrTextD`}
+                      ///whitespace-nowrap-щоб текст у комірці таблиці не переносився
+                      className={`${styleTableText} ${clasTextAlign} text-tabTrText dark:text-tabTrTextD  whitespace-nowrap`}
                     >
                       {tData}
                     </td>

@@ -2,12 +2,13 @@ import { useState } from "react"
 import DroopFifterForm from "./DroopFifterForm"
 
 export default function DropdownFilter({
-  filterData,
+  filterData, //Дані фільтру(тільки ті поля по яких задано )
   setFilterData,
-  applyFilters,
   setIsDropdownFilter,
   styleTableText,
+  applyFilters, //Застосувати фільтр
   deleteFilterAll,
+  setFilteredState, //Що у фільтрі є непусті записи
 }) {
   const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false)
   const [filterDataRow, setFilterDataRow] = useState([]) //Рядок, що коригується(в DropdownFilterForm)
@@ -29,26 +30,10 @@ export default function DropdownFilter({
     //--------------------------------------------------------------
   }
 
-  //   const deleteFilterAll = () => {
-  //     console.log("DropdownFilter.js/deleteFilterAll/");
-  //     let tempData = [...filterData];
-  //     const temp = tempData.map((data, idx) => {
-  //       data.comparisonFirst = "";
-  //       data.filterFirst = "";
-  //       data.logical = "";
-  //       data.comparisonLast = "";
-  //       data.filterLast = "";
-  //     });
-  //     setFilterData(tempData);
-  //   };
-
   return (
-    // <div className="absolute left-0 z-10 mx-2 rounded-lg border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400 md:left-auto">
-    //drop-shadow-md-тінь
     <div
       style={{ "--sW": "calc(100vw - 20px)" }} //
-      className="absolute left-0 z-10 mx-2 max-w-[--sW] rounded-lg border border-fBorder bg-fBg  p-1  dark:border-fBorderD dark:bg-fBgD md:left-auto"
-      //   className="absolute left-0 z-10 mx-2 max-w-[100px] rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto"
+      className="absolute left-0 z-10 mx-2 max-w-[--sW] rounded-lg border border-fBorder bg-fBg  p-1  dark:border-fBorderD dark:bg-fBgD md:left-auto overflow-auto"
     >
       <div className="mb-1 flex justify-between">
         <button
@@ -56,7 +41,7 @@ export default function DropdownFilter({
           onClick={() => deleteFilterAll()}
           title="Очистити всі"
         >
-          {/* кошик */}
+          {/* смітник */}
           <svg
             // className="h-6 w-6 text-iconT dark:text-iconTD"
             className="h-6 w-6 text-blue-600 "
@@ -137,13 +122,14 @@ export default function DropdownFilter({
         </button>
       </div>
       {/* <div className="max-w-ful overflow-auto"> */}
-      <div className="w-ful">
+      <div className=" w-ful  ">
         {/* <table className="table-fixed"> */}
-        <table className="max-w-full table-auto overflow-auto">
+        <table className="max-w-full table-auto overflow-auto w-[20%]">
           {/* <thead className="bg-gray-300  text-left uppercase  text- dark:bg-gray-500 dark:text-white"> */}
           <thead className="bg-fBg  text-left uppercase text-fText dark:bg-fBgD  dark:text-fTextD">
             <tr>
-              <th className={`${styleTableText} w-[40%]`}>Поле</th>
+              {/* <th className={`${styleTableText} w-[10%]`}>Поле</th> */}
+              <th className={`${styleTableText}`}>Поле</th>
               {/* <th>Ключ</th> */}
               {/* <th className={`${styleTableText} w-24`}>&gt;=&lt;</th> */}
               <th className={`${styleTableText}`}>=</th>
@@ -158,7 +144,7 @@ export default function DropdownFilter({
               <tr
                 id={row._nrow}
                 key={index}
-                className={`${styleTableText} -medium bg-fBg font-normal text-fText hover:text-fTextHov hover:bg-fBgHov dark:bg-fBgD dark:hover:text-fTextHovD dark:text-fTextD dark:hover:bg-fBgHovD`}
+                className={`${styleTableText} -medium bg-fBg font-normal text-fText hover:text-fTextHov hover:bg-fBgHov dark:bg-fBgD dark:hover:text-fTextHovD dark:text-fTextD dark:hover:bg-fBgHovD `}
                 onClick={(e) => editRows(e)}
               >
                 <td
@@ -173,32 +159,19 @@ export default function DropdownFilter({
               >
                 {row.accessor}
               </td> */}
-                <td
-                  id={row._nrow}
-                  //   className={`${styleTableText} `}
-                >
-                  {row.comparisonFirst}
-                </td>
-                <td
-                  id={row._nrow}
-                  //   className={`${styleTableText} `}
-                >
+                <td id={row._nrow}>{row.comparisonFirst}:</td>
+                <td id={row._nrow} className={`${styleTableText}`}>
                   {row.filterFirst}
                 </td>
-                <td id={row._nrow} className={`${styleTableText} `}>
-                  {row.logical}
-                </td>
+                <td id={row._nrow}>{row.logical}</td>
                 <td
                   id={row._nrow}
                   //   className={`${styleTableText} `}
                 >
-                  {row.comparisonLast}
+                  {row.comparisonTwo}:
                 </td>
-                <td
-                  id={row._nrow}
-                  //   className={`${styleTableText} `}
-                >
-                  {row.filterLast}
+                <td id={row._nrow} className={`${styleTableText} whitespace-nowrap scroll-auto`}>
+                  {row.filterTwo}
                 </td>
               </tr>
             ))}
@@ -212,6 +185,7 @@ export default function DropdownFilter({
           filterDataRow={filterDataRow}
           filterData={filterData} //масив фільтрів
           setFilterData={setFilterData}
+          setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
         />
       )}
     </div>
