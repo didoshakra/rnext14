@@ -17,6 +17,7 @@ export default function ItemImag({ item, fill, width, height }) {
           src={item.image}
           alt={item.title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           className={`object-contain duration-700 ease-in-out group-hover:opacity-75 ${
             loading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"
           }}`}

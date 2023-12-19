@@ -79,7 +79,7 @@ function ProductVeg({ item }) {
       <div className="mb-1 mt-4 flex items-center justify-center gap-10 px-1 font-semibold">
         {item.discontProc > 0 && (
           <p className="justify-center text-center text-base text dark:text-hTextD line-through">
-            {(item.price - (item.price * item.discontProc) / 100).toFixed(2)}
+            {(item.price + (item.price * item.discontProc) / 100).toFixed(2)}
           </p>
         )}
         <p className="justify-center text-center text-base font-bold text-hText dark:text-hTextD">

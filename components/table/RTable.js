@@ -282,7 +282,7 @@ export default function DProductTable({
 
   //---*** Сам фільтр/Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
-    setIsDropdownFilter(false)
+    setIsDropdownFilter(false) //Закриваєм випадаюче вікно фільтрів
     if (filteredState != 1) return
     //--- Додаткові ф-ції
     //Як реалізувати оператор змінної в JavaScript? // https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
@@ -313,7 +313,6 @@ export default function DProductTable({
     }
 
     //--- Початок фільтруівання
-    setIsDropdownFilter(false) //Закриваєм випадаюче вікно фільтрів
     // console.log("RTable.js.js/applyFilters/filterData=", filterData);
     let tempWorkData = []
     if (filteredState != 2) {
@@ -348,7 +347,7 @@ export default function DProductTable({
           //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
 
           //--- Задаєм змінну типу поля //Тип змінної, якщо не заданий то "string"
-          const valueType = targetObj.type === undefined ? "string" : targetObj.type//Ф-ція що задає типи
+          const valueType = targetObj.type === undefined ? "string" : targetObj.type //Ф-ція що задає типи
           //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
           const valueData = valToType(current[attribute], valueType) //Значення поля робочої БД
           const filterFirst = valToType(targetObj.filterFirst, valueType) //Значення фільтру1
@@ -370,7 +369,7 @@ export default function DProductTable({
           }
 
           //--- Якщо є filterTwo.length
-          if (targetObj.filterTwo.length> 0) {
+          if (targetObj.filterTwo.length > 0) {
             //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
             const filterTwo = valToType(targetObj.filterTwo, valueType) //Значення фільтру1
             // console.log("RTable.js.js/applyFilters/Two/filterRow=", filterRow);
@@ -464,8 +463,8 @@ export default function DProductTable({
     setFilterData(tempFilterData) //Перезаписуєм масив фільтрів
     // setWorkData(beforSeachData) //Відкат даних до фільтру
     setIsDropdownFilter(false) //Закриваємо випадаюче вікно
+    if (filteredState === 2) setWorkData(beforFilterData) //Відновлюємо робочу БД до фільтрування
     setFilteredState(0) //Іконка
-    setWorkData(beforFilterData) //Відновлюємо робочу БД до фільтрування
   }
   //----------------------------------------------------
 
@@ -549,6 +548,7 @@ export default function DProductTable({
                   styleTableText={styleTableText}
                   applyFilters={applyFilters} //Застосувати фільтр
                   deleteFilterAll={deleteFilterAll}
+                  filteredState={filteredState} //Що у фільтрі є непусті записи
                   setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
                 />
               )}
