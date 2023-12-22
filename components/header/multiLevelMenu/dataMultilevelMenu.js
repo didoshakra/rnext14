@@ -18,57 +18,37 @@ export const menuAdmin = [
           {
             id: 4,
             title: "Бренди",
-            url: "/shop/references/d_brand",
+            // url: "/shop/references/d_brand",
           },
           {
             id: 5,
             title: "Категорії товарів",
-            url: "/shop/references/d_category",
+            // url: "/shop/references/d_category",
           },
           {
             id: 6,
             title: "Клієнти",
-            url: "/shop/references/d_client",
+            // url: "/shop/references/d_client",
           },
           {
             id: 7,
             title: "Підрозділи",
-            url: "/shop/references/d_department",
+            // url: "/shop/references/d_department",
           },
           {
             id: 8,
             title: "Одиниці вимірювання",
-            url: "/shop/references/d_ov",
+            // url: "/shop/references/d_ov",
           },
           {
             id: 9,
             title: "Користувачі",
-            url: "/shop/references/d_user",
+            // url: "/shop/references/d_user",
           },
         ],
       },
-      {
-        id: 1,
-        title: "Документи",
-        submenu: [
-          {
-            id: 2,
-            title: "Продажі",
-            submenu: [
-              {
-                id: 3,
-                title: "Товарні чеки (doc_check_head)",
-                url: "/shop/docs/doc_check_head",
-              },
-              //   {
-              //     id: 4,
-              //     title: "Товарний чек/товари(doc_check_products))",
-              //     url: "/shop/docs/doc_check_products",
-              //   },
-            ],
-          },
-        ],
-      },
+
+    
     ],
   },
 ]
