@@ -11,6 +11,7 @@ export default function DroopFifterForm({
   setIsDropdownFilterForm,
   filterData,
   setFilterData,
+  filteredState, //Що у фільтрі є непусті записи
   setFilteredState, //Що у фільтрі є непусті записи
 }) {
   const valueType = filterDataRow.type //Тип поля, що фільтрується
@@ -38,7 +39,7 @@ export default function DroopFifterForm({
         : "include",
   })
 
-  console.log("DroopFifterForm.js/valueType=", valueType)
+  //   console.log("DroopFifterForm.js/valueType=", valueType)
   const [inputError, setInputError] = useState(null)
 
   const handleSubmit = () => {
@@ -63,7 +64,7 @@ export default function DroopFifterForm({
       targetObj.filterTwo = state.filterTwo
       //   console.log("DroopFifterForm.js/handleEdit/filterData=", filterData);
       setFilterData(tempData) //заносим зміни в filterData
-      setFilteredState(1) //Що у фільтрі є непусті записи
+      if (filteredState !=2) setFilteredState(1) //Що у фільтрі є непусті записи
       //   }
     }
     setIsDropdownFilterForm(false)
@@ -72,14 +73,16 @@ export default function DroopFifterForm({
   function handleChange(evt) {
     // const value = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
     const value = evt.target.value
+    console.log("DroopFifterForm.js/handleEdit/state=", state)
+    console.log("DroopFifterForm.js/handleEdit/evt.target.name=", evt.target.name)
+    // Занесення значення value в властивість об’єкту ...state, з іменем [evt.target.name]//об'єкт  {filterFirst: '11', comparisonTwo: 'include'}
     setState({
-      ...state,
-      [evt.target.name]: value,
+      ...state, //об’єкт
+      [evt.target.name]: value, //ім'я властивісту об’єкту:нове значення
     })
-    // console.log("DroopFifterForm.js/handleChange/state=", state);
+    console.log("DroopFifterForm.js/handleChange/state=", state);
   }
 
-  const deleteFilterRow = () => {}
 
   return (
     <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg1 p-1  dark:border-fBorderD dark:bg-fBg1D overflow-auto">

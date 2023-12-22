@@ -1,31 +1,31 @@
 import { useState } from "react"
-import DroopFifterForm from "./DroopFifterForm"
 
 export default function DropdownFilter({
-  filterData, //Дані фільтру(тільки ті поля по яких задано )
-  setFilterData,
-  setIsDropdownFilter,
+  sumData, //Дані фільтру(тільки ті поля по яких задано )
+  setSumData,
+  setIsDropdownSum,
   styleTableText,
-  applyFilters, //Застосувати фільтр
+  applySum, //Застосувати фільтр
   deleteFilterAll,
   filteredState, //Що у фільтрі є непусті записи
   setFilteredState, //Що у фільтрі є непусті записи
 }) {
-  const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false)
-  const [filterDataRow, setFilterDataRow] = useState([]) //Рядок, що коригується(в DropdownFilterForm)
-
+//   console.log("DropdownFilter.js/editRows/sumData=", sumData)
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
   const editRows = (e) => {
-    // console.log("DropdownFilter.js/editRows/e.target=", e.target);
+    // console.log("DropdownFilter.js/editRows/e.target=", e.target)
     const nRow = Number(e.target.id) //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
-
+    const value = e.target.value
+    setSumData({
+      ...state,
+      [evt.target.name]: value,
+    })
     //Щукаємо рядок _nrow === nRow
-    let tempData = [...filterData] //Копія робочого масиву обєктів
+    let tempData = [...sumData] //Копія робочого масиву обєктів
     //  //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
     const row = tempData.find((obj) => obj._nrow === nRow) //Шукажмо запис по _nrow=nRow
     if (row) {
-      setIsDropdownFilterForm(true)
-      setFilterDataRow(row)
+        setSumData(row)
     }
     //
     //--------------------------------------------------------------
@@ -67,8 +67,8 @@ export default function DropdownFilter({
               </button>
               <button
                 className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
-                onClick={() => applyFilters()}
-                title="Застосувати фільтр"
+                onClick={() => applySum()}
+                title="Розрахувати"
               >
                 {/* Enter */}
                 <svg
@@ -96,7 +96,7 @@ export default function DropdownFilter({
 
           <button
             className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
-            onClick={(e) => setIsDropdownFilter(false)}
+            onClick={(e) => setIsDropdownSum(false)}
             title="Вийти без збереження"
           >
             {/* скасувати */}
@@ -123,60 +123,114 @@ export default function DropdownFilter({
               <tr>
                 {/* <th className={`${styleTableText} w-[10%]`}>Поле</th> */}
                 <th className={`${styleTableText}`}>Поле</th>
-                {/* <th>Ключ</th> */}
-                {/* <th className={`${styleTableText} w-24`}>&gt;=&lt;</th> */}
-                <th className={`${styleTableText} text-iconT`}>=</th>
-                <th className={`${styleTableText}`}>Фільтр1</th>
-                <th className={`${styleTableText} text-iconT`}>&&</th>
-                <th className={`${styleTableText} text-iconT`}>=</th>
-                <th className={`${styleTableText}`}>Фільтр2</th>
+                <th className="flex">
+                  <svg
+                    className="h-6 w-6 text-iconT dark:text-iconTD"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {" "}
+                    <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                    <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6-7l-6-7h11a1 1 0 0 1 1 1v2" />
+                    <title>suma</title>
+                  </svg>
+                  <svg
+                    className="h-6 w-6 text-iconT dark:text-iconTD"
+                    // class="h-4 w-4 text-red-500"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {" "}
+                    <path stroke="none" d="M0 0h24v24H0z" /> <path d="M3 12h7l-3 -3m0 6l3 -3" />{" "}
+                    <path d="M21 12h-7l3 -3m0 6l-3 -3" /> <path d="M9 6v-3h6v3" /> <path d="M9 18v3h6v-3" />
+                    <title>min</title>
+                  </svg>
+                  {/*>max  */}
+                  <svg
+                    className="h-6 w-6 text-iconT dark:text-iconTD"
+                    // class="h-4 w-4 text-red-500"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {" "}
+                    <path stroke="none" d="M0 0h24v24H0z" /> <path d="M10 12h-7l3 -3m0 6l-3 -3" />{" "}
+                    <path d="M14 12h7l-3 -3m0 6l3 -3" /> <path d="M3 6v-3h18v3" /> <path d="M3 18v3h18v-3" />
+                    <title>max</title>
+                  </svg>
+                  <svg
+                    className="h-6 w-6 text-iconT dark:text-iconTD"
+                    // class="h-4 w-4 text-red-500"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {" "}
+                    <path stroke="none" d="M0 0h24v24H0z" /> <circle cx="12" cy="12" r="9" />{" "}
+                    <line x1="12" y1="3" x2="12" y2="7" /> <line x1="12" y1="21" x2="12" y2="18" />{" "}
+                    <line x1="3" y1="12" x2="7" y2="12" /> <line x1="21" y1="12" x2="18" y2="12" />{" "}
+                    <line x1="12" y1="12" x2="12" y2="12.01" />
+                    <title>середнє</title>
+                  </svg>
+                </th>
               </tr>
             </thead>
             <tbody>
-              {filterData.map((row, index) => (
+              {sumData.map((row, index) => (
                 <tr
                   id={row._nrow}
                   key={index}
                   className={`${styleTableText} -medium bg-fBg font-normal text-fText hover:text-fTextHov hover:bg-fBgHov dark:bg-fBgD dark:hover:text-fTextHovD dark:text-fTextD dark:hover:bg-fBgHovD `}
-                  onClick={(e) => editRows(e)}
+                  //   onClick={(e) => editRows(e)}
                 >
                   <td id={row._nrow} className={`font-semibold  whitespace-nowrap`}>
                     {row.name}
                   </td>
-                  {/* <td
-                id={row._nrow}
-                className={`${styleTableText} font-semibold text-fText dark:text-fTextD`}
-              >
-                {row.accessor}
-              </td> */}
+
                   <td id={row._nrow} className="text-iconT">
-                    {row.comparisonFirst}
+                    <select
+                      //   className=" block  appearance-none items-center rounded border border-fBorder bg-fInputBg p-1 align-middle  leading-tight text-fText focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-fInputBgD dark:text-fTextD dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                      className=" block  items-center bg-fInputBg p-1 align-middle  text-fText   dark:bg-fInputBgD dark:text-fTextD  "
+                      onChange={(e) => editRows(e)}
+                      value={row.comparison}
+                    >
+                      {/* <option value={row.comparison} disabled>
+                      </option> */}
+                      <option value="min">min</option>
+                      <option value="max">max</option>
+                      <option value="sum">sum</option>
+                      <option value="середнє">середнє</option>
+                    </select>
+                    {/* {row.comparison} */}
                   </td>
-                  <td id={row._nrow}>{row.filterFirst}</td>
-                  <td id={row._nrow} className="text-iconT">
-                    {row.logical}
-                  </td>
-                  <td id={row._nrow} className="text-iconT">
-                    {row.comparisonTwo}
-                  </td>
-                  <td id={row._nrow}>{row.filterTwo}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      {/* Dropdown menu */}
-      {isDropdownFilterForm && (
-        <DroopFifterForm
-          setIsDropdownFilterForm={setIsDropdownFilterForm}
-          filterDataRow={filterDataRow}
-          filterData={filterData} //масив фільтрів
-          setFilterData={setFilterData}
-          filteredState={filteredState} //Що у фільтрі є непусті записи
-          setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
-        />
-      )}
     </div>
   )
 }

@@ -34,6 +34,7 @@ module.exports = {
         bodyBg: "var(--color-pCol0)",
         bodyBgD: "#334155", // --color-pCol7: #334155;
         infoMsg: "#13ff11",
+        infoMsgD: "#13ff11",
         errorMsg: "#f21e08",
         errorMsgD: "#f21e08",
         eclipseBg: "rgba(36, 12, 12, 0.4)", //Затемнення екрану
@@ -41,6 +42,8 @@ module.exports = {
         //--- iconT /Table,Form,Card,
         iconT: "#f64532",
         iconTD: "#f64532",
+        iconInfo: "#138611",
+        iconInfoD: "#13ff11",
 
         //-- headTape --------------------------------------------
         hTapeText: "var(--color-pCol0)",

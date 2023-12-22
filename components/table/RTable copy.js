@@ -37,11 +37,8 @@
 // 20231120 // Добавив вікна фільтрів по заданих полях:DropdownFilter.js+DroopFifterForm.js
 // 20231127 // Фільтрування по багатьох полях/Відновлення БД до фільтрування/ При фівльтруванні для порівняння дані перетворюються у ті типи, які задані в initialСolumns.type
 // 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: numeric+boll=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
-// 20231215 // ВІдмітити(зняти) всі/
-// 20231217 ////<th>i<td>-whitespace-nowrap-щоб текст у комірці таблиці не переносився(довгий рядок)
-// 20231222 //Нижній рядок сумування/Працює на основі параметрів initialСolumns(sum: "sum","max","min","mean" \\можна відключити (p_sum=false)-небуде ні нижньоо рядка ні кнопки обчислення Sum
-//---------------------------------------------------------------------------------------------------------
-//!! Доробити:    table: Фільтри по даті / Суми по стовбцях
+//          // ВІдмітити(зняти) всі/
+// 20231217 ////<th>i<td>-whitespace-nowrap-щоб текст у комірці таблиці не переносився
 //--------------------------------------------------------------------------------------------------------------------
 
 //*** Типи даних ******* */(string,number,boolean,date-це об'єкт,але треба вказувати)
@@ -49,10 +46,11 @@
 // Якщо тип не вказаний, то він прирівнюється до (string)
 
 "use client"
-import { useState, useMemo, useCallback } from "react"
+import { useState, useMemo, useEffect } from "react"
 import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
+import DropdownSum from "./DropdownSum_old"
 
 export default function Rtable({
   initialData, //початкові дані (з БД) - обов'язково
@@ -75,6 +73,7 @@ export default function Rtable({
   const [beforFilterData, setBeforFilterData] = useState([]) //Зберігається БД перед фільтруванням (Для відкату)
   const [isDropdownFilter, setIsDropdownFilter] = useState(false) //вікно фільтру
   const [filteredState, setFilteredState] = useState(0) //Стан фільтрування (0-незаповнений фільтр і не було фільтрування/ 1-заповнений фільтр, але не було фільтрування / 2- було фільтрування)
+  const [isDropdownSum, setIsDropdownSum] = useState(false) //вікно сумування
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -111,7 +110,6 @@ export default function Rtable({
 
   //== Підготовка робочої структури workData */   //https://habr.com/ru/companies/otus/articles/696610/
   const preparedData = useMemo(() => {
-    console.log("FRtable.js/preparedData= useMemo/")
     // const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
       let tempData = { ...data } // Copy object()
@@ -131,7 +129,6 @@ export default function Rtable({
 
   //== Підготовка масиву фільтрів по полях (filterData) */
   const preparedFilterData = useMemo(() => {
-    console.log("FRtable.js/preparedFilterData = useMemo/")
     let resData = [] //масив об'єктів
     let nR = -1
     const temp = initialСolumns.map((data, idx) => {
@@ -155,6 +152,29 @@ export default function Rtable({
   }, [initialСolumns]) //Змінюється тільки при зміні 2-го аргумента
 
   const [filterData, setFilterData] = useState(preparedFilterData) //Фільтер для всіх полів
+  //   console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
+
+  //== Підготовка масиву рядка sum  (Data) */
+  const preparedSumData = useMemo(() => {
+    let resData = [] //масив об'єктів
+    let nR = -1
+    const temp = initialСolumns.map((data, idx) => {
+      let tempData = {} // об’єкта
+      if (data.sum != undefined && data.sum) {
+        nR = nR + 1
+        tempData._nrow = nR
+        tempData.name = data.label
+        tempData.accessor = data.accessor
+        tempData.comparison = "sum" //max/min/sum/mean(serednie)
+        tempData.result = 0
+        resData.push(tempData) //Додаємо в масив
+      }
+    })
+    return resData
+  }, [initialСolumns]) //Змінюється тільки при зміні 2-го аргумента
+
+  const [sumData, setSumData] = useState(preparedSumData) //Фільтер для всіх полів
+  //   console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
 
   //** Сторінки */ //https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
   const [page, setPage] = useState(1) //Номер текучої сторінки
@@ -163,7 +183,6 @@ export default function Rtable({
 
   //==*п Сортування */
   const handleSorting = (sortField, sortOrder) => {
-    console.log("FRtable.js/handleSorting/")
     //--- Для встановлення початкового сортування
     if (sortOrder === "default") {
       sortOrder = "asc"
@@ -187,7 +206,6 @@ export default function Rtable({
 
   //--- Задає режим сортування
   const handleSortingChange = (accessor) => {
-    console.log("FRtable.js/handleSortingChange/")
     // console.log("RTable.js/handleSortingChange/accessor=", accessor)
     const sortOrder =
       //   accessor === sortField && order === "asc" ? "desc" : "asc";
@@ -201,7 +219,6 @@ export default function Rtable({
 
   //== Пошук(search)/фільтер-по всіх полях зразу */
   const seachAllFilds = (e) => {
-    console.log("FRtable.js/seachAllFilds/")
     const searchValue = e.target.value
     if (lengthSearhValue === 0) {
       setBeforSeachData(workData)
@@ -237,7 +254,6 @@ export default function Rtable({
 
   //== Вибір/Selected / Записуємо селект(true/false) в _selected роточого масиву(workData) */
   const selectRows = (e) => {
-    console.log("FRtable.js/selectRows/")
     // console.log("RTable.js/selectRows/e.target=", e.target);
     const nRow = Number(e.target.id) //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
 
@@ -268,7 +284,6 @@ export default function Rtable({
 
   //--- Вибір/Selected (всі)
   const onSelectAll = () => {
-    console.log("FRtable.js/onSelectAll/")
     let selectData = [...workData] //Копія робочого масиву обєктів
     const temp = selectData.map((data, idx) => {
       if (selectedAllRows) data._selected = false
@@ -282,21 +297,16 @@ export default function Rtable({
 
   //== Фільтр множинний */
   //--- Формує (true/false) для стилю шоб показувати іконку фільтру біля назви в шапці, якщо є заданий фільтр по цьому полю
-  const clasThFilter = useCallback(
-    (accessor) => {
-      console.log("FRtable.js/clasThFilterl/")
-      const targetObj = filterData.find((obj) => obj.accessor === accessor) //Шукажмо запис
-      // console.log("RTable.js.js/applyFilters/targetObj ==", targetObj)
-      if (targetObj && targetObj.filterFirst.length > 0) {
-        return true
-      } else return false
-    },
-    [filterData]
-  )
+  const clasThFilter = (accessor) => {
+    const targetObj = filterData.find((obj) => obj.accessor === accessor) //Шукажмо запис
+    // console.log("RTable.js.js/applyFilters/targetObj ==", targetObj)
+    if (targetObj && targetObj.filterFirst.length > 0) {
+      return true
+    } else return false
+  }
 
   //---*** Сам фільтр/Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
-    console.log("FRtable.js/applyFilters/")
     setIsDropdownFilter(false) //Закриваєм випадаюче вікно фільтрів
     if (filteredState === 0) return
     //--- Додаткові ф-ції
@@ -432,7 +442,7 @@ export default function Rtable({
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
   const deleteFilterAll = () => {
-    console.log("RTable.js/deleteFilterAll/")
+    // console.log("RTable.js/deleteFilterAll/")
     let tempFilterData = [...filterData]
     const temp = tempFilterData.map((data) => {
       data.comparisonFirst = ""
@@ -451,7 +461,8 @@ export default function Rtable({
   //-- рядок сумування
   //--Обчислення сум
   const applySum = () => {
-    console.log("FRtable.js/applySum/")
+    console.log("RTable.js/applySum/sumRow=", sumRow)
+    // console.log("RTable.js/applySum/ workData.map/tempSumRow=", tempSumRow)
     let tRow = {} //об'єкт
     const temp1 = initialСolumns.map((item) => {
       //   let tempSumRow = { ...sumRow }
@@ -479,13 +490,23 @@ export default function Rtable({
         console.log("RTable.js/applySum/accessor", item.accessor + "/tSum=", tSum)
         tRow[item.accessor] = tSum //Додавання нової властивості до оь'якту
       }
-      //******************************
+      //*******************************
     })
-    // console.log("RTable.js/applySum/tRow=", tRow)
+    console.log("RTable.js/applySum/tRow=", tRow)
     setSumRow(tRow)
   }
 
-  //-------------------------------------------------
+  //-- очишення параметрів сумування
+  const deleteSumAll = () => {
+    console.log("RTable.js/deleteSumAll/")
+    let tempSumData = [...sumData]
+    const temp = tempFilterData.map((data) => {
+      data.comparison = ""
+    })
+    setSumData(tempSumData) //Перезаписуєм масив фільтрів
+  }
+  //----------------------------------------------------
+
   return (
     //align-middle-текст по вертикалі посередині
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
@@ -515,9 +536,9 @@ export default function Rtable({
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="2"
+              strokeWidth="1.5"
               stroke="currentColor"
-              className="h-5 w-5 text-iconT dark:text-iconTD"
+              className="h-5 w-5 text-iconT dark:text-iconT"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
@@ -529,7 +550,7 @@ export default function Rtable({
           <div className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
             {/* іконка T */}
             <svg
-              className="h-5 w-5 text-iconT dark:text-iconTD"
+              className="h-5 w-5 text-iconT dark:text-iconT"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -575,7 +596,7 @@ export default function Rtable({
             >
               {/* Лійка */}
               <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
+                className="h-5 w-5 text-iconT dark:text-iconT"
                 viewBox="0 0 24 24"
                 fill={filteredState === 2 ? "currentColor" : filteredState === 1 ? "green" : "none"}
                 stroke="currentColor"
@@ -606,18 +627,19 @@ export default function Rtable({
             )}
           </div>
         )}
-
         {/* Рядок сум */}
         {typeof (p_sum !== "undefined") && p_sum && (
           <div>
             <button
+              //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
               className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
+              //   onClick={() => setIsDropdownSum(!isDropdownSum)}
               onClick={applySum}
               title="Рядок сум"
             >
               {/* suma */}
               <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
+                className="h-5 w-5 text-iconT dark:text-iconT"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -632,7 +654,23 @@ export default function Rtable({
                 <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6-7l-6-7h11a1 1 0 0 1 1 1v2" />
                 <title>Рядок сум</title>
               </svg>
+              {/* <p title="Відфільтровано">: {workData.length}</p>
+              <p title="Вся БД">/ {initialData.length}</p> */}
             </button>
+
+            {/* Dropdown menu */}
+            {isDropdownSum && (
+              <DropdownSum
+                sumData={sumData} //Дані фільтру(тільки ті поля по яких задано )
+                setSumData={setSumData}
+                setIsDropdownSum={setIsDropdownSum}
+                styleTableText={styleTableText}
+                applySum={applySum} //Застосувати фільтр
+                deleteSumAll={deleteSumAll}
+                // filteredState={filteredState} //Що у фільтрі є непусті записи
+                // setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
+              />
+            )}
           </div>
         )}
 
@@ -702,6 +740,7 @@ export default function Rtable({
                 return (
                   <th
                     //whitespace-nowrap-щоб текст у комірці таблиці не переносився
+                    // className={`${styleTableText} border-r dark:border-tabThBorderD border-tabThBorder whitespace-nowrap`}
                     className={`${styleTableText} border-r dark:border-tabThBorderD border-tabThBorder whitespace-nowrap`}
                     key={accessor}
                   >
@@ -725,13 +764,13 @@ export default function Rtable({
                         <div className="flex text-center align-middle">
                           {clasFilter && (
                             <svg
-                            //   className="h-4 w-4 "
-                              className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
+                              //   class="h-4 w-4 text-red-500"
+                              className="h-4 w-4 "
                               viewBox="0 0 24 24"
                               fill="none"
                               // fill="currentColor"
                               stroke="currentColor"
-                              strokeWidth="2"
+                              strokeWidth="1"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             >
@@ -746,7 +785,6 @@ export default function Rtable({
               })}
             </tr>
           </thead>
-
           {/* рядки */}
           <tbody>
             {/* перебір рядків */}
@@ -795,131 +833,134 @@ export default function Rtable({
               </tr>
             ))}
           </tbody>
-
-          {/* Нижній рядок сум */}
-          {typeof (p_sum !== "undefined") && p_sum && (
-            <tfoot
-              className={`${styleTableText} sticky bottom-0 border-t border-tabThBorder bg-tabThBg text-tabThText dark:border-tabThBorderD dark:bg-tabThBgD dark:text-tabThTextD`}
-            >
-              <tr>
-                {/* <th colSpan="8" className="text-center">
+          {/*  */}
+          <tfoot
+            className={`${styleTableText} sticky bottom-0 border-t border-tabThBorder bg-tabThBg text-tabThText dark:border-tabThBorderD dark:bg-tabThBgD dark:text-tabThTextD`}
+          >
+            <tr>
+              {/* <th colSpan="8" className="text-center">
                 Всього
               </th> */}
-                {initialСolumns.map(({ accessor, _nrow, sum, align, type, index }) => {
-                  const clasFlexJustify =
-                    align == "right"
-                      ? "justify-end "
-                      : align == "center"
-                      ? "justify-center"
-                      : align == "left"
-                      ? "justify-start"
-                      : type == "number"
-                      ? "justify-end "
-                      : type == "date"
-                      ? "justify-center"
-                      : "justify-start"
-                  const tIcon =
-                    sum === "sum" ? (
-                      // suma
-                      <svg
-                        className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        {" "}
-                        <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                        <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6-7l-6-7h11a1 1 0 0 1 1 1v2" />
-                        <title>suma</title>
-                      </svg>
-                    ) : sum === "min" ? (
-                      <>
-                        <svg
-                          className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          {" "}
-                          <path stroke="none" d="M0 0h24v24H0z" /> <path d="M3 12h7l-3 -3m0 6l3 -3" />{" "}
-                          <path d="M21 12h-7l3 -3m0 6l-3 -3" /> <path d="M9 6v-3h6v3" /> <path d="M9 18v3h6v-3" />
-                          <title>min</title>
-                        </svg>
-                      </>
-                    ) : sum === "max" ? (
-                      <>
-                        {/*>max  */}
-                        <svg
-                          className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          {" "}
-                          <path stroke="none" d="M0 0h24v24H0z" /> <path d="M10 12h-7l3 -3m0 6l-3 -3" />{" "}
-                          <path d="M14 12h7l-3 -3m0 6l3 -3" /> <path d="M3 6v-3h18v3" /> <path d="M3 18v3h18v-3" />
-                          <title>max</title>
-                        </svg>
-                      </>
-                    ) : sum === "mean" ? (
-                      <svg
-                        className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        {" "}
-                        <path stroke="none" d="M0 0h24v24H0z" /> <circle cx="12" cy="12" r="9" />{" "}
-                        <line x1="12" y1="3" x2="12" y2="7" /> <line x1="12" y1="21" x2="12" y2="18" />{" "}
-                        <line x1="3" y1="12" x2="7" y2="12" /> <line x1="21" y1="12" x2="18" y2="12" />{" "}
-                        <line x1="12" y1="12" x2="12" y2="12.01" />
-                        <title>середнє</title>
-                      </svg>
-                    ) : (
-                      ""
-                    )
-                  return (
-                    <th
-                      key={accessor}
-                      className={`${styleTableText} border-r dark:border-tabThBorderD border-tabThBorder whitespace-nowrap`}
+              {initialСolumns.map(({ accessor, _nrow, sum, align, type, index }) => {
+                const clasFlexJustify =
+                  align == "right"
+                    ? "justify-end "
+                    : align == "center"
+                    ? "justify-center"
+                    : align == "left"
+                    ? "justify-start"
+                    : type == "number"
+                    ? "justify-end "
+                    : type == "date"
+                    ? "justify-center"
+                    : "justify-start"
+                const tIcon =
+                  sum === "sum" ? (
+                    // suma
+                    <svg
+                      className="h-4 w-4 text-iconT dark:text-iconTD"
+                      //   class="h-4 w-4 text-red-500"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
-                      <div
-                        id={_nrow}
-                        key={accessor}
-                        className={`${styleTableText} ${clasFlexJustify} flex items-center text-tabTrText dark:text-tabTrTextD  whitespace-nowrap text-left`}
+                      {" "}
+                      <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                      <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6-7l-6-7h11a1 1 0 0 1 1 1v2" />
+                      <title>suma</title>
+                    </svg>
+                  ) : sum === "min" ? (
+                    <>
+                      <svg
+                        className="h-4 w-4 text-iconT dark:text-iconTD"
+                        // class="h-4 w-4 text-red-500"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
-                        <p className="flex align-bottom">{tIcon}</p>
-                        <p>{sumRow[accessor]}</p>
-                      </div>
-                    </th>
+                        {" "}
+                        <path stroke="none" d="M0 0h24v24H0z" /> <path d="M3 12h7l-3 -3m0 6l3 -3" />{" "}
+                        <path d="M21 12h-7l3 -3m0 6l-3 -3" /> <path d="M9 6v-3h6v3" /> <path d="M9 18v3h6v-3" />
+                        <title>min</title>
+                      </svg>
+                    </>
+                  ) : sum === "max" ? (
+                    <>
+                      {/*>max  */}
+                      <svg
+                        className="h-4 w-4 text-iconT dark:text-iconTD"
+                        // class="h-4 w-4 text-red-500"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        {" "}
+                        <path stroke="none" d="M0 0h24v24H0z" /> <path d="M10 12h-7l3 -3m0 6l-3 -3" />{" "}
+                        <path d="M14 12h7l-3 -3m0 6l3 -3" /> <path d="M3 6v-3h18v3" /> <path d="M3 18v3h18v-3" />
+                        <title>max</title>
+                      </svg>
+                    </>
+                  ) : sum === "mean" ? (
+                    <svg
+                      className="h-4 w-4 text-iconT dark:text-iconTD"
+                      //   class="h-4 w-4 text-red-500"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {" "}
+                      <path stroke="none" d="M0 0h24v24H0z" /> <circle cx="12" cy="12" r="9" />{" "}
+                      <line x1="12" y1="3" x2="12" y2="7" /> <line x1="12" y1="21" x2="12" y2="18" />{" "}
+                      <line x1="3" y1="12" x2="7" y2="12" /> <line x1="21" y1="12" x2="18" y2="12" />{" "}
+                      <line x1="12" y1="12" x2="12" y2="12.01" />
+                      <title>середнє</title>
+                    </svg>
+                  ) : (
+                    ""
                   )
-                })}
-              </tr>
-            </tfoot>
-          )}
+                return (
+                  <th
+                    key={accessor}
+                    className={`${styleTableText} border-r dark:border-tabThBorderD border-tabThBorder whitespace-nowrap`}
+                    // className={`${styleTableText}  ${clasFlexJustify}  text-tabTrText dark:text-tabTrTextD  whitespace-nowrap text-right`}
+                  >
+                    <div
+                      id={_nrow}
+                      key={accessor}
+                      //   className="flex align-middle items-center justify-end"
+                      className={`${styleTableText} ${clasFlexJustify} flex items-center text-tabTrText dark:text-tabTrTextD  whitespace-nowrap text-left`}
+                    >
+                      <p className="flex align-bottom">{tIcon}</p>
+                      <p>{sumRow[accessor]}</p>
+                      {/* <p>{sumRow1}</p> */}
+                    </div>
+                  </th>
+                )
+              })}
+            </tr>
+          </tfoot>
         </table>
       </div>
-
       {/* footer */}
       <TableFooter
         range={range}

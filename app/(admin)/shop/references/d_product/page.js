@@ -1,27 +1,27 @@
-"use client";
-import { useEffect, useState } from "react";
-import RTable from "@/components/table/RTable";
+"use client"
+import { useEffect, useState } from "react"
+import RTable from "@/components/table/RTable"
 
 export default function Products() {
-  const [resData, setResData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [resData, setResData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const getData = async (res) => {
     await fetch("/api/shop/references/d_product")
       .then((res) => res.json())
       .then((data) => {
-        setResData(data.data);
+        setResData(data.data)
         // console.log("d_product/page/data.data.rows", data.data);
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        setLoading(false);
-      });
-  };
+        setLoading(false)
+      })
+  }
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData()
+  }, [])
 
   // Колонки, що показуються
   const columns = [
@@ -30,7 +30,8 @@ export default function Products() {
       accessor: "_nrow",
       sortable: false,
       minWith: "15px",
-      With: "20px",
+      with: "20px",
+      sum: "mean",
     },
 
     {
@@ -38,7 +39,8 @@ export default function Products() {
       accessor: "id",
       sortable: true,
       minWith: "15px",
-      With: "100px",
+      with: "100px",
+      sum: "max",
     },
     {
       label: "Назва товару",
@@ -46,26 +48,27 @@ export default function Products() {
       sortable: true,
       filtered: true,
       minWith: "150px",
-      With: "200px",
+      with: "200px",
     },
     {
       label: "ШтрихКод",
       accessor: "skod",
-      type: "date",
+      //   type: "namber",
       sortable: true,
-      filtered: true, 
+      filtered: true,
       align: "center",
       minWith: "100px",
-      With: "200px",
+      with: "200px",
+      sum: "min", //середнє арифметичне
     },
     {
       label: "Категорія",
       accessor: "category",
       sortable: true,
       filtered: true,
-      type: "boolean",
+      type: "string",
       minWith: "150px",
-      With: "200px",
+      with: "200px",
     },
     {
       label: "Ціна",
@@ -74,9 +77,10 @@ export default function Products() {
       sortable: true,
       filtered: true,
       minWith: "100px",
-      With: "200px",
+      with: "200px",
+      sum: "sum",
     },
-  ];
+  ]
 
   //  const columns = [
   //   {
@@ -122,7 +126,7 @@ export default function Products() {
       role: "Designer",
       age: "27",
     },
-  ];
+  ]
 
   //   console.log("d_product/page/resData", resData);
   return (
@@ -141,9 +145,10 @@ export default function Products() {
             // p_selected={true}//Завжди
             p_searchAllRows={true}
             p_filtered={true}
+            p_sum={true}
           />
         </>
       )}
     </main>
-  );
+  )
 }
