@@ -50,6 +50,7 @@
 
 "use client"
 import { useState, useMemo, useCallback } from "react"
+import { useRouter } from "next/navigation"
 import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
@@ -63,6 +64,8 @@ export default function Rtable({
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
   p_sum, //(true/false)рядок сумування
 }) {
+  const router = useRouter() //для переходу на сторінки
+  const [menuOpen, setMenuOpen] = useState(false)
   const [sumRow, setSumRow] = useState({})
   const [selectedRows, setSelectedRows] = useState([])
   const [selectedAllRows, setSelectedAllRows] = useState(false)
@@ -485,17 +488,69 @@ export default function Rtable({
     setSumRow(tRow)
   }
 
+  // Вихід з форми
+  const onCancel = () => {
+    //якщо не довідник
+    router.push("/") //перехід на сторінку
+    // if (!isDovidnuk) router.push("/") //перехід на сторінку
+    // // if (!isDovidnuk) router.back() //повернутись
+    // else setDovActive("")
+  }
   //-------------------------------------------------
   return (
     //align-middle-текст по вертикалі посередині
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="dark:text-hTextD rounded-3xl border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+        <div className="flex justify-between dark:text-hTextD  items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+          <button
+            // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={() => setMenuOpen(!menuOpen)}
+            title="меню"
+          >
+            {/* іконка мобільного меню */}
+            <svg
+              //   className="h-6 w-6 text-iconT dark:text-iconTD"
+              className="h-6 w-6 text-iconT dark:text-iconTD"
+              //   className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
+              <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
+              <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+          </button>
           <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
+          <button
+            className="h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={onCancel}
+            title="Вийти"
+          >
+            {/* відмова(помножити) */}
+            <svg
+              className="h-6 w-6 text-iconT dark:text-iconTD"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
       )}
 
+      {/*  */}
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
@@ -725,7 +780,7 @@ export default function Rtable({
                         <div className="flex text-center align-middle">
                           {clasFilter && (
                             <svg
-                            //   className="h-4 w-4 "
+                              //   className="h-4 w-4 "
                               className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
                               viewBox="0 0 24 24"
                               fill="none"
