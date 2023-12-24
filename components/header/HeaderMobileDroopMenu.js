@@ -30,6 +30,7 @@ const HeaderMobileDroopMenu = () => {
       window.removeEventListener("mousedown", handleOutSideClick)
     }
   }, [ref_HeaderMobileDroopMenu])
+
   //випадаюче меню Налаштувань
   const renderMenu = () => {
     return headMenu.map((item, index) => {
@@ -71,11 +72,9 @@ const HeaderMobileDroopMenu = () => {
 
       {/* список головного меню */}
       <div
-        // ref={ref_HeaderMobileDroopMenu}
         className={`${mobileMenuOpen ? "absolute" : "hidden"} right-0 z-10 m-0 p-0`}
       >
         <ul
-          //   ref={ref_HeaderMobileDroopMenu}
           className=" rounded-lg border border-hBorder  bg-hBg p-1 drop-shadow-md dark:border-hBorder dark:bg-hBgD"
         >
           {renderMenu()}

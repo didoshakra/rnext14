@@ -1,12 +1,9 @@
 //UserMenuDroop.js
 //Саме випадаюче меню мови
 
-import { useContext, useRef, useEffect } from "react"
-// import { ComponentContext } from "../../context/ComponentContext"
-// import { useSession, signIn, signOut } from "next-auth"
+import {  useRef, useEffect } from "react"
 
 const UserMenuDroop = ({ setUserMenuOpen, setSetingMenuOpen }) => {
-  //   const { state } = useContext(ComponentContext)
   //    const [session] = useSession()
 
   //*************Для клацання поза обєктом

@@ -54,6 +54,7 @@ import { useRouter } from "next/navigation"
 import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
+import TableMenuDroop from "./TableMenuDroop"
 
 export default function Rtable({
   initialData, //початкові дані (з БД) - обов'язково
@@ -64,8 +65,10 @@ export default function Rtable({
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
   p_sum, //(true/false)рядок сумування
 }) {
-  const router = useRouter() //для переходу на сторінки
-  const [menuOpen, setMenuOpen] = useState(false)
+  const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
+  const [action, setAction] = useState(false) //
+  const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //
+  const [pSumRow, setPSumRow] = useState(p_sum)
   const [sumRow, setSumRow] = useState({})
   const [selectedRows, setSelectedRows] = useState([])
   const [selectedAllRows, setSelectedAllRows] = useState(false)
@@ -235,6 +238,7 @@ export default function Rtable({
       }
       setLengthSearhValue(searchValue.length)
       setWorkData(nowData)
+      setSumRow({}) //очистка нихнього рядка
     }
   }
 
@@ -431,6 +435,7 @@ export default function Rtable({
     // console.log("RTable.js.js/ApplyFilters/Endfor1/")
     setWorkData(nowData)
     setFilteredState(2) //Колір заповнення іконки фільтру
+    setSumRow({}) //очистка нихнього рядка
   }
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
@@ -449,6 +454,7 @@ export default function Rtable({
     setIsDropdownFilter(false) //Закриваємо випадаюче вікно
     if (filteredState === 2) setWorkData(beforFilterData) //Відновлюємо робочу БД до фільтрування
     setFilteredState(0) //Іконка
+    setSumRow({})//очистка нихнього рядка
   }
 
   //-- рядок сумування
@@ -488,6 +494,14 @@ export default function Rtable({
     setSumRow(tRow)
   }
 
+
+//   const onSumRow = () => {
+//     console.log("RTable.js/onSumRow/")
+//     if (pSumRow) setSumRow({})
+//     else applySum()
+//     setPSumRow(!pSumRow)
+//   }
+
   // Вихід з форми
   const onCancel = () => {
     //якщо не довідник
@@ -502,52 +516,55 @@ export default function Rtable({
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="flex justify-between dark:text-hTextD  items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
-          <button
-            // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            className="h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setMenuOpen(!menuOpen)}
-            title="меню"
-          >
-            {/* іконка мобільного меню */}
-            <svg
-              //   className="h-6 w-6 text-iconT dark:text-iconTD"
-              className="h-6 w-6 text-iconT dark:text-iconTD"
-              //   className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        <>
+          <div className="flex justify-between dark:text-hTextD  items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+            <button
+              // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+              title="меню"
             >
-              {" "}
-              <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
-              <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
-              <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
-            </svg>
-          </button>
-          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
-          <button
-            className="h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={onCancel}
-            title="Вийти"
-          >
-            {/* відмова(помножити) */}
-            <svg
-              className="h-6 w-6 text-iconT dark:text-iconTD"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              {/* іконка мобільного меню */}
+              <svg
+                className="h-6 w-6 text-iconT dark:text-iconTD"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
+                <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
+                <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
+              </svg>
+            </button>
+
+            <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
+            <button
+              className="h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              onClick={onCancel}
+              title="Вийти"
             >
-              {" "}
-              <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
+              {/* відмова(помножити) */}
+              <svg
+                className="h-6 w-6 text-iconT dark:text-iconTD"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          {/* Dropdown tableMenu */}
+          {isTableMenuDroop && <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} />}
+        </>
       )}
 
       {/*  */}
@@ -662,12 +679,13 @@ export default function Rtable({
           </div>
         )}
 
-        {/* Рядок сум */}
-        {typeof (p_sum !== "undefined") && p_sum && (
+        {/* Іконка рядка сум(налаштовуєься) */}
+        {typeof (pSumRow !== "undefined") && pSumRow && (
           <div>
             <button
               className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
               onClick={applySum}
+              //   onClick={onSumRow}
               title="Рядок сум"
             >
               {/* suma */}
@@ -852,7 +870,7 @@ export default function Rtable({
           </tbody>
 
           {/* Нижній рядок сум */}
-          {typeof (p_sum !== "undefined") && p_sum && (
+          {typeof (pSumRow !== "undefined") && pSumRow && (
             <tfoot
               className={`${styleTableText} sticky bottom-0 border-t border-tabThBorder bg-tabThBg text-tabThText dark:border-tabThBorderD dark:bg-tabThBgD dark:text-tabThTextD`}
             >
