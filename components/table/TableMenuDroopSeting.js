@@ -14,57 +14,43 @@ const TableMenuDroopSeting = ({ setIsTableMenuDroop }) => {
   //випадаюче меню
   const renderMenu = () => {
     return (
-      <>
-        {/*Фільтр множинний */}
-        <div
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-          title="Додати"
-          onClick={() => onAction("add")}
-        >
-          {/* Додати */}
-          <svg
-            className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" /> <line x1="12" y1="5" x2="12" y2="19" />{" "}
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
+      //   <fieldset>
+      //     <legend>Select a maintenance drone:</legend>
 
-          <p> Фільтр множинний</p>
+      //     <div>
+      //       <input className=" m-2" type="radio" id="huey" name="drone" value="huey" checked />
+      //       <label for="huey">Huey</label>
+      //     </div>
+
+      //     <div>
+      //       <input className=" m-2" type="radio" id="dewey" name="drone" value="dewey" />
+      //       <label for="dewey">Dewey</label>
+      //     </div>
+
+      //     <div>
+      //       <input className=" m-2" type="radio" id="louie" name="drone" value="louie" />
+      //       <label for="louie">Louie</label>
+      //     </div>
+
+      //   </fieldset>
+      <fieldset>
+        <legend>Select a maintenance drone:</legend>
+
+        <div>
+          <input type="radio" id="huey" name="drone" value="huey" checked />
+          <label for="huey">Huey</label>
         </div>
 
-        {/* Підсумковий рядок */}
-        <div
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-          title="Редагувати"
-          onClick={() => onAction("edit")}
-        >
-          {/* Підсумковий рядок */}
-          <svg
-            className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" />{" "}
-            <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-            <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
-          </svg>
-          <p>Підсумковий рядок</p>
+        <div>
+          <input type="radio" id="dewey" name="drone" value="dewey" />
+          <label for="dewey">Dewey</label>
         </div>
-      </>
+
+        <div>
+          <input type="radio" id="louie" name="drone" value="louie" />
+          <label for="louie">Louie</label>
+        </div>
+      </fieldset>
     )
   }
 

@@ -37,11 +37,11 @@ export default function DropdownFilter({
       className="absolute left-0 z-10 md:max-w-[--sW] rounded-lg border border-fBorder bg-fBg dark:border-fBorderD dark:bg-fBgD md:left-auto w-full md:w-[40%]"
     >
       <div className="mt-1 px-1 w-full overflow-auto">
-        <div className="flex justify-between ">
+        <div className="h-7 flex justify-between items-center mb-1">
           {filteredState != 0 ? (
-            <div className="flex justify-start space-x-1">
+            <div className="flex justify-start space-x-1 items-center">
               <button
-                className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
+                className="h-6 w-6 align-middle  hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
                 onClick={() => deleteFilterAll()}
                 title="Очистити всі"
               >
@@ -66,11 +66,12 @@ export default function DropdownFilter({
                 </svg>
               </button>
               <button
-                className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
+                className="leading-6 m-1 px-2 text-center   rounded-md  bg-gradient-to-r from-red-400 to-red-700 text-white drop-shadow-md hover:from-red-300 hover:to-red-600  shadow-[-2px_-2px_13px_rgb(255,255,255,0.6),2px_2px_3px_rgba(0,0,0,0.6)] active:shadow-[2px_2px_3px_rgb(255,255,255,0.6),-2px_-2px_3px_rgba(0,0,0,0.6)]"
+                // className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
                 onClick={() => applyFilters()}
-                title="Застосувати фільтр"
+                title="Застосувати  фільтри"
               >
-                {/* Enter */}
+                {/* Enter
                 <svg
                   className="h-6 w-6 text-iconT dark:text-iconTD"
                   viewBox="0 0 24 24"
@@ -82,20 +83,29 @@ export default function DropdownFilter({
                 >
                   {" "}
                   <polyline points="9 10 4 15 9 20" /> <path d="M20 4v7a4 4 0 0 1-4 4H4" />
-                </svg>
-                {/* <h1 className={`{styleTableText} font-bold uppercase text-red-500 `}>
-            Застосувати фільтри
-          </h1> */}
+                </svg> */}
+                <h1 className={`{styleTableText} font-bold uppercase `}>Застосувати</h1>
               </button>
             </div>
           ) : (
             "-"
           )}
+          {/* <input
+            className="leading-6 m-1 px-2 text-center   rounded-md  bg-gradient-to-r from-red-400 to-red-700 text-white drop-shadow-md hover:from-red-300 hover:to-red-600  shadow-[-2px_-2px_13px_rgb(255,255,255,0.6),2px_2px_3px_rgba(0,0,0,0.6)] active:shadow-[2px_2px_3px_rgb(255,255,255,0.6),-2px_-2px_3px_rgba(0,0,0,0.6)]"
+            type="button"
+            value="Застосувати фільтр"
+          /> */}
+          {/* <button
+            className="leading-6 m-1 px-2 text-center   rounded-md  bg-gradient-to-r from-red-400 to-red-700 text-white drop-shadow-md hover:from-red-300 hover:to-red-600  shadow-[-2px_-2px_13px_rgb(255,255,255,0.6),2px_2px_3px_rgba(0,0,0,0.6)] active:shadow-[2px_2px_3px_rgb(255,255,255,0.6),-2px_-2px_3px_rgba(0,0,0,0.6)]"
+            value="Застосувати фільтр"
+          >
+            Застосувати фільтр
+          </button> */}
 
-          <h1 className={`{styleTableText} font-bold uppercase text-fText dark:text-fTextD `}>Фільтри</h1>
+          <h1 className={`{styleTableText} font-bold uppercase text-center text-fText dark:text-fTextD `}>Фільтри</h1>
 
           <button
-            className="hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
+            className=" h-6 w-6 hover:bg-fBgHov dark:hover:bg-fBgHovD rounded-full border border-fBorder dark:border-fBorderD"
             onClick={(e) => setIsDropdownFilter(false)}
             title="Вийти без збереження"
           >
