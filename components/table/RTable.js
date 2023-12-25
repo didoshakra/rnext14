@@ -55,11 +55,12 @@ import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
+// import TableMenuDroop from "./TableMenuDroopSeting"
 
 export default function Rtable({
   initialData, //початкові дані (з БД) - обов'язково
   initialСolumns, //поля(задаються в ...) - обов'язково
-  title, //(значення)заголовок - не обов'язково
+  title = "", //(значення)заголовок - не обов'язково
   //   p_selected, //???Завжди(true/false)вибір рядків-не обов'язково
   p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
@@ -68,6 +69,7 @@ export default function Rtable({
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [action, setAction] = useState(false) //
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //
+  const [isDropMenuSeting, setIsDropMenuSeting] = useState(false) //
   const [pSumRow, setPSumRow] = useState(p_sum)
   const [sumRow, setSumRow] = useState({})
   const [selectedRows, setSelectedRows] = useState([])
@@ -87,7 +89,7 @@ export default function Rtable({
   //em-Відносно розміру шрифту даного елемента(=em*text-xs)
   const styleTableText =
     tableFontSize === "xs"
-      ? " text-xs p-[0.2em]"
+      ? " text-xs p-[0.25em]"
       : tableFontSize === "sm"
       ? " text-sm p-[0.2em]"
       : tableFontSize === "base"
@@ -245,46 +247,52 @@ export default function Rtable({
   //== Вибір/Selected / Записуємо селект(true/false) в _selected роточого масиву(workData) */
   const selectRows = (e) => {
     console.log("FRtable.js/selectRows/")
-    // console.log("RTable.js/selectRows/e.target=", e.target);
     const nRow = Number(e.target.id) //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
-
     //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
-    let copyArray = [...selectedRows] //Копія робочого масиву обєктів
+    let copyArray = ([] = [...selectedRows]) //Копія робочого масиву обєктів
+    if (selectedAllRows) {
+      onSelectAll()
+      copyArray = [] //скидаємо масив
+    }
     const selectIndex = copyArray.findIndex((item) => item === nRow) //id-це id HTML DOM елемента (в нашому випадку:id={_nrow})
     // console.log("RTable.js.js/selectRows/selectIndex=", selectIndex);
     if (selectIndex === -1) {
       copyArray.push(nRow) //Додаємо в масив
       //   console.log("RTable.js.js/addSelecrToRbTable/nRow=", nRow);
     } else copyArray.splice(selectIndex, 1) //Якщо вже є в масиві то видаляємо
-    // console.log("RTable.js.js/selectRows/copyArray=", copyArray);
+    // console.log("RTable.js/selectRows/copyArray=", copyArray)
     //
     setSelectedRows(copyArray) //Запмс в масив
 
     //--- Запишемо селект(true/false) в _selected роточого масиву(workData) --------
-    let selectData = [...workData] //Копія робочого масиву обєктів
+    let tWorkData = [...workData] //Копія робочого масиву обєктів
 
     //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
-    const targetObj = selectData.find((obj) => obj._nrow === nRow) //Шукажмо запис по _nrow=nRow
+    const targetObj = tWorkData.find((obj) => obj._nrow === nRow) //Шукажмо запис по _nrow=nRow
     // console.log("RTable.js.js/selectRows/targetObj=", targetObj);
     if (targetObj) {
       const newSelect = !targetObj._selected
       targetObj._selected = newSelect
-      setWorkData(selectData)
+      setWorkData(tWorkData)
     }
   }
 
   //--- Вибір/Selected (всі)
   const onSelectAll = () => {
-    console.log("FRtable.js/onSelectAll/")
-    let selectData = [...workData] //Копія робочого масиву обєктів
-    const temp = selectData.map((data, idx) => {
+    // console.log("FRtable.js/onSelectAll/")
+    let tWorkData = [...workData] //Копія робочого масиву обєктів
+    let tSelectedData = []
+    const temp = tWorkData.map((data, idx) => {
       if (selectedAllRows) data._selected = false
       else data._selected = true
-      setWorkData(selectData)
+      setWorkData(tWorkData)
+      console.log("FRtable.js/onSelectAll/tSelectedData=", tSelectedData)
+      if (!selectedAllRows) tSelectedData.push(data._nrow) //Додаємо в масив
     })
     //
     setSelectedAllRows(!selectedAllRows)
-    setSelectedRows([])
+    console.log("FRtable.js/onSelectAll/tSelectedData=", tSelectedData)
+    setSelectedRows(tSelectedData)
   }
 
   //== Фільтр множинний */
@@ -454,7 +462,7 @@ export default function Rtable({
     setIsDropdownFilter(false) //Закриваємо випадаюче вікно
     if (filteredState === 2) setWorkData(beforFilterData) //Відновлюємо робочу БД до фільтрування
     setFilteredState(0) //Іконка
-    setSumRow({})//очистка нихнього рядка
+    setSumRow({}) //очистка нихнього рядка
   }
 
   //-- рядок сумування
@@ -494,13 +502,22 @@ export default function Rtable({
     setSumRow(tRow)
   }
 
-
-//   const onSumRow = () => {
-//     console.log("RTable.js/onSumRow/")
-//     if (pSumRow) setSumRow({})
-//     else applySum()
-//     setPSumRow(!pSumRow)
-//   }
+  const onDropSeting = (seting) => {
+    console.log("RTable.js/onDropSeting/seting=", seting + "/pSumRow=", pSumRow + "/filteredState=", filteredState)
+    switch (seting) {
+      case "filter":
+        console.log("RTable.js/onDropSeting/seting=filter")
+        setFilteredState(!filteredState)
+        break
+      case "sumr":
+        console.log("RTable.js/onDropSeting/seting=sumr")
+        // setPSumRow(!pSumRow)
+        setPSumRow(false)
+        break
+      default:
+        break
+    }
+  }
 
   // Вихід з форми
   const onCancel = () => {
@@ -510,64 +527,201 @@ export default function Rtable({
     // // if (!isDovidnuk) router.back() //повернутись
     // else setDovActive("")
   }
+
+  const DropMenuSeting = () => {
+    return (
+      <div className="absolute right-2  z-10 m-0 p-3 text-base font-medium bg-fBg1 dark:bg-fBgD  rounded-lg border border-hBorder dark:border-hBorderD">
+        <fieldset>
+          <legend>Налаштування таблиці</legend>
+          <div
+            className="flex m-1 space-x-2 justify-start items-center text-base font-normal text-hText  hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            onClick={() => onDropSeting("filter")}
+          >
+            <input
+              type="checkbox"
+              id="filter"
+              name="filter1"
+              //   checked //вибраний
+            />
+            <label htmlFor="filter">Фільтр</label>
+          </div>
+
+          <div
+            className="m-1 space-x-2 flex justify-start  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            onClick={() => onDropSeting("sumr")}
+          >
+            <input className="" type="checkbox" id="nrow" name="nrow1" checked />
+            <label htmlFor="nrow">Підсукковий рядок </label>
+          </div>
+        </fieldset>
+      </div>
+    )
+  }
   //-------------------------------------------------
   return (
     //align-middle-текст по вертикалі посередині
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
       {/* title- Заголовок вікна таблиці */}
-      {typeof title !== "undefined" && (
-        <>
-          <div className="flex justify-between dark:text-hTextD  items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+      {/* {typeof title !== "undefined" && ( */}
+      <div className="flex justify-between dark:text-hTextD  items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+        {/* left */}
+        <div className="flex justify-start">
+          <button
+            // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+            title="меню"
+          >
+            {/* іконка мобільного меню */}
+            <svg
+              className="h-6 w-6 text-iconT dark:text-iconTD"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
+              <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
+              <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+          </button>
+          {selectedRows.length === 0 && (
+            <button
+              // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+              title="Додати"
+            >
+              {/* Додати */}
+              <svg
+                className="h-6 w-6 text-iconT dark:text-iconTD"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <path stroke="none" d="M0 0h24v24H0z" /> <line x1="12" y1="5" x2="12" y2="19" />{" "}
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          )}
+
+          {selectedRows.length === 1 && (
             <button
               // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
               className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
               onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
               title="меню"
             >
-              {/* іконка мобільного меню */}
+              {/* Редагувати */}
               <svg
                 className="h-6 w-6 text-iconT dark:text-iconTD"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
                 strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 {" "}
-                <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
-                <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
-                <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
+                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+                <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
               </svg>
             </button>
-
-            <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
+          )}
+          {selectedRows.length > 0 && (
             <button
-              className="h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              onClick={onCancel}
-              title="Вийти"
+              // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+              title="меню"
             >
-              {/* відмова(помножити) */}
+              {/* Видалити */}
               <svg
                 className="h-6 w-6 text-iconT dark:text-iconTD"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
                 strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 {" "}
-                <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+                <path stroke="none" d="M0 0h24v24H0z" /> <line x1="4" y1="7" x2="20" y2="7" />{" "}
+                <line x1="10" y1="11" x2="10" y2="17" /> <line x1="14" y1="11" x2="14" y2="17" />{" "}
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />{" "}
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
               </svg>
             </button>
-          </div>
-          {/* Dropdown tableMenu */}
-          {isTableMenuDroop && <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} />}
-        </>
-      )}
+          )}
+        </div>
+        {/* title */}
+        <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
 
-      {/*  */}
+        {/* right */}
+        <div className="flex justify-end">
+          <button
+            className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={()=>setIsDropMenuSeting(!isDropMenuSeting)}
+            title="Вийти"
+          >
+            {/* налаштування(шестерня) */}
+            <svg
+              className="h-6 w-6 text-iconT dark:text-iconTD"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <path stroke="none" d="M0 0h24v24H0z" />{" "}
+              <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />{" "}
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+          {/*  */}
+          <button
+            className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={onCancel}
+            title="Вийти"
+          >
+            {/* відмова(помножити) */}
+            <svg
+              className="h-6 w-6 text-iconT dark:text-iconTD"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      {/* Dropdown tableMenu */}
+      {isTableMenuDroop && (
+        <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} onDropSeting={onDropSeting} />
+      )}
+      {/* Dropdown tableMenu */}
+      {isDropMenuSeting && <DropMenuSeting />}
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
@@ -743,7 +897,6 @@ export default function Rtable({
           </div>
         )}
       </div>
-
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
         className=" max-h-[--sH] w-full overflow-auto border border-tabThBorder dark:border-tabThBorderD"
@@ -992,7 +1145,6 @@ export default function Rtable({
           )}
         </table>
       </div>
-
       {/* footer */}
       <TableFooter
         range={range}

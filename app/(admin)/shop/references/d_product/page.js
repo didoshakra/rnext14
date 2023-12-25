@@ -141,7 +141,7 @@ export default function Products() {
           <RTable
             initialData={resData}
             initialСolumns={columns}
-            title={"DProducts"}
+            title={"DProducts ggggg ggggggggggggg gggggggggggggggggg"}
             // p_selected={true}//Завжди
             p_searchAllRows={true}
             p_filtered={true}

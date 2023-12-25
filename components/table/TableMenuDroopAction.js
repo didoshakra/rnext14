@@ -2,14 +2,35 @@
 //Меню в Drawer з Header
 
 "use client"
-import { useState } from "react"
+import { useRef, useEffect, useState } from "react"
 
-const TableMenuDroopAction = ({ setIsTableMenuDroop, setAction }) => {
+const TableMenuDroopAction = ({setAction}) => {
   const [tableMenuDroopAction, setTableMenuDroopAction] = useState(false)
+
+  //*************Для клацання поза обєктом
+  const ref_TableMenuDroopAction = useRef(null)
+
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!ref_TableMenuDroopAction.current?.contains(event.target)) {
+        // alert("Outside Clicked.");
+        // console.log("Outside Clicked. ");
+        // setSetingMenuOpen(false);
+        setTableMenuDroopAction(false)
+      }
+    }
+
+    window.addEventListener("mousedown", handleOutSideClick)
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick)
+    }
+  }, [ref_TableMenuDroopAction, setTableMenuDroopAction])
+  //
 
   const onAction = (action) => {
     setAction(action)
-    setIsTableMenuDroop(false)
+    closeDroop
   }
 
   //випадаюче меню
@@ -18,7 +39,7 @@ const TableMenuDroopAction = ({ setIsTableMenuDroop, setAction }) => {
       <>
         {/* Додати */}
         <div
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+          className="space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           title="Додати"
           onClick={() => onAction("add")}
         >
@@ -131,11 +152,11 @@ const TableMenuDroopAction = ({ setIsTableMenuDroop, setAction }) => {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             {" "}
             <path stroke="none" d="M0 0h24v24H0z" /> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />{" "}
@@ -174,9 +195,9 @@ const TableMenuDroopAction = ({ setIsTableMenuDroop, setAction }) => {
 
   // ************************************************************************************
   return (
-    <div className="m-0 items-center">
+    <div ref={ref_TableMenuDroopAction} className="m-0 items-center">
       <div
-        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+        className="my-2 w-full flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
         onClick={() => setTableMenuDroopAction(!tableMenuDroopAction)}
         title="меню"
       >

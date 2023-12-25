@@ -2,64 +2,77 @@
 //Меню в Drawer з Header
 
 "use client"
-import { useState } from "react"
+import { useRef, useEffect, useState } from "react"
 
-const TableMenuDroopSeting = ({ setIsTableMenuDroop }) => {
+const TableMenuDroopSeting = ({ onDropSeting }) => {
   const [tableMenuDroopSeting, setTableMenuDroopSeting] = useState(false)
 
-  const onAction = (action) => {
-    setIsTableMenuDroop(false)
+  //*************Для клацання поза обєктом
+  const ref_TableMenuDroopSeting = useRef(null)
+
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!ref_TableMenuDroopSeting.current?.contains(event.target)) {
+        // alert("Outside Clicked.");
+        // console.log("Outside Clicked. ");
+        // setSetingMenuOpen(false);
+        setTableMenuDroopSeting(false)
+      }
+    }
+
+    window.addEventListener("mousedown", handleOutSideClick)
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick)
+    }
+  }, [ref_TableMenuDroopSeting, setTableMenuDroopSeting])
+  //
+
+  const onArrow = () => {
+    setTableMenuDroopSeting(!tableMenuDroopSeting)
+    // setIsTableMenuDroop(false)
+    // setTableMenuDroopAction(false)
   }
 
   //випадаюче меню
   const renderMenu = () => {
     return (
-      //   <fieldset>
-      //     <legend>Select a maintenance drone:</legend>
+      <>
+        {/*  */}
+        <fieldset>
+          <legend>Choose your monster's features:</legend>
+          <div
+            className="flex m-1 space-x-2 justify-start items-center text-base font-normal text-hText  hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            onClick={() => onDropSeting("filter")}
+          >
+            <input
+              type="checkbox"
+              id="filter"
+              name="filter1"
+              //   checked //вибраний
+            />
+            <label htmlFor="filter">Фільтер</label>
+          </div>
 
-      //     <div>
-      //       <input className=" m-2" type="radio" id="huey" name="drone" value="huey" checked />
-      //       <label for="huey">Huey</label>
-      //     </div>
-
-      //     <div>
-      //       <input className=" m-2" type="radio" id="dewey" name="drone" value="dewey" />
-      //       <label for="dewey">Dewey</label>
-      //     </div>
-
-      //     <div>
-      //       <input className=" m-2" type="radio" id="louie" name="drone" value="louie" />
-      //       <label for="louie">Louie</label>
-      //     </div>
-
-      //   </fieldset>
-      <fieldset>
-        <legend>Select a maintenance drone:</legend>
-
-        <div>
-          <input type="radio" id="huey" name="drone" value="huey" checked />
-          <label for="huey">Huey</label>
-        </div>
-
-        <div>
-          <input type="radio" id="dewey" name="drone" value="dewey" />
-          <label for="dewey">Dewey</label>
-        </div>
-
-        <div>
-          <input type="radio" id="louie" name="drone" value="louie" />
-          <label for="louie">Louie</label>
-        </div>
-      </fieldset>
+          <div
+            className="m-1 space-x-2 flex justify-start  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            onClick={() => onDropSeting("sumr")}
+          >
+            <input className="" type="checkbox" id="nrow" name="nrow1" checked />
+            <label htmlFor="nrow">Підсукковий рядок </label>
+          </div>
+        </fieldset>
+      </>
     )
   }
 
   // ************************************************************************************
   return (
-    <div className="m-0 items-center">
+    <div ref={ref_TableMenuDroopSeting} className="m-0 items-center">
       <div
-        className="w-fullroup flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-        onClick={() => setTableMenuDroopSeting(!tableMenuDroopSeting)}
+        className="my-2 w-full flex list-none flex-nowrap items-center space-x-1 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+        // onClick={() => setTableMenuDroopSeting(!tableMenuDroopSeting)}
+        onClick={() => onArrow()}
         title="меню"
       >
         {/* іконка мобільного меню */}

@@ -30,7 +30,7 @@ module.exports = {
         theme3Bg: "#fcd34d",
         theme4Bg: "#86efac",
 
-        //-- Загальні
+        //0-- Загальні
         bodyBg: "var(--color-pCol0)",
         bodyBgD: "#334155", // --color-pCol7: #334155;
         infoMsg: "#13ff11",
@@ -39,34 +39,32 @@ module.exports = {
         errorMsgD: "#f21e08",
         eclipseBg: "rgba(36, 12, 12, 0.4)", //Затемнення екрану
 
-        //--- iconT /Table,Form,Card,
-        iconT: "#f64532",
-        iconTD: "#f64532",
-        iconInfo: "#138611",
-        iconInfoD: "#13ff11",
-
-        //-- headTape --------------------------------------------
+        //6-- headTape --------------------------------------------
         hTapeText: "var(--color-pCol0)",
         hTapeBg: "var(--color-pCol6)",
         hTapeBgD: "#0f172a", //--color-pCol9: #0f172a;
-
-        //-- form (Bg-для 2-х форм)-------
-        fBorder: "var(--color-pCol4)",
+        
+        //1-- form (Bg-для 2-х форм)-------
+        fBg: "var(--color-pCol1)",
+        fBgD: "#1e293b", //--color-pCol8: #1e293b;
+        // fBg1: "var(--color-pCol0)",
+        fBg1: "#ffff",
+        fBg1D: "#334155", //--color-pCol7: #334155; fBorder: "var(--color-pCol4)",
         fBorderD: "#64748b", //--color-pCol5:#64748b;
         fText: "var(--color-pCol7)",
         fTextD: "var(--color-pCol2)",
         fTextHov: "var(--color-pCol8)",
         fTextHovD: "var(--color-pCol8)",
-        fBg: "var(--color-pCol1)",
-        fBgD: "#1e293b", //--color-pCol8: #1e293b;
-        fBg1: "var(--color-pCol2)",
-        fBg1D: "#334155", //--color-pCol7: #334155;
         fInputBg: "var(--color-pCol0)",
         fInputBgD: "#475569", //  --color-pCol6: #475569;
         fBgHov: "var(--color-pCol2)",
         fBgHovD: "var(--color-pCol1)",
 
-        //-- head --------------------------------------------
+        //2-- head --------------------------------------------
+        hBg: "var(--color-pCol2)",
+        hBgD: "#1e293b", //--color-pCol8: #1e293b;
+        hBgHov: "var(--color-pCol3)",
+        hBgHovD: "var(--color-pCol7)",
         hBorder: "var(--color-pCol3)",
         hBorderD: "#64748b", //--color-pCol5:#64748b;
         hText: "var(--color-pCol6)",
@@ -75,16 +73,18 @@ module.exports = {
         hTextHovD: "var(--color-pCol3)",
         hTextImg: "var(--color-pCol1)",
         hTextImg1: "var(--color-pCol3)",
-        hBg: "var(--color-pCol2)",
-        hBgD: "#1e293b", //--color-pCol8: #1e293b;
-        hBgHov: "var(--color-pCol3)",
-        hBgHovD: "var(--color-pCol7)",
 
-        //Текст випадаючого меню
+        //3--Випадаючоге меню
         drawDropMenuBg: "var(--color-pCol1)",
         drawDropMenuBgD: "#1e293b", //--color-pCol8: #1e293b;
         drawDropHr: "var(--color-pCol3)", // Лінії розмежування
         drawDropHrD: "#475569", // --color-pCol6: #475569;
+
+        //--- iconT /Table,Form,Card,
+        iconT: "#f64532",
+        iconTD: "#f64532",
+        iconInfo: "#138611",
+        iconInfoD: "#13ff11",
 
         //-- table (th/нижній підсумок) ------------------------------------------
         tabThBorder: "var(--color-pCol3)",
@@ -115,6 +115,7 @@ module.exports = {
         tabTrBgSelHovD: "#8694a6",
       },
     },
+
     keyframes: {
       slideHome: {
         "0%": {
