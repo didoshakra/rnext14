@@ -563,15 +563,9 @@ export default function Rtable({
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
       {/* title- Заголовок вікна таблиці */}
       {/* {typeof title !== "undefined" && ( */}
-      <div className="flex flex-col md:flex-row md:justify-between dark:text-hTextD  md:items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+      <div className="flex justify-between dark:text-hTextD  items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
         {/* left */}
-        <div className="flex justify-center items-center ">
-          {/* title */}
-          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
-        </div>
-
-        {/* right */}
-        <div className="flex justify-start md:justify-end">
+        <div className="flex justify-start">
           <button
             // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
@@ -671,9 +665,15 @@ export default function Rtable({
               </svg>
             </button>
           )}
+        </div>
+        {/* title */}
+        <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
+
+        {/* right */}
+        <div className="flex justify-end">
           <button
             className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsDropMenuSeting(!isDropMenuSeting)}
+            onClick={()=>setIsDropMenuSeting(!isDropMenuSeting)}
             title="Вийти"
           >
             {/* налаштування(шестерня) */}
