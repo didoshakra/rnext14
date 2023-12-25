@@ -55,6 +55,8 @@ import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
+import MenuDropSeting from "./MenuDropSeting"
+
 // import TableMenuDroop from "./TableMenuDroopSeting"
 
 export default function Rtable({
@@ -69,7 +71,7 @@ export default function Rtable({
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [action, setAction] = useState(false) //
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //
-  const [isDropMenuSeting, setIsDropMenuSeting] = useState(false) //
+  const [isMenuDropSeting, setIsMenuDropSeting] = useState(false) //
   const [pSumRow, setPSumRow] = useState(p_sum)
   const [sumRow, setSumRow] = useState({})
   const [selectedRows, setSelectedRows] = useState([])
@@ -557,30 +559,18 @@ export default function Rtable({
       </div>
     )
   }
-  //-------------------------------------------------
-  return (
-    //align-middle-текст по вертикалі посередині
-    <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
-      {/* title- Заголовок вікна таблиці */}
-      {/* {typeof title !== "undefined" && ( */}
-      <div className="flex flex-col md:flex-row md:justify-between dark:text-hTextD  md:items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
-        {/* left */}
-        <div className="flex justify-center items-center ">
-          {/* title */}
-          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
-        </div>
 
-        {/* right */}
-        <div className="flex justify-start md:justify-end">
+  const HeadRight = () => {
+    return (
+        <>
           <button
-            // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
             title="меню"
           >
             {/* іконка мобільного меню */}
             <svg
-              className="h-6 w-6 text-iconT dark:text-iconTD"
+              className="h-5 w-5 text-iconT dark:text-iconTD"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -596,14 +586,14 @@ export default function Rtable({
           </button>
           {selectedRows.length === 0 && (
             <button
-              // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
               onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
               title="Додати"
             >
               {/* Додати */}
               <svg
-                className="h-6 w-6 text-iconT dark:text-iconTD"
+                className="h-5 w-5 text-iconT dark:text-iconTD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -622,14 +612,14 @@ export default function Rtable({
 
           {selectedRows.length === 1 && (
             <button
-              // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
               onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
               title="меню"
             >
               {/* Редагувати */}
               <svg
-                className="h-6 w-6 text-iconT dark:text-iconTD"
+                className="h-5 w-5 text-iconT dark:text-iconTD"
                 viewBox="0 0 24 24"
                 strokeWidth="2"
                 stroke="currentColor"
@@ -646,14 +636,14 @@ export default function Rtable({
           )}
           {selectedRows.length > 0 && (
             <button
-              // className="flex h-6 w-6 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+              className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
               onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
               title="меню"
             >
               {/* Видалити */}
               <svg
-                className="h-6 w-6 text-iconT dark:text-iconTD"
+                className="h-5 w-5 text-iconT dark:text-iconTD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -672,13 +662,13 @@ export default function Rtable({
             </button>
           )}
           <button
-            className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsDropMenuSeting(!isDropMenuSeting)}
+            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={() => setIsMenuDropSeting(!isMenuDropSeting)}
             title="Вийти"
           >
             {/* налаштування(шестерня) */}
             <svg
-              className="h-6 w-6 text-iconT dark:text-iconTD"
+              className="h-5 w-5 text-iconT dark:text-iconTD"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -696,13 +686,13 @@ export default function Rtable({
           </button>
           {/*  */}
           <button
-            className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             onClick={onCancel}
             title="Вийти"
           >
             {/* відмова(помножити) */}
             <svg
-              className="h-6 w-6 text-iconT dark:text-iconTD"
+              className="h-5 w-5 text-iconT dark:text-iconTD"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -714,19 +704,27 @@ export default function Rtable({
               <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
+        </>
+    )
+  }
+  //-------------------------------------------------
+  return (
+    //align-middle-текст по вертикалі посередині
+    <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
+      {/* title- Заголовок вікна таблиці */}
+      {/* {typeof title !== "undefined" && ( */}
+      <div className="flex justify-center text-center items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+        {/* left */}
+        <div className="flex justify-center items-center ">
+          {/* title */}
+          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
         </div>
       </div>
-      {/* Dropdown tableMenu */}
-      {isTableMenuDroop && (
-        <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} onDropSeting={onDropSeting} />
-      )}
-      {/* Dropdown tableMenu */}
-      {isDropMenuSeting && <DropMenuSeting />}
+
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
-      <div className="my-1 flex flex-wrap items-center justify-start">
-        {/*  */}
-
+      <div className="my-1 flex flex-wrap items-center justify-between">
+        {/* left*/}
         {/* Блок:селект/фільтер/шрифт */}
         <div className="flex flex-wrap items-center justify-start">
           {/*Інформація про вибрані рядки  */}
@@ -752,7 +750,7 @@ export default function Rtable({
           </button>
 
           {/* Вибір шрифта */}
-          <div className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
+          <div className="ml-1 md:flex items-center rounded-lg border hidden  border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
             {/* іконка T */}
             <svg
               className="h-5 w-5 text-iconT dark:text-iconTD"
@@ -789,79 +787,82 @@ export default function Rtable({
               <option value="lg">великий</option> */}
             </select>
           </div>
+          {/* Фільтр: Інфа відфільтровані/ вся БД  */}
+          {typeof (p_filtered !== "undefined") && p_filtered && (
+            <>
+              <button
+                //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+                className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
+                onClick={() => setIsDropdownFilter(!isDropdownFilter)}
+              >
+                {/* Лійка */}
+                <svg
+                  className="h-5 w-5 text-iconT dark:text-iconTD"
+                  viewBox="0 0 24 24"
+                  fill={filteredState === 2 ? "currentColor" : filteredState === 1 ? "green" : "none"}
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                  <title>Фільтр</title>
+                </svg>
+
+                <p title="Відфільтровано">: {workData.length}</p>
+                <p title="Вся БД">/ {initialData.length}</p>
+              </button>
+
+              {/* Dropdown menu */}
+              {isDropdownFilter && (
+                <DropdownFilter
+                  filterData={filterData} //Дані фільтру(тільки ті поля по яких задано )
+                  setFilterData={setFilterData}
+                  setIsDropdownFilter={setIsDropdownFilter}
+                  styleTableText={styleTableText}
+                  applyFilters={applyFilters} //Застосувати фільтр
+                  deleteFilterAll={deleteFilterAll}
+                  filteredState={filteredState} //Що у фільтрі є непусті записи
+                  setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
+                />
+              )}
+            </>
+          )}
+          {/* Іконка рядка сум(налаштовуєься) */}
+          {typeof (pSumRow !== "undefined") && pSumRow && (
+            <div>
+              <button
+                className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
+                onClick={applySum}
+                //   onClick={onSumRow}
+                title="Рядок сум"
+              >
+                {/* suma */}
+                <svg
+                  className="h-5 w-5 text-iconT dark:text-iconTD"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                  <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6-7l-6-7h11a1 1 0 0 1 1 1v2" />
+                  <title>Рядок сум</title>
+                </svg>
+              </button>
+            </div>
+          )}
+        </div>
+        <div className=" md:hidden flex justify-end ">
+          <HeadRight />
         </div>
 
-        {/* Фільтр: Інфа відфільтровані/ вся БД  */}
-        {typeof (p_filtered !== "undefined") && p_filtered && (
-          <div>
-            <button
-              //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-              className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
-              onClick={() => setIsDropdownFilter(!isDropdownFilter)}
-            >
-              {/* Лійка */}
-              <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
-                viewBox="0 0 24 24"
-                fill={filteredState === 2 ? "currentColor" : filteredState === 1 ? "green" : "none"}
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                <title>Фільтр</title>
-              </svg>
-
-              <p title="Відфільтровано">: {workData.length}</p>
-              <p title="Вся БД">/ {initialData.length}</p>
-            </button>
-
-            {/* Dropdown menu */}
-            {isDropdownFilter && (
-              <DropdownFilter
-                filterData={filterData} //Дані фільтру(тільки ті поля по яких задано )
-                setFilterData={setFilterData}
-                setIsDropdownFilter={setIsDropdownFilter}
-                styleTableText={styleTableText}
-                applyFilters={applyFilters} //Застосувати фільтр
-                deleteFilterAll={deleteFilterAll}
-                filteredState={filteredState} //Що у фільтрі є непусті записи
-                setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
-              />
-            )}
-          </div>
-        )}
-
-        {/* Іконка рядка сум(налаштовуєься) */}
-        {typeof (pSumRow !== "undefined") && pSumRow && (
-          <div>
-            <button
-              className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
-              onClick={applySum}
-              //   onClick={onSumRow}
-              title="Рядок сум"
-            >
-              {/* suma */}
-              <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {" "}
-                <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6-7l-6-7h11a1 1 0 0 1 1 1v2" />
-                <title>Рядок сум</title>
-              </svg>
-            </button>
-          </div>
-        )}
+        {/*  */}
 
         {/*Пошук швидкий/фільтр (рядок пощуку по всіх полях) */}
         {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
@@ -869,8 +870,8 @@ export default function Rtable({
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
               {/* Лупа */}
               <svg
-                className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                // className="h-4 w-4 text-gray-500 dark:text-red-500"
+                className="h-5 w-5 text-gray-500 dark:text-gray-400"
+                // className="h-5 w-5 text-gray-500 dark:text-red-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -896,7 +897,20 @@ export default function Rtable({
             />
           </div>
         )}
+        {/* right */}
+        <div className=" hidden md:flex justify-end ">
+          <HeadRight />
+        </div>
+        
       </div>
+
+      {/* Dropdown tableMenu */}
+      {isTableMenuDroop && (
+        <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} onDropSeting={onDropSeting} />
+      )}
+      {/* Dropdown tableMenu */}
+      {isMenuDropSeting && <MenuDropSeting setIsMenuDropSeting={setIsMenuDropSeting} />}
+
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
         className=" max-h-[--sH] w-full overflow-auto border border-tabThBorder dark:border-tabThBorderD"
@@ -951,8 +965,8 @@ export default function Rtable({
                         <div className="flex text-center align-middle">
                           {clasFilter && (
                             <svg
-                              //   className="h-4 w-4 "
-                              className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
+                              //   className="h-5 w-5 "
+                              className="h-5 w-5 text-iconInfo dark:text-iconInfoD"
                               viewBox="0 0 24 24"
                               fill="none"
                               // fill="currentColor"
@@ -1048,7 +1062,7 @@ export default function Rtable({
                     sum === "sum" ? (
                       // suma
                       <svg
-                        className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
+                        className="h-5 w-5 text-iconInfo dark:text-iconInfoD"
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"
@@ -1066,7 +1080,7 @@ export default function Rtable({
                     ) : sum === "min" ? (
                       <>
                         <svg
-                          className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
+                          className="h-5 w-5 text-iconInfo dark:text-iconInfoD"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
@@ -1086,7 +1100,7 @@ export default function Rtable({
                       <>
                         {/*>max  */}
                         <svg
-                          className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
+                          className="h-5 w-5 text-iconInfo dark:text-iconInfoD"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
@@ -1104,7 +1118,7 @@ export default function Rtable({
                       </>
                     ) : sum === "mean" ? (
                       <svg
-                        className="h-4 w-4 text-iconInfo dark:text-iconInfoD"
+                        className="h-5 w-5 text-iconInfo dark:text-iconInfoD"
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"
