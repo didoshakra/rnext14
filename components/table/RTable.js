@@ -691,10 +691,6 @@ export default function Rtable({
   return (
     //align-middle-текст по вертикалі посередині
     <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
-      {/* title- Заголовок вікна таблиці */}
-      {/* {typeof title !== "undefined" && ( */}
-      {/* мобільного меню */}
-
       <div className="flex justify-between text-center items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
         {/* left */}
         <button
@@ -718,11 +714,9 @@ export default function Rtable({
             <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
           </svg>
         </button>
-        {/*  */}
-        <div className="flex justify-center items-center ">
-          {/* title */}
-          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
-        </div>
+
+        {/* title */}
+        <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
 
         {/*відмова(помножити)  */}
         <button
