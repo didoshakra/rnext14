@@ -666,7 +666,7 @@ export default function Rtable({
         </button> */}
 
         {/*відмова(помножити)  */}
-        {/* <button
+        <button
           className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={onCancel}
           title="Вийти"
@@ -683,7 +683,7 @@ export default function Rtable({
             {" "}
             <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-        </button> */}
+        </button>
       </>
     )
   }
@@ -776,7 +776,7 @@ export default function Rtable({
 
           {/* Вибір шрифта */}
           {typeof (pSeting.pFonts !== "undefined") && pSeting.pFonts && (
-            <div className="ml-1 flex items-center rounded-lg border   border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
+            <div className="ml-1 md:flex items-center rounded-lg border hidden  border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
               {/* іконка T */}
               <svg
                 className="h-5 w-5 text-iconT dark:text-iconTD"
