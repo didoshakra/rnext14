@@ -644,8 +644,61 @@ export default function Rtable({
         </button> */}
 
         {/* мобільного меню */}
-        <button
+        {/* <button
           className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+          title="меню"
+        >
+          <svg
+            className="h-5 w-5 text-iconT dark:text-iconTD"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
+            <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
+            <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
+          </svg>
+        </button> */}
+
+        {/*відмова(помножити)  */}
+        {/* <button
+          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          onClick={onCancel}
+          title="Вийти"
+        >
+          <svg
+            className="h-5 w-5 text-iconT dark:text-iconTD"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button> */}
+      </>
+    )
+  }
+  //-------------------------------------------------
+  return (
+    //align-middle-текст по вертикалі посередині
+    <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
+      {/* title- Заголовок вікна таблиці */}
+      {/* {typeof title !== "undefined" && ( */}
+      {/* мобільного меню */}
+
+      <div className="flex justify-between text-center items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
+        {/* left */}
+        <button
+          className="relative p-1 flex mx-1 justify-start dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
           title="меню"
         >
@@ -665,6 +718,11 @@ export default function Rtable({
             <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
           </svg>
         </button>
+        {/*  */}
+        <div className="flex justify-center items-center ">
+          {/* title */}
+          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
+        </div>
 
         {/*відмова(помножити)  */}
         <button
@@ -686,21 +744,6 @@ export default function Rtable({
             <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-      </>
-    )
-  }
-  //-------------------------------------------------
-  return (
-    //align-middle-текст по вертикалі посередині
-    <div className={`${styleTableText} px-1 align-middle bg-bodyBg dark:bg-bodyBgD`}>
-      {/* title- Заголовок вікна таблиці */}
-      {/* {typeof title !== "undefined" && ( */}
-      <div className="flex justify-center text-center items-center rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD">
-        {/* left */}
-        <div className="flex justify-center items-center ">
-          {/* title */}
-          <h1 className={`${styleTitleText}  text-center  `}>{title}</h1>
-        </div>
       </div>
 
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
@@ -733,7 +776,7 @@ export default function Rtable({
 
           {/* Вибір шрифта */}
           {typeof (pSeting.pFonts !== "undefined") && pSeting.pFonts && (
-            <div className="ml-1 md:flex items-center rounded-lg border hidden  border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
+            <div className="ml-1 flex items-center rounded-lg border   border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
               {/* іконка T */}
               <svg
                 className="h-5 w-5 text-iconT dark:text-iconTD"

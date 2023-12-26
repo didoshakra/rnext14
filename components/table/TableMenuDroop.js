@@ -41,7 +41,7 @@ const TableMenuDroop = ({ setIsTableMenuDroop, setAction, setPSeting, pSeting })
   return (
     <div
       ref={ref_TableMenuDroop}
-      className="absolute right-1 z-10 m-0 p-3 text-base font-medium bg-fBg1 dark:bg-fBgD  rounded-lg border border-hBorder dark:border-hBorderD"
+      className="absolute left-1 z-10 m-0 p-3 text-base font-medium bg-fBg1 dark:bg-fBgD  rounded-lg border border-hBorder dark:border-hBorderD"
     >
       <TableMenuDroopAction setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} />
       <hr className="h-0.5 min-w-full bg-drawDropHr" />
