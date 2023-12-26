@@ -5,7 +5,7 @@
 import { useRef, useEffect, useState } from "react"
 import MenuSeting from "./MenuSeting"
 
-const TableMenuDroopSeting = ({ onDropSeting }) => {
+const TableMenuDroopSeting = ({ pSeting, setPSeting }) => {
   const [tableMenuDroopSeting, setTableMenuDroopSeting] = useState(false)
 
   //*************Для клацання поза обєктом
@@ -31,43 +31,8 @@ const TableMenuDroopSeting = ({ onDropSeting }) => {
 
   const onArrow = () => {
     setTableMenuDroopSeting(!tableMenuDroopSeting)
-    // setIsTableMenuDroop(false)
-    // setTableMenuDroopAction(false)
-  }
+   }
 
-  //випадаюче меню
-  const renderMenu = () => {
-    return (
-      <>
-        {/*  */}
-        <fieldset>
-          <legend>Налаштування</legend>
-          <div
-            className="flex m-1 space-x-2 justify-start items-center text-base font-normal text-hText  hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-            onClick={() => onDropSeting("filter")}
-          >
-            <input
-              type="checkbox"
-              id="filter"
-              name="filter1"
-              //   checked //вибраний
-            />
-            <label htmlFor="filter">Фільтр</label>
-          </div>
-
-          <div
-            className="m-1 space-x-2 flex justify-start  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-            onClick={() => onDropSeting("sumr")}
-          >
-            <input className="" type="checkbox" id="nrow" name="nrow1" checked />
-            <label htmlFor="nrow">Підсукковий рядок </label>
-          </div>
-        </fieldset>
-      </>
-    )
-  }
-
-  // ************************************************************************************
   return (
     <div ref={ref_TableMenuDroopSeting} className="m-0 items-center">
       <div
@@ -77,7 +42,7 @@ const TableMenuDroopSeting = ({ onDropSeting }) => {
         title="меню"
       >
         {/* іконка мобільного меню */}
-        <p className="pl-2 text-lg font-medium italic  text-hText">Seting / Налаштування </p>
+        <p className="pl-2 text-lg font-medium italic  text-hText">Налаштування</p>
         {tableMenuDroopSeting ? (
           // стрілка вверх
           <svg
@@ -114,7 +79,7 @@ const TableMenuDroopSeting = ({ onDropSeting }) => {
       </div>
 
       <div className={`${tableMenuDroopSeting ? "relative" : "hidden"}  text-base font-normal px-2`}>
-        <MenuSeting onDropSeting={onDropSeting} />
+        <MenuSeting  pSeting={ pSeting} setPSeting={setPSeting } />
         {/* <div>{renderMenu()}</div> */}
       </div>
     </div>

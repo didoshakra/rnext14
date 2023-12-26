@@ -8,7 +8,7 @@ export default function MenuSeting({ pSeting, setPSeting }) {
 
   return (
     <fieldset>
-      <legend>Опції інтерфейсу таблиці</legend>
+      <legend className="font-semibold">Опції інтерфейсу таблиці</legend>
       {/* Фонт/шрифт */}
       <div className="m-1 space-x-2 md:flex justify-start hidden items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
         <input

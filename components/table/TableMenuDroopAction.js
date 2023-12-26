@@ -38,12 +38,11 @@ const TableMenuDroopAction = ({setAction}) => {
     return (
       <>
         {/* Додати */}
-        <div
+        {/* <div
           className="space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           title="Додати"
           onClick={() => onAction("add")}
         >
-          {/* Додати */}
           <svg
             className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
             width="24"
@@ -61,15 +60,14 @@ const TableMenuDroopAction = ({setAction}) => {
           </svg>
 
           <p> Додати </p>
-        </div>
+        </div> */}
 
         {/* Редагувати */}
-        <div
+        {/* <div
           className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           title="Редагувати"
           onClick={() => onAction("edit")}
         >
-          {/* Редагувати */}
           <svg
             className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
             viewBox="0 0 24 24"
@@ -85,15 +83,14 @@ const TableMenuDroopAction = ({setAction}) => {
             <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
           </svg>
           <p>Редагувати</p>
-        </div>
+        </div> */}
 
         {/* Видалити */}
-        <div
+        {/* <div
           className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           title="Видалити"
           onClick={() => onAction("delete")}
         >
-          {/* Видалити */}
           <svg
             className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
             width="24"
@@ -112,7 +109,7 @@ const TableMenuDroopAction = ({setAction}) => {
             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
           </svg>
           <p>Видалити</p>
-        </div>
+        </div> */}
 
         {/* Друкувати */}
         <div
@@ -202,7 +199,7 @@ const TableMenuDroopAction = ({setAction}) => {
         title="меню"
       >
         {/* іконка мобільного меню */}
-        <p className="pl-2 text-lg font-medium italic  text-hText">Action / Дії</p>
+        <p className="pl-2 text-lg font-medium italic  text-hText"> Дії</p>
         {tableMenuDroopAction ? (
           // стрілка вверх
           <svg

@@ -43,7 +43,7 @@ module.exports = {
         hTapeText: "var(--color-pCol0)",
         hTapeBg: "var(--color-pCol6)",
         hTapeBgD: "#0f172a", //--color-pCol9: #0f172a;
-        
+
         //1-- form (Bg-для 2-х форм)-------
         fBg: "var(--color-pCol1)",
         fBgD: "#1e293b", //--color-pCol8: #1e293b;
@@ -64,7 +64,7 @@ module.exports = {
         hBg: "var(--color-pCol2)",
         hBgD: "#1e293b", //--color-pCol8: #1e293b;
         hBgHov: "var(--color-pCol3)",
-        hBgHovD: "var(--color-pCol7)",
+        hBgHovD: "var(--color-pCol8)",
         hBorder: "var(--color-pCol3)",
         hBorderD: "#64748b", //--color-pCol5:#64748b;
         hText: "var(--color-pCol6)",
