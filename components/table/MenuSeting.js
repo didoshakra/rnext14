@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 
-export default function MenuSeting({ pSeting, setPSeting }) {
+export default function MenuSeting({ pSeting, setPSeting,tableFontSize, setTableFontSize }) {
   const onChange = () => {
     console.log("MenuSeting.js/onChange/")
     setPSeting({ ...pSeting, ["pSumRow"]: !pSeting.pSumRow })
@@ -59,6 +59,44 @@ export default function MenuSeting({ pSeting, setPSeting }) {
           checked={pSeting.pSearchAllRows ? true : false}
         />
         <label htmlFor="search">Швидкий пошук</label>
+      </div>
+
+      {/*Шрифти */}
+      <div className="m-1 space-x-2 flex md:hidden justify-start  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
+        {/* <svg
+          className="h-5 w-5 text-iconT dark:text-iconTD"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <polyline points="4 7 4 4 20 4 20 7" /> <line x1="9" y1="20" x2="15" y2="20" />{" "}
+          <line x1="12" y1="4" x2="12" y2="20" />
+          <title>Шрифти</title>
+        </svg> */}
+        <select
+          className="mx-1 block w-full  items-center border-tabThBorder bg-tabTrBg align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          // defaultValue={tableFontSize}
+          onChange={(e) => setTableFontSize(e.target.value)}
+          //   id="page-size"
+          title="Величина шрифту"
+        >
+          <option value={tableFontSize} disabled>
+            {tableFontSize}
+          </option>
+          <option value="xs">xs</option>
+          <option value="sm">sm</option>
+          <option value="base">base</option>
+          <option value="lg">lg</option>
+          {/* <option value="xs">дрібний</option>
+              <option value="sm">середній</option>
+              <option value="base">базовий</option>
+              <option value="lg">великий</option> */}
+        </select>
+        <legend>Шрифти</legend>
       </div>
     </fieldset>
   )

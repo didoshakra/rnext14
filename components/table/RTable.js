@@ -931,6 +931,8 @@ export default function Rtable({
           setAction={setAction}
           setPSeting={setPSeting}
           pSeting={pSeting}
+          tableFontSize={tableFontSize}
+          setTableFontSize={setTableFontSize}
         />
       )}
       {/* Dropdown MenuSetingDrop

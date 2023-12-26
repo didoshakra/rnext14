@@ -5,7 +5,7 @@
 import { useRef, useEffect, useState } from "react"
 import MenuSeting from "./MenuSeting"
 
-const TableMenuDroopSeting = ({ pSeting, setPSeting }) => {
+const TableMenuDroopSeting = ({ pSeting, setPSeting, tableFontSize, setTableFontSize }) => {
   const [tableMenuDroopSeting, setTableMenuDroopSeting] = useState(false)
 
   //*************Для клацання поза обєктом
@@ -31,7 +31,7 @@ const TableMenuDroopSeting = ({ pSeting, setPSeting }) => {
 
   const onArrow = () => {
     setTableMenuDroopSeting(!tableMenuDroopSeting)
-   }
+  }
 
   return (
     <div ref={ref_TableMenuDroopSeting} className="m-0 items-center">
@@ -79,7 +79,12 @@ const TableMenuDroopSeting = ({ pSeting, setPSeting }) => {
       </div>
 
       <div className={`${tableMenuDroopSeting ? "relative" : "hidden"}  text-base font-normal px-2`}>
-        <MenuSeting  pSeting={ pSeting} setPSeting={setPSeting } />
+        <MenuSeting
+          pSeting={pSeting}
+          setPSeting={setPSeting}
+          tableFontSize={tableFontSize}
+          setTableFontSize={setTableFontSize}
+        />
         {/* <div>{renderMenu()}</div> */}
       </div>
     </div>

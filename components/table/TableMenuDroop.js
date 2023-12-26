@@ -6,7 +6,7 @@ import { useRef, useEffect, useState } from "react"
 import TableMenuDroopAction from "./TableMenuDroopAction"
 import TableMenuDroopSeting from "./TableMenuDroopSeting"
 
-const TableMenuDroop = ({ setIsTableMenuDroop, setAction, setPSeting, pSeting }) => {
+const TableMenuDroop = ({ setIsTableMenuDroop, setAction, setPSeting, pSeting, tableFontSize, setTableFontSize }) => {
   console.log("TableMenuDroop.js")
 
   //*************Для клацання поза обєктом
@@ -45,7 +45,12 @@ const TableMenuDroop = ({ setIsTableMenuDroop, setAction, setPSeting, pSeting })
     >
       <TableMenuDroopAction setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} />
       <hr className="h-0.5 min-w-full bg-drawDropHr" />
-      <TableMenuDroopSeting pSeting={pSeting}  setPSeting={setPSeting} />
+      <TableMenuDroopSeting
+        pSeting={pSeting}
+        setPSeting={setPSeting}
+        tableFontSize={tableFontSize}
+        setTableFontSize={setTableFontSize}
+      />
     </div>
   )
 }
