@@ -3,6 +3,7 @@
 
 "use client"
 import { useRef, useEffect, useState } from "react"
+import MenuSeting from "./MenuSeting"
 
 const TableMenuDroopSeting = ({ onDropSeting }) => {
   const [tableMenuDroopSeting, setTableMenuDroopSeting] = useState(false)
@@ -113,7 +114,8 @@ const TableMenuDroopSeting = ({ onDropSeting }) => {
       </div>
 
       <div className={`${tableMenuDroopSeting ? "relative" : "hidden"}  text-base font-normal px-2`}>
-        <div>{renderMenu()}</div>
+        <MenuSeting onDropSeting={onDropSeting} />
+        {/* <div>{renderMenu()}</div> */}
       </div>
     </div>
   )

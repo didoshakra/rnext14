@@ -55,7 +55,7 @@ import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
-import MenuDropSeting from "./MenuDropSeting"
+import MenuDropSeting from "./MenuSetingDrop"
 
 // import TableMenuDroop from "./TableMenuDroopSeting"
 
@@ -71,7 +71,7 @@ export default function Rtable({
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [action, setAction] = useState(false) //
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //
-  const [isMenuDropSeting, setIsMenuDropSeting] = useState(false) //
+  const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //
   const [pSumRow, setPSumRow] = useState(p_sum)
   const [sumRow, setSumRow] = useState({})
   const [selectedRows, setSelectedRows] = useState([])
@@ -663,7 +663,7 @@ export default function Rtable({
           )}
           <button
             className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsMenuDropSeting(!isMenuDropSeting)}
+            onClick={() => setIsMenuSetingDrop(!isMenuSetingDrop)}
             title="Вийти"
           >
             {/* налаштування(шестерня) */}
@@ -908,7 +908,7 @@ export default function Rtable({
         <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} onDropSeting={onDropSeting} />
       )}
       {/* Dropdown tableMenu */}
-      {isMenuDropSeting && <MenuDropSeting setIsMenuDropSeting={setIsMenuDropSeting} onDropSeting={onDropSeting} />}
+      {isMenuSetingDrop && <MenuDropSeting setIsMenuSetingDrop={setIsMenuSetingDrop} onDropSeting={onDropSeting} />}
 
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
