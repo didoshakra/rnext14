@@ -40,7 +40,7 @@ const TableMenuDroopSeting = ({ onDropSeting }) => {
       <>
         {/*  */}
         <fieldset>
-          <legend>Choose your monster's features:</legend>
+          <legend>Налаштування</legend>
           <div
             className="flex m-1 space-x-2 justify-start items-center text-base font-normal text-hText  hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
             onClick={() => onDropSeting("filter")}
@@ -51,7 +51,7 @@ const TableMenuDroopSeting = ({ onDropSeting }) => {
               name="filter1"
               //   checked //вибраний
             />
-            <label htmlFor="filter">Фільтер</label>
+            <label htmlFor="filter">Фільтр</label>
           </div>
 
           <div

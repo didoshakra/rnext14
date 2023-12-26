@@ -1,7 +1,6 @@
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
 
-
-export default function MenuDropSeting({ setIsMenuDropSeting }) {
+export default function MenuDropSeting({ onDropSeting, setIsMenuDropSeting }) {
   //*************Для клацання поза обєктом
   const ref_MenuDropSeting = useRef(null)
 

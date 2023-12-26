@@ -901,7 +901,6 @@ export default function Rtable({
         <div className=" hidden md:flex justify-end ">
           <HeadRight />
         </div>
-        
       </div>
 
       {/* Dropdown tableMenu */}
@@ -909,7 +908,7 @@ export default function Rtable({
         <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} onDropSeting={onDropSeting} />
       )}
       {/* Dropdown tableMenu */}
-      {isMenuDropSeting && <MenuDropSeting setIsMenuDropSeting={setIsMenuDropSeting} />}
+      {isMenuDropSeting && <MenuDropSeting setIsMenuDropSeting={setIsMenuDropSeting} onDropSeting={onDropSeting} />}
 
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
