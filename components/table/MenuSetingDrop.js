@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react"
 import MenuSeting from "./MenuSeting"
 
-export default function MenuSetingDrop({ onDropSeting, setIsMenuSetingDrop }) {
+export default function MenuSetingDrop({ setIsMenuSetingDrop, pSeting, setPSeting }) {
   //*************Для клацання поза обєктом
   const ref_MenuSetingDrop = useRef(null)
 
@@ -26,7 +26,7 @@ export default function MenuSetingDrop({ onDropSeting, setIsMenuSetingDrop }) {
       ref={ref_MenuSetingDrop}
       className="absolute right-2  z-10 m-0 p-3 text-base font-medium bg-fBg1 dark:bg-fBgD  rounded-lg border border-hBorder dark:border-hBorderD"
     >
-      <MenuSeting onDropSeting={onDropSeting} />
+      <MenuSeting setPSeting={setPSeting} pSeting={pSeting} />
     </div>
   )
 }

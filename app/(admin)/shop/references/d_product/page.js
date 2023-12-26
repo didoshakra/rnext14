@@ -141,11 +141,12 @@ export default function Products() {
           <RTable
             initialData={resData}
             initialСolumns={columns}
-            title={"DProducts ggggg ggggggggggggg gggggggggggggggggg"}
+            title={"DProducts"}
             // p_selected={true}//Завжди
-            p_searchAllRows={true}
-            p_filtered={true}
-            p_sum={true}
+            p_fonts={true} //чи треба зміні фонтів(величина шрифтів)(true/false)
+            p_filtered={true} //чи треба Фільтр по всіх полях-не обов'язково(true/false)
+            p_sumRow={true} //Підсумковий рядок(true/false)
+            p_searchAllRows={true} //чи треба пошук по всіх полях-не обов'язково(true/false)
           />
         </>
       )}

@@ -55,7 +55,7 @@ import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
-import MenuDropSeting from "./MenuSetingDrop"
+import MenuSetingDrop from "./MenuSetingDrop"
 
 // import TableMenuDroop from "./TableMenuDroopSeting"
 
@@ -64,18 +64,26 @@ export default function Rtable({
   initialСolumns, //поля(задаються в ...) - обов'язково
   title = "", //(значення)заголовок - не обов'язково
   //   p_selected, //???Завжди(true/false)вибір рядків-не обов'язково
-  p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
-  p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
-  p_sum, //(true/false)рядок сумування
+  p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
+  p_fonts, //чи треба зміні фонтів(величина шрифтів)(true/false)
+  p_filtered, //чи треба Фільтр по всіх полях-не обов'язково(true/false)
+  p_sumRow, //чи треба Підсумковий рядок(true/false)
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
-  const [action, setAction] = useState(false) //
-  const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //
-  const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //
-  const [pSumRow, setPSumRow] = useState(p_sum)
-  const [sumRow, setSumRow] = useState({})
-  const [selectedRows, setSelectedRows] = useState([])
-  const [selectedAllRows, setSelectedAllRows] = useState(false)
+  const [action, setAction] = useState(false) //дані про вибрані події???
+  const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
+  const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //чи активовано меню налаштування
+  const [isDropdownFilter, setIsDropdownFilter] = useState(false) //чи активовано вікно фільтру
+  const [pSeting, setPSeting] = useState({
+    pSumRow: p_sumRow,
+    pFonts: p_fonts,
+    pFiltered: p_filtered,
+    pSearchAllRows: p_searchAllRows,
+  })
+  console.log("RTable.js/pSeting=", pSeting)
+  const [sumRow, setSumRow] = useState({}) //Підсумковий рядок(дані)
+  const [selectedRows, setSelectedRows] = useState([]) //Пибрані рядки(дані{1,2,...})
+  const [selectedAllRows, setSelectedAllRows] = useState(false) //Чи була подія вибрані всі
   const [sortField, setSortField] = useState("") //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc") //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10) //К-сть рядків на сторінку
@@ -83,7 +91,6 @@ export default function Rtable({
   const [lengthSearhValue, setLengthSearhValue] = useState(0) //Попереднє значення рядка пошуку(Для відкату пошуку)
   const [beforSeachData, setBeforSeachData] = useState([]) //Зберігається БД перед пошуком (Для відкату пошуку)
   const [beforFilterData, setBeforFilterData] = useState([]) //Зберігається БД перед фільтруванням (Для відкату)
-  const [isDropdownFilter, setIsDropdownFilter] = useState(false) //вікно фільтру
   const [filteredState, setFilteredState] = useState(0) //Стан фільтрування (0-незаповнений фільтр і не було фільтрування/ 1-заповнений фільтр, але не було фільтрування / 2- було фільтрування)
 
   // Стилі таблиці
@@ -121,7 +128,7 @@ export default function Rtable({
 
   //== Підготовка робочої структури workData */   //https://habr.com/ru/companies/otus/articles/696610/
   const preparedData = useMemo(() => {
-    console.log("FRtable.js/preparedData= useMemo/")
+    // console.log("FRtable.js/preparedData= useMemo/")
     // const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
       let tempData = { ...data } // Copy object()
@@ -141,7 +148,7 @@ export default function Rtable({
 
   //== Підготовка масиву фільтрів по полях (filterData) */
   const preparedFilterData = useMemo(() => {
-    console.log("FRtable.js/preparedFilterData = useMemo/")
+    // console.log("FRtable.js/preparedFilterData = useMemo/")
     let resData = [] //масив об'єктів
     let nR = -1
     const temp = initialСolumns.map((data, idx) => {
@@ -173,7 +180,7 @@ export default function Rtable({
 
   //==*п Сортування */
   const handleSorting = (sortField, sortOrder) => {
-    console.log("FRtable.js/handleSorting/")
+    // console.log("FRtable.js/handleSorting/")
     //--- Для встановлення початкового сортування
     if (sortOrder === "default") {
       sortOrder = "asc"
@@ -197,7 +204,7 @@ export default function Rtable({
 
   //--- Задає режим сортування
   const handleSortingChange = (accessor) => {
-    console.log("FRtable.js/handleSortingChange/")
+    // console.log("FRtable.js/handleSortingChange/")
     // console.log("RTable.js/handleSortingChange/accessor=", accessor)
     const sortOrder =
       //   accessor === sortField && order === "asc" ? "desc" : "asc";
@@ -211,7 +218,7 @@ export default function Rtable({
 
   //== Пошук(search)/фільтер-по всіх полях зразу */
   const seachAllFilds = (e) => {
-    console.log("FRtable.js/seachAllFilds/")
+    // console.log("FRtable.js/seachAllFilds/")
     const searchValue = e.target.value
     if (lengthSearhValue === 0) {
       setBeforSeachData(workData)
@@ -248,7 +255,7 @@ export default function Rtable({
 
   //== Вибір/Selected / Записуємо селект(true/false) в _selected роточого масиву(workData) */
   const selectRows = (e) => {
-    console.log("FRtable.js/selectRows/")
+    // console.log("FRtable.js/selectRows/")
     const nRow = Number(e.target.id) //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
     //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
     let copyArray = ([] = [...selectedRows]) //Копія робочого масиву обєктів
@@ -288,12 +295,12 @@ export default function Rtable({
       if (selectedAllRows) data._selected = false
       else data._selected = true
       setWorkData(tWorkData)
-      console.log("FRtable.js/onSelectAll/tSelectedData=", tSelectedData)
+      //   console.log("FRtable.js/onSelectAll/tSelectedData=", tSelectedData)
       if (!selectedAllRows) tSelectedData.push(data._nrow) //Додаємо в масив
     })
     //
     setSelectedAllRows(!selectedAllRows)
-    console.log("FRtable.js/onSelectAll/tSelectedData=", tSelectedData)
+    // console.log("FRtable.js/onSelectAll/tSelectedData=", tSelectedData)
     setSelectedRows(tSelectedData)
   }
 
@@ -301,7 +308,7 @@ export default function Rtable({
   //--- Формує (true/false) для стилю шоб показувати іконку фільтру біля назви в шапці, якщо є заданий фільтр по цьому полю
   const clasThFilter = useCallback(
     (accessor) => {
-      console.log("FRtable.js/clasThFilterl/")
+      //   console.log("FRtable.js/clasThFilterl/")
       const targetObj = filterData.find((obj) => obj.accessor === accessor) //Шукажмо запис
       // console.log("RTable.js.js/applyFilters/targetObj ==", targetObj)
       if (targetObj && targetObj.filterFirst.length > 0) {
@@ -313,7 +320,7 @@ export default function Rtable({
 
   //---*** Сам фільтр/Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
-    console.log("FRtable.js/applyFilters/")
+    // console.log("FRtable.js/applyFilters/")
     setIsDropdownFilter(false) //Закриваєм випадаюче вікно фільтрів
     if (filteredState === 0) return
     //--- Додаткові ф-ції
@@ -384,8 +391,8 @@ export default function Rtable({
           //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
           const valueData = valToType(current[attribute], valueType) //Значення поля робочої БД
           const filterFirst = valToType(targetObj.filterFirst, valueType) //Значення фільтру1
-          console.log("RTable.js.js/ApplyFilters/typeof /valueData=", valueData + "/", typeof valueData)
-          console.log("RTable.js.js/ApplyFilters/filterFirst=", filterFirst + "/", typeof filterFirst)
+          //   console.log("RTable.js.js/ApplyFilters/typeof /valueData=", valueData + "/", typeof valueData)
+          //   console.log("RTable.js.js/ApplyFilters/filterFirst=", filterFirst + "/", typeof filterFirst)
 
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
@@ -450,7 +457,7 @@ export default function Rtable({
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
   const deleteFilterAll = () => {
-    console.log("RTable.js/deleteFilterAll/")
+    // console.log("RTable.js/deleteFilterAll/")
     let tempFilterData = [...filterData]
     const temp = tempFilterData.map((data) => {
       data.comparisonFirst = ""
@@ -470,7 +477,7 @@ export default function Rtable({
   //-- рядок сумування
   //--Обчислення сум
   const applySum = () => {
-    console.log("FRtable.js/applySum/")
+    // console.log("FRtable.js/applySum/")
     let tRow = {} //об'єкт
     const temp1 = initialСolumns.map((item) => {
       //   let tempSumRow = { ...sumRow }
@@ -504,22 +511,22 @@ export default function Rtable({
     setSumRow(tRow)
   }
 
-  const onDropSeting = (seting) => {
-    console.log("RTable.js/onDropSeting/seting=", seting + "/pSumRow=", pSumRow + "/filteredState=", filteredState)
-    switch (seting) {
-      case "filter":
-        console.log("RTable.js/onDropSeting/seting=filter")
-        setFilteredState(!filteredState)
-        break
-      case "sumr":
-        console.log("RTable.js/onDropSeting/seting=sumr")
-        // setPSumRow(!pSumRow)
-        setPSumRow(false)
-        break
-      default:
-        break
-    }
-  }
+  //   const onDropSeting = (seting) => {
+  //     // console.log("RTable.js/onDropSeting/seting=", seting + "/pSumRow=", pSumRow + "/filteredState=", filteredState)
+  //     switch (seting) {
+  //       case "filter":
+  //         console.log("RTable.js/onDropSeting/seting=filter")
+  //         setFilteredState(!filteredState)
+  //         break
+  //       case "sumr":
+  //         console.log("RTable.js/onDropSeting/seting=sumr")
+  //         // setPSumRow(!pSumRow)
+  //         setPSumRow(false)
+  //         break
+  //       default:
+  //         break
+  //     }
+  //   }
 
   // Вихід з форми
   const onCancel = () => {
@@ -530,143 +537,38 @@ export default function Rtable({
     // else setDovActive("")
   }
 
-  const DropMenuSeting = () => {
-    return (
-      <div className="absolute right-2  z-10 m-0 p-3 text-base font-medium bg-fBg1 dark:bg-fBgD  rounded-lg border border-hBorder dark:border-hBorderD">
-        <fieldset>
-          <legend>Налаштування таблиці</legend>
-          <div
-            className="flex m-1 space-x-2 justify-start items-center text-base font-normal text-hText  hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-            onClick={() => onDropSeting("filter")}
-          >
-            <input
-              type="checkbox"
-              id="filter"
-              name="filter1"
-              //   checked //вибраний
-            />
-            <label htmlFor="filter">Фільтр</label>
-          </div>
-
-          <div
-            className="m-1 space-x-2 flex justify-start  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-            onClick={() => onDropSeting("sumr")}
-          >
-            <input className="" type="checkbox" id="nrow" name="nrow1" checked />
-            <label htmlFor="nrow">Підсукковий рядок </label>
-          </div>
-        </fieldset>
-      </div>
-    )
-  }
-
   const HeadRight = () => {
     return (
-        <>
+      <>
+        <button
+          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+          title="меню"
+        >
+          {/* іконка мобільного меню */}
+          <svg
+            className="h-5 w-5 text-iconT dark:text-iconTD"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
+            <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
+            <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
+          </svg>
+        </button>
+        {selectedRows.length === 0 && (
           <button
+            // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
-            title="меню"
+            title="Додати"
           >
-            {/* іконка мобільного меню */}
-            <svg
-              className="h-5 w-5 text-iconT dark:text-iconTD"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              {" "}
-              <line x1="8" y1="6" x2="21" y2="6" /> <line x1="8" y1="12" x2="21" y2="12" />{" "}
-              <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
-              <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
-            </svg>
-          </button>
-          {selectedRows.length === 0 && (
-            <button
-              // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
-              title="Додати"
-            >
-              {/* Додати */}
-              <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {" "}
-                <path stroke="none" d="M0 0h24v24H0z" /> <line x1="12" y1="5" x2="12" y2="19" />{" "}
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
-          )}
-
-          {selectedRows.length === 1 && (
-            <button
-              // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
-              title="меню"
-            >
-              {/* Редагувати */}
-              <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {" "}
-                <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
-                <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
-              </svg>
-            </button>
-          )}
-          {selectedRows.length > 0 && (
-            <button
-              // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-              onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
-              title="меню"
-            >
-              {/* Видалити */}
-              <svg
-                className="h-5 w-5 text-iconT dark:text-iconTD"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {" "}
-                <path stroke="none" d="M0 0h24v24H0z" /> <line x1="4" y1="7" x2="20" y2="7" />{" "}
-                <line x1="10" y1="11" x2="10" y2="17" /> <line x1="14" y1="11" x2="14" y2="17" />{" "}
-                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />{" "}
-                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-              </svg>
-            </button>
-          )}
-          <button
-            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsMenuSetingDrop(!isMenuSetingDrop)}
-            title="Вийти"
-          >
-            {/* налаштування(шестерня) */}
+            {/* Додати */}
             <svg
               className="h-5 w-5 text-iconT dark:text-iconTD"
               width="24"
@@ -679,32 +581,107 @@ export default function Rtable({
               strokeLinejoin="round"
             >
               {" "}
-              <path stroke="none" d="M0 0h24v24H0z" />{" "}
-              <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />{" "}
-              <circle cx="12" cy="12" r="3" />
+              <path stroke="none" d="M0 0h24v24H0z" /> <line x1="12" y1="5" x2="12" y2="19" />{" "}
+              <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
           </button>
-          {/*  */}
+        )}
+
+        {selectedRows.length === 1 && (
           <button
+            // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={onCancel}
-            title="Вийти"
+            onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+            title="меню"
           >
-            {/* відмова(помножити) */}
+            {/* Редагувати */}
             <svg
               className="h-5 w-5 text-iconT dark:text-iconTD"
               viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
               strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
               {" "}
-              <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+              <path stroke="none" d="M0 0h24v24H0z" />{" "}
+              <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+              <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /> <line x1="16" y1="5" x2="19" y2="8" />
             </svg>
           </button>
-        </>
+        )}
+        {selectedRows.length > 0 && (
+          <button
+            // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+            title="меню"
+          >
+            {/* Видалити */}
+            <svg
+              className="h-5 w-5 text-iconT dark:text-iconTD"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <path stroke="none" d="M0 0h24v24H0z" /> <line x1="4" y1="7" x2="20" y2="7" />{" "}
+              <line x1="10" y1="11" x2="10" y2="17" /> <line x1="14" y1="11" x2="14" y2="17" />{" "}
+              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />{" "}
+              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+            </svg>
+          </button>
+        )}
+        <button
+          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          onClick={() => setIsMenuSetingDrop(!isMenuSetingDrop)}
+          title="Вийти"
+        >
+          {/* налаштування(шестерня) */}
+          <svg
+            className="h-5 w-5 text-iconT dark:text-iconTD"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" />{" "}
+            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />{" "}
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </button>
+        {/*  */}
+        <button
+          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          onClick={onCancel}
+          title="Вийти"
+        >
+          {/* відмова(помножити) */}
+          <svg
+            className="h-5 w-5 text-iconT dark:text-iconTD"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </>
     )
   }
   //-------------------------------------------------
@@ -750,45 +727,48 @@ export default function Rtable({
           </button>
 
           {/* Вибір шрифта */}
-          <div className="ml-1 md:flex items-center rounded-lg border hidden  border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
-            {/* іконка T */}
-            <svg
-              className="h-5 w-5 text-iconT dark:text-iconTD"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              {" "}
-              <polyline points="4 7 4 4 20 4 20 7" /> <line x1="9" y1="20" x2="15" y2="20" />{" "}
-              <line x1="12" y1="4" x2="12" y2="20" />
-              <title>Шрифти</title>
-            </svg>
-            <p>:</p>
-            <select
-              className="mx-1 block w-full  items-center border-tabThBorder bg-tabTrBg align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              defaultValue={tableFontSize}
-              onChange={(e) => setTableFontSize(e.target.value)}
-              //   id="page-size"
-              title="Величина шрифту"
-            >
-              <option value={tableFontSize} disabled>
-                {tableFontSize}
-              </option>
-              <option value="xs">xs</option>
-              <option value="sm">sm</option>
-              <option value="base">base</option>
-              <option value="lg">lg</option>
-              {/* <option value="xs">дрібний</option>
+          {typeof (pSeting.pFonts !== "undefined") && pSeting.pFonts && (
+            <div className="ml-1 md:flex items-center rounded-lg border hidden  border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD">
+              {/* іконка T */}
+              <svg
+                className="h-5 w-5 text-iconT dark:text-iconTD"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <polyline points="4 7 4 4 20 4 20 7" /> <line x1="9" y1="20" x2="15" y2="20" />{" "}
+                <line x1="12" y1="4" x2="12" y2="20" />
+                <title>Шрифти</title>
+              </svg>
+              <p>:</p>
+              <select
+                className="mx-1 block w-full  items-center border-tabThBorder bg-tabTrBg align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                defaultValue={tableFontSize}
+                onChange={(e) => setTableFontSize(e.target.value)}
+                //   id="page-size"
+                title="Величина шрифту"
+              >
+                <option value={tableFontSize} disabled>
+                  {tableFontSize}
+                </option>
+                <option value="xs">xs</option>
+                <option value="sm">sm</option>
+                <option value="base">base</option>
+                <option value="lg">lg</option>
+                {/* <option value="xs">дрібний</option>
               <option value="sm">середній</option>
               <option value="base">базовий</option>
               <option value="lg">великий</option> */}
-            </select>
-          </div>
+              </select>
+            </div>
+          )}
+
           {/* Фільтр: Інфа відфільтровані/ вся БД  */}
-          {typeof (p_filtered !== "undefined") && p_filtered && (
+          {typeof (pSeting.pFiltered !== "undefined") && pSeting.pFiltered && (
             <>
               <button
                 //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
@@ -829,7 +809,8 @@ export default function Rtable({
             </>
           )}
           {/* Іконка рядка сум(налаштовуєься) */}
-          {typeof (pSumRow !== "undefined") && pSumRow && (
+          {/* {typeof (pSumRow !== "undefined") && pSumRow && ( */}
+          {typeof (pSeting.pSumRow !== "undefined") && pSeting.pSumRow && (
             <div>
               <button
                 className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
@@ -865,7 +846,7 @@ export default function Rtable({
         {/*  */}
 
         {/*Пошук швидкий/фільтр (рядок пощуку по всіх полях) */}
-        {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
+        {typeof pSeting.pSearchAllRows !== "undefined" && pSeting.pSearchAllRows && (
           <div className="relative ml-1 w-full items-center md:w-80">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
               {/* Лупа */}
@@ -889,9 +870,7 @@ export default function Rtable({
             <input
               size="lg"
               placeholder="Пошук..."
-              // value={searchValue}
-              //   onChange={(e) =>p_filterededp_searchAllRows onChangeSearch(e)} //Для Enter
-              onChange={(e) => seachAllFilds(e)} //Пошук
+              onChange={(e) => seachAllFilds(e)}
               type="text"
               className="block w-full items-center rounded-lg border border-tabThBorder bg-tabTrBg p-1 pl-10 text-tabTrText dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-tabTrTextD"
             />
@@ -905,10 +884,17 @@ export default function Rtable({
 
       {/* Dropdown tableMenu */}
       {isTableMenuDroop && (
-        <TableMenuDroop setIsTableMenuDroop={setIsTableMenuDroop} setAction={setAction} onDropSeting={onDropSeting} />
+        <TableMenuDroop
+          setIsTableMenuDroop={setIsTableMenuDroop}
+          setAction={setAction}
+          pSeting={pSeting}
+          setPSeting={setPSeting}
+        />
       )}
       {/* Dropdown tableMenu */}
-      {isMenuSetingDrop && <MenuDropSeting setIsMenuSetingDrop={setIsMenuSetingDrop} onDropSeting={onDropSeting} />}
+      {isMenuSetingDrop && (
+        <MenuSetingDrop setIsMenuSetingDrop={setIsMenuSetingDrop} setPSeting={setPSeting} pSeting={pSeting} />
+      )}
 
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
@@ -1036,7 +1022,7 @@ export default function Rtable({
           </tbody>
 
           {/* Нижній рядок сум */}
-          {typeof (pSumRow !== "undefined") && pSumRow && (
+          {typeof (pSeting.pSumRow !== "undefined") && pSeting.pSumRow && (
             <tfoot
               className={`${styleTableText} sticky bottom-0 border-t border-tabThBorder bg-tabThBg text-tabThText dark:border-tabThBorderD dark:bg-tabThBgD dark:text-tabThTextD`}
             >
