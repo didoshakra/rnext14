@@ -28,47 +28,10 @@ export default function Products() {
     {
       label: "nR",
       accessor: "_nrow",
-      sortable: false,
+      //   sortable: false,
+      sum: "mean",
       minWith: "15px",
       with: "20px",
-      sum: "mean",
-    },
-
-    {
-      label: "Id",
-      accessor: "id",
-      sortable: true,
-      minWith: "15px",
-      with: "100px",
-      sum: "max",
-    },
-    {
-      label: "Назва товару",
-      accessor: "name",
-      sortable: true,
-      filtered: true,
-      minWith: "150px",
-      with: "200px",
-    },
-    {
-      label: "ШтрихКод",
-      accessor: "skod",
-      //   type: "namber",
-      sortable: true,
-      filtered: true,
-      align: "center",
-      minWith: "100px",
-      with: "200px",
-      sum: "min", //середнє арифметичне
-    },
-    {
-      label: "Категорія",
-      accessor: "category",
-      sortable: true,
-      filtered: true,
-      type: "string",
-      minWith: "150px",
-      with: "200px",
     },
     {
       label: "Ціна",
@@ -76,9 +39,67 @@ export default function Products() {
       type: "number",
       sortable: true,
       filtered: true,
-      minWith: "100px",
-      with: "200px",
       sum: "sum",
+    },
+    {
+      label: "Назва товару",
+      accessor: "name",
+      sortable: true,
+      filtered: true,
+    },
+    {
+      label: "Од.вим.",
+      accessor: "ov",
+      align: "center", //Вирівнювання
+    },
+    {
+      label: "ШтрихКод",
+      accessor: "skod",
+      sortable: true,
+      filtered: true,
+      //   type: "string",
+      //   align: "center",
+      sum: "min", //середнє арифметичне
+    },
+    {
+      label: "Категорія",
+      accessor: "category",
+      sortable: true,
+      filtered: true,
+      minWith: "150px",
+      with: "200px",
+    },
+    {
+      label: "ПДВ",
+      accessor: "pdv",
+      sortable: true,
+      filtered: true,
+      type: "number",
+    },
+    {
+      label: "УКТЗЕД",
+      accessor: "akcuz",
+      sortable: true,
+      filtered: true,
+      type: "number",
+    },
+    {
+      label: "Знижка",
+      accessor: "is_discount",
+      sortable: true,
+      filtered: true,
+      type: "boolean",
+    },
+    {
+      label: "Бренд",
+      accessor: "brand",
+      sortable: true,
+      filtered: true,
+    },
+    {
+      label: "Імідж",
+      accessor: "img",
+      type: "img",
     },
   ]
 
@@ -97,36 +118,36 @@ export default function Products() {
   //   },
   // ];
 
-  const rows = [
-    {
-      key: "1",
-      firstName: "Tony",
-      lastName: "Reichert",
-      role: "Developer",
-      age: "35",
-    },
-    {
-      key: "2",
-      firstName: "Zoey",
-      lastName: "Lang",
-      role: "Designer",
-      age: "22",
-    },
-    {
-      key: "3",
-      firstName: "Jane",
-      lastName: "Fisher",
-      role: "CEO",
-      age: "29",
-    },
-    {
-      key: "4",
-      firstName: "William",
-      lastName: "Howard",
-      role: "Designer",
-      age: "27",
-    },
-  ]
+  //   const rows = [
+  //     {
+  //       key: "1",
+  //       firstName: "Tony",
+  //       lastName: "Reichert",
+  //       role: "Developer",
+  //       age: "35",
+  //     },
+  //     {
+  //       key: "2",
+  //       firstName: "Zoey",
+  //       lastName: "Lang",
+  //       role: "Designer",
+  //       age: "22",
+  //     },
+  //     {
+  //       key: "3",
+  //       firstName: "Jane",
+  //       lastName: "Fisher",
+  //       role: "CEO",
+  //       age: "29",
+  //     },
+  //     {
+  //       key: "4",
+  //       firstName: "William",
+  //       lastName: "Howard",
+  //       role: "Designer",
+  //       age: "27",
+  //     },
+  //   ]
 
   //   console.log("d_product/page/resData", resData);
   return (

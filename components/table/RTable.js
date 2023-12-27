@@ -36,7 +36,7 @@
 // 20231117 // Щвидкий пошук по всіх полях(одне значення,пошуковий рядок)/Відновлення даних при стиранні у рядку/ Працює разом з сортуванням
 // 20231120 // Добавив вікна фільтрів по заданих полях:DropdownFilter.js+DroopFifterForm.js
 // 20231127 // Фільтрування по багатьох полях/Відновлення БД до фільтрування/ При фівльтруванні для порівняння дані перетворюються у ті типи, які задані в initialСolumns.type
-// 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: numeric+boll=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
+// 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: number+boolean=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
 // 20231215 // ВІдмітити(зняти) всі/
 // 20231217 ////<th>i<td>-whitespace-nowrap-щоб текст у комірці таблиці не переносився(довгий рядок)
 // 20231222 //Нижній рядок сумування/Працює на основі параметрів initialСolumns(sum: "sum","max","min","mean" \\можна відключити (p_sum=false)-небуде ні нижньоо рядка ні кнопки обчислення Sum
@@ -44,7 +44,7 @@
 //!! Доробити:    table: Фільтри по даті / Суми по стовбцях
 //--------------------------------------------------------------------------------------------------------------------
 
-//*** Типи даних ******* */(string,number,boolean,date-це об'єкт,але треба вказувати)
+//*** Типи даних ******* */(string,number,boolean,img,date-це об'єкт,але треба вказувати)
 // Для кращого відображення і фільтрування потрібно вказувати такі
 // Якщо тип не вказаний, то він прирівнюється до (string)
 
@@ -55,7 +55,6 @@ import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
-import MenuSetingDrop from "./MenuSetingDrop"
 
 // import TableMenuDroop from "./TableMenuDroopSeting"
 
@@ -1034,9 +1033,75 @@ export default function Rtable({
               >
                 {/* перебір полів */}
                 {initialСolumns.map(({ accessor, type = "", align = "" }) => {
-                  const tData = accessor === "index" ? rowIndex : row[accessor]
+                  //   const tData = accessor === "index" ? rowIndex : row[accessor]
+                  // const tImg="img"
+                  // const tImg=<img class="w-10 h-10 rounded-full" src="/avatar/5.jpg" alt="Jese image"></img>
+                  const tImg = (
+                    <div className="flex justify-center">
+                      <img className="w-6 h-6" src={row[accessor]} alt="Jese image"></img>
+                    </div>
+                  )
+                  const nData =
+                    //   type === "boolean" && row[accessor] === "true"
+                    type === "boolean" && row[accessor] ? (
+                      // ? "+"
+                      <div className="flex justify-center">
+                        <svg
+                          class="h-6 w-6 text-red-500"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          {" "}
+                          <polyline points="9 11 12 14 22 4" />{" "}
+                          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                      </div>
+                    ) : type === "boolean" && !row[accessor] ? (
+                      <div className="flex justify-center">
+                        <svg
+                          class="h-6 w-6 text-red-500"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          {" "}
+                          {/* <polyline points="9 11 12 14 22 4" />{" "} */}
+                          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                      </div>
+                    ) : type === "img" ? (
+                      tImg
+                    ) : (
+                      row[accessor]
+                    )
+                  const tData = accessor === "index" ? rowIndex : nData
                   //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
 
+                  //   const clasTextAlign =
+                  //     align == "right"
+                  //       ? "text-right"
+                  //       : align == "center"
+                  //       ? "text-center"
+                  //       : align == "left"
+                  //       ? "text-left"
+                  //       : type == "number"
+                  //       ? "text-right"
+                  //       : type == "date"
+                  //       ? "text-center"
+                  //       : "text-left"
+                  //   const clasTextAlign =
+                  //     align == "right" || type == "number"
+                  //       ? "text-right"
+                  //       : align == "center" || type == "date" || type == "boolean" || type == "img"
+                  //       ? "text-center"
+                  //       : "text-left"
                   const clasTextAlign =
                     align == "right"
                       ? "text-right"
@@ -1046,7 +1111,7 @@ export default function Rtable({
                       ? "text-left"
                       : type == "number"
                       ? "text-right"
-                      : type == "date"
+                      : type == "date" || type == "boolean" || type == "img"
                       ? "text-center"
                       : "text-left"
 
