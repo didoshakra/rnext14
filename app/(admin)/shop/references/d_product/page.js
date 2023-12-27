@@ -97,6 +97,20 @@ export default function Products() {
       filtered: true,
     },
     {
+      label: "Дата створення",
+      accessor: "datecreate",
+      sortable: true,
+      filtered: true,
+      type: "date",
+    },
+    {
+      label: "Дата ств.",
+      accessor: "date_create",
+      sortable: true,
+      filtered: true,
+    //   type: "date",
+    },
+    {
       label: "Імідж",
       accessor: "img",
       type: "img",

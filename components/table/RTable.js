@@ -1104,6 +1104,8 @@ export default function Rtable({
                       </div>
                     ) : type === "img" ? (
                       tImg
+                    ) : type === "date" ? (
+                      row[accessor]
                     ) : (
                       row[accessor]
                     )

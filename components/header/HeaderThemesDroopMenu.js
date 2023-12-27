@@ -146,7 +146,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
               {resolvedTheme === "dark" ? (
                 <svg
                   // group-hover - при наведенні на (group) буде змінюватись */
-                  className="h-8 w-8  dark:hover:text-hTextHovD dark:group-hover:text-hTextHov"
+                  className="h-8 w-8  dark:text-hTextHovD dark:group-hover:text-hTextHovD"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -193,7 +193,8 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
             {/* іконка валів/малювати */}
             <p>
               <svg
-                className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHov"
+                // className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHovD"
+                className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHovD"
                 // class="h-8 w-8 text-red-500"
                 width="24"
                 height="24"

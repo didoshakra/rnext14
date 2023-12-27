@@ -6,7 +6,7 @@ export async function GET() {
   //   console.log("app/api/shop/references/d_product/route.js");
   let data = [];
   const query =
-    "SELECT d_product.id,d_product.name,category_id,price,brand_id,img,ov_id,skod,uktzed,pdv,akcuz,is_discount,d_category.name AS category,d_brand.name AS brand,d_ov.name AS ov FROM d_product JOIN d_category ON d_category.id = d_product.category_id   JOIN d_brand ON d_brand.id = d_product.brand_id JOIN d_ov ON d_ov.kod = d_product.ov_id  ORDER BY id ";
+    "SELECT d_product.id,d_product.name,category_id,price,brand_id,img,ov_id,skod,uktzed,pdv,akcuz,is_discount,date_create,COALESCE(to_char(date_create, 'MM-DD-YYYY'), '') AS datecreate,d_category.name AS category,d_brand.name AS brand,d_ov.name AS ov FROM d_product JOIN d_category ON d_category.id = d_product.category_id   JOIN d_brand ON d_brand.id = d_product.brand_id JOIN d_ov ON d_ov.kod = d_product.ov_id  ORDER BY id "
   //   const query = "select * from d_product ORDER BY id DESC LIMIT 100";
   try {
     const result = await conn.query(query); // conn.query-команда виконнання запиту(.query)
