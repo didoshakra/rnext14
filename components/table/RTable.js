@@ -943,7 +943,7 @@ export default function Rtable({
       {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
         className=" max-h-[--sH] w-full overflow-auto border border-tabThBorder dark:border-tabThBorderD"
-        style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
+        style={{ "--sH": "calc(100vh - 200px)" }} //Створення style для h-
       >
         {/*border-collapse- обєднання границь ячейок "> */}
         <table className=" w-full table-auto">
