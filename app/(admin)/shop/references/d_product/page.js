@@ -97,7 +97,7 @@ export default function Products() {
       filtered: true,
     },
     {
-      label: "Дата створення",
+      label: "Дата ств.",
       accessor: "datecreate",
       sortable: true,
       filtered: true,
@@ -108,7 +108,7 @@ export default function Products() {
       accessor: "date_create",
       sortable: true,
       filtered: true,
-    //   type: "date",
+      type: "date",
     },
     {
       label: "Імідж",
