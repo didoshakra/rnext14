@@ -50,6 +50,7 @@
 
 "use client"
 import { useState, useMemo, useCallback } from "react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import TableFooter from "./TableFooter"
 import useTable from "./useTable"
@@ -79,7 +80,7 @@ export default function Rtable({
     pFiltered: p_filtered,
     pSearchAllRows: p_searchAllRows,
   })
-  console.log("RTable.js/pSeting=", pSeting)
+  //   console.log("RTable.js/pSeting=", pSeting)
   const [sumRow, setSumRow] = useState({}) //Підсумковий рядок(дані)
   const [selectedRows, setSelectedRows] = useState([]) //Пибрані рядки(дані{1,2,...})
   const [selectedAllRows, setSelectedAllRows] = useState(false) //Чи була подія вибрані всі
@@ -95,6 +96,15 @@ export default function Rtable({
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
   //em-Відносно розміру шрифту даного елемента(=em*text-xs)
+  const styleTableImg =
+    tableFontSize === "xs"
+      ? " h-3 w-3"
+      : tableFontSize === "sm"
+      ? "h-[14px] w-[14px]"
+      : tableFontSize === "base"
+      ? "h-4 w-4"
+      : "h-[18px] w-[18px]"
+
   const styleTableText =
     tableFontSize === "xs"
       ? " text-xs p-[0.25em]"
@@ -501,7 +511,7 @@ export default function Rtable({
         if (item.sum === "mean") {
           tSum = tSum / kZap
         }
-        console.log("RTable.js/applySum/accessor", item.accessor + "/tSum=", tSum)
+        // console.log("RTable.js/applySum/accessor", item.accessor + "/tSum=", tSum)
         tRow[item.accessor] = tSum //Додавання нової властивості до оь'якту
       }
       //******************************
@@ -1019,11 +1029,11 @@ export default function Rtable({
           <tbody>
             {/* перебір рядків */}
             {/* slice-це кусок вибраного для рендерінгу масиву (сторінка/відфільтроване і...) */}
-            {slice.map((row, rowIndex) => (
+            {/* {slice.map((row, rowIndex) => ( */}
+            {slice.map((row) => (
               <tr
-                id={row._nrow} //Початкова нумерація рядків/додано програмно
-                key={row._nrow} //Початкова нумерація рядків/додано програмно
-                // key={row.id}
+                id={row._nrow} //_nrow- нумерація рядків/додано програмно
+                key={row._nrow}
                 className={`${
                   row._selected
                     ? "bg-tabTrBgSel hover:bg-tabTrBgSelHov dark:bg-tabTrBgSelD dark:hover:bg-tabTrBgSelHovD"
@@ -1034,26 +1044,40 @@ export default function Rtable({
                 {/* перебір полів */}
                 {initialСolumns.map(({ accessor, type = "", align = "" }) => {
                   //   const tData = accessor === "index" ? rowIndex : row[accessor]
-                  // const tImg="img"
-                  // const tImg=<img class="w-10 h-10 rounded-full" src="/avatar/5.jpg" alt="Jese image"></img>
                   const tImg = (
-                    <div className="flex justify-center">
-                      <img className="w-6 h-6" src={row[accessor]} alt="Jese image"></img>
+                    <div
+                      id={row._nrow}
+                      className="flex justify-center"
+                      //   className={`${styleTableImg} flex justify-cente border border-3`}
+                    >
+                      {/* <Image
+                        id={row._nrow}
+                        alt="image"
+                        // fill
+                        width={16} //Не міняється при зміні шрифтів(від 12-18px)
+                        height={16} //Не міняється при зміні шрифтів(від 12-18px)
+                        src={row[accessor]}
+                        // style={{
+                        //   objectFit: "cover",
+                        // }}
+                      /> */}
+                      <img id={row._nrow} className={`${styleTableImg}`} src={row[accessor]} alt="Jese image" />
                     </div>
                   )
-                  const nData =
+                  const tData =
                     //   type === "boolean" && row[accessor] === "true"
                     type === "boolean" && row[accessor] ? (
                       // ? "+"
-                      <div className="flex justify-center">
+                      <div id={row._nrow} className="flex justify-center">
                         <svg
-                          class="h-6 w-6 text-red-500"
+                          id={row._nrow}
+                          className="h-4 w-4 text-red-500"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           {" "}
                           <polyline points="9 11 12 14 22 4" />{" "}
@@ -1061,15 +1085,17 @@ export default function Rtable({
                         </svg>
                       </div>
                     ) : type === "boolean" && !row[accessor] ? (
-                      <div className="flex justify-center">
+                      <div id={row._nrow} className="flex justify-center">
                         <svg
-                          class="h-6 w-6 text-red-500"
+                          id={row._nrow}
+                          //   className ="h-4 w-4 text-red-500"
+                          className={`${styleTableImg}  text-iconT dark:text-iconTD`}
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           {" "}
                           {/* <polyline points="9 11 12 14 22 4" />{" "} */}
@@ -1081,7 +1107,8 @@ export default function Rtable({
                     ) : (
                       row[accessor]
                     )
-                  const tData = accessor === "index" ? rowIndex : nData
+                  //   const tData = accessor === "index" ? rowIndex : nData
+                  //   const tData = nData
                   //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
 
                   //   const clasTextAlign =
