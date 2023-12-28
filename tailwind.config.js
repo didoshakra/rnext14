@@ -45,11 +45,12 @@ module.exports = {
         hTapeBgD: "#0f172a", //--color-pCol9: #0f172a;
 
         //1-- form (Bg-для 2-х форм)-------
-        fBg: "var(--color-pCol1)",
+        fBg: "var(--color-pCol)",
         fBgD: "#1e293b", //--color-pCol8: #1e293b;
         // fBg1: "var(--color-pCol0)",
-        fBg1: "#ffff",
-        fBg1D: "#334155", //--color-pCol7: #334155; fBorder: "var(--color-pCol4)",
+        fBg1: "var(--color-pCol1)",
+        fBg1D: "#334155", //--color-pCol7: #334155;
+        fBorder: "var(--color-pCol4)",
         fBorderD: "#64748b", //--color-pCol5:#64748b;
         fText: "var(--color-pCol7)",
         fTextD: "var(--color-pCol2)",

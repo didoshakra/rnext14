@@ -162,7 +162,11 @@ export default function DropdownFilter({
                   <td id={row._nrow} className="text-iconT">
                     {row.comparisonFirst}
                   </td>
-                  <td id={row._nrow}>{row.filterFirst}</td>
+                  <td id={row._nrow} >
+                    {/* <td id={row._nrow} className="whitespace-nowrap"> */}
+                    {/* <td id={row._nrow} className={`${row.filterFirst.length < 11 && whitespace - nowrap}`}> */}
+                    {row.filterFirst}
+                  </td>
                   <td id={row._nrow} className="text-iconT">
                     {row.logical}
                   </td>

@@ -51,7 +51,7 @@
 
 "use client"
 import { useState, useMemo, useCallback } from "react"
-import Image from "next/image"
+// import Image from "next/image"
 import { useRouter } from "next/navigation"
 import TableFooter from "./TableFooter"
 import useTable from "./useTable"
@@ -73,7 +73,7 @@ export default function Rtable({
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [action, setAction] = useState(false) //дані про вибрані події???
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
-  const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //чи активовано меню налаштування
+//   const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //налаштування(шестерня)(НЕ БУДЕ)чи активовано меню налаштування
   const [isDropdownFilter, setIsDropdownFilter] = useState(false) //чи активовано вікно фільтру
   const [pSeting, setPSeting] = useState({
     pSelected: p_selected,
@@ -88,7 +88,7 @@ export default function Rtable({
   const [selectedAllRows, setSelectedAllRows] = useState(false) //Чи була подія вибрані всі
   const [sortField, setSortField] = useState("") //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc") //Сортування в яку сторону(верх/вниз)
-  const [rowsPerPage, setRowsPerPage] = useState(10) //К-сть рядків на сторінку
+  const [rowsPerPage, setRowsPerPage] = useState(15) //К-сть рядків на сторінку
   const [tableFontSize, setTableFontSize] = useState("sm") //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0) //Попереднє значення рядка пошуку(Для відкату пошуку)
   const [beforSeachData, setBeforSeachData] = useState([]) //Зберігається БД перед пошуком (Для відкату пошуку)
@@ -804,7 +804,6 @@ export default function Rtable({
                 className="mx-1 block w-full  items-center border-tabThBorder bg-tabTrBg align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-tabThBorderD dark:bg-tabTrBgD dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 defaultValue={tableFontSize}
                 onChange={(e) => setTableFontSize(e.target.value)}
-                //   id="page-size"
                 title="Величина шрифту"
               >
                 <option value={tableFontSize} disabled>
@@ -849,7 +848,7 @@ export default function Rtable({
               </button>
 
               {/* Dropdown menu */}
-              {isDropdownFilter && (
+              {/* {isDropdownFilter && (
                 <DropdownFilter
                   filterData={filterData} //Дані фільтру(тільки ті поля по яких задано )
                   setFilterData={setFilterData}
@@ -860,7 +859,7 @@ export default function Rtable({
                   filteredState={filteredState} //Що у фільтрі є непусті записи
                   setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
                 />
-              )}
+              )} */}
             </>
           )}
           {/* Іконка рядка сум(налаштовуєься) */}
@@ -936,7 +935,19 @@ export default function Rtable({
           <HeadRight />
         </div>
       </div>
-
+      {/* Dropdown menu */}
+      {isDropdownFilter && (
+        <DropdownFilter
+          filterData={filterData} //Дані фільтру(тільки ті поля по яких задано )
+          setFilterData={setFilterData}
+          setIsDropdownFilter={setIsDropdownFilter}
+          styleTableText={styleTableText}
+          applyFilters={applyFilters} //Застосувати фільтр
+          deleteFilterAll={deleteFilterAll}
+          filteredState={filteredState} //Що у фільтрі є непусті записи
+          setFilteredState={setFilteredState} //Що у фільтрі є непусті записи
+        />
+      )}
       {/* Dropdown <TableMenuDroop */}
       {isTableMenuDroop && (
         <TableMenuDroop

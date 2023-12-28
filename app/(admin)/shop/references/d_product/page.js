@@ -34,18 +34,18 @@ export default function Products() {
       with: "20px",
     },
     {
+      label: "Назва товару",
+      accessor: "name",
+      sortable: true,
+      filtered: true,
+    },
+    {
       label: "Ціна",
       accessor: "price",
       type: "number",
       sortable: true,
       filtered: true,
       sum: "sum",
-    },
-    {
-      label: "Назва товару",
-      accessor: "name",
-      sortable: true,
-      filtered: true,
     },
     {
       label: "Од.вим.",
