@@ -96,13 +96,13 @@ export default function Products() {
       sortable: true,
       filtered: true,
     },
-    {
-      label: "Дата ств.",
-      accessor: "datecreate",
-      sortable: true,
-      filtered: true,
-      type: "date",
-    },
+    // {
+    //   label: "Дата ств.",
+    //   accessor: "datecreate",
+    //   sortable: true,
+    //   filtered: true,
+    //   type: "date",
+    // },
     {
       label: "Дата ств.",
       accessor: "date_create",

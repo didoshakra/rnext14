@@ -125,9 +125,9 @@ export default function DropdownFilter({
           </button>
         </div>
         {/* <div className="max-w-ful overflow-auto"> */}
-        <div className=" w-ful  ">
+        <div className=" w-full ">
           {/* <table className="table-fixed"> */}
-          <table className="max-w-full table-auto overflow-auto w-[20%]">
+          <table className="max-w-full table-auto overflow-auto w-[100%]">
             {/* <thead className="bg-gray-300  text-left uppercase  text- dark:bg-gray-500 dark:text-white"> */}
             <thead className="bg-fBg  text-left uppercase text-fText dark:bg-fBgD  dark:text-fTextD">
               <tr>
@@ -136,7 +136,7 @@ export default function DropdownFilter({
                 {/* <th>Ключ</th> */}
                 {/* <th className={`${styleTableText} w-24`}>&gt;=&lt;</th> */}
                 <th className={`${styleTableText} text-iconT`}>=</th>
-                <th className={`${styleTableText}`}>Фільтр1</th>
+                <th className={`${styleTableText}`}>  Фільтр1  </th>
                 <th className={`${styleTableText} text-iconT`}>&&</th>
                 <th className={`${styleTableText} text-iconT`}>=</th>
                 <th className={`${styleTableText}`}>Фільтр2</th>
