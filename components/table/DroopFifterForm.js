@@ -85,7 +85,7 @@ export default function DroopFifterForm({
 
 
   return (
-    <div className=" absolute z-10 w-full rounded-lg border border-fBorder  bg-fBg1 p-1  dark:border-fBorderD dark:bg-fBg1D overflow-auto">
+    <div className=" absolute left-0 z-10 w-full rounded-lg border border-fBorder  bg-fBg1 p-1  dark:border-fBorderD dark:bg-fBg1D overflow-auto">
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
           <div className="flex justify-start space-x-1">

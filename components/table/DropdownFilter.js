@@ -34,10 +34,10 @@ export default function DropdownFilter({
   return (
     <div
       style={{ "--sW": "calc(100vw - 20px)" }} //
-      className="absolute left-0 z-10 md:max-w-[--sW] rounded-lg border border-fBorder bg-fBg dark:border-fBorderD dark:bg-fBgD md:left-auto w-full md:w-[40%]"
+      className="absolute left-0 z-10 md:max-w-[--sW] rounded-lg border border-fBorder bg-fBg dark:border-fBorderD dark:bg-fBgD md:left-auto w-full md:w-[40%] p-2"
     >
       <div className="mt-1 px-1 w-full overflow-auto">
-        <div className="h-7 flex justify-between items-center mb-1">
+        <div className="h-7 flex justify-between items-center mb-2">
           {filteredState != 0 ? (
             <div className="flex justify-start space-x-1 items-center">
               <button
@@ -125,9 +125,9 @@ export default function DropdownFilter({
           </button>
         </div>
         {/* <div className="max-w-ful overflow-auto"> */}
-        <div className=" w-full ">
+        <div className=" w-full">
           {/* <table className="table-fixed"> */}
-          <table className="max-w-full table-auto overflow-auto w-[100%]">
+          <table className="max-w-full table-auto overflow-auto w-[100%] ">
             {/* <thead className="bg-gray-300  text-left uppercase  text- dark:bg-gray-500 dark:text-white"> */}
             <thead className="bg-fBg  text-left uppercase text-fText dark:bg-fBgD  dark:text-fTextD">
               <tr>
@@ -136,7 +136,7 @@ export default function DropdownFilter({
                 {/* <th>Ключ</th> */}
                 {/* <th className={`${styleTableText} w-24`}>&gt;=&lt;</th> */}
                 <th className={`${styleTableText} text-iconT`}>=</th>
-                <th className={`${styleTableText}`}>  Фільтр1  </th>
+                <th className={`${styleTableText}`}> Фільтр1 </th>
                 <th className={`${styleTableText} text-iconT`}>&&</th>
                 <th className={`${styleTableText} text-iconT`}>=</th>
                 <th className={`${styleTableText}`}>Фільтр2</th>
@@ -162,7 +162,7 @@ export default function DropdownFilter({
                   <td id={row._nrow} className="text-iconT">
                     {row.comparisonFirst}
                   </td>
-                  <td id={row._nrow} >
+                  <td id={row._nrow}>
                     {/* <td id={row._nrow} className="whitespace-nowrap"> */}
                     {/* <td id={row._nrow} className={`${row.filterFirst.length < 11 && whitespace - nowrap}`}> */}
                     {row.filterFirst}
