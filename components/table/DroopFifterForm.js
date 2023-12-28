@@ -181,7 +181,8 @@ export default function DroopFifterForm({
                 className=" block w-full  items-center rounded border border-fBorder bg-fInputBg p-1  align-middle leading-tight  text-fText dark:border-fBorderD dark:bg-fInputBgD dark:text-fTextD"
                 id="filterFirst"
                 // required
-                type="text"
+                // type="text"
+                type={filterDataRow.type}
                 name="filterFirst"
                 value={state.filterFirst}
                 onChange={handleChange}
