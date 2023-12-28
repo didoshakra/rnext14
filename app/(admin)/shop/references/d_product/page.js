@@ -177,7 +177,7 @@ export default function Products() {
             initialData={resData}
             initialСolumns={columns}
             title={"DProducts"}
-            // p_selected={true}//Завжди
+            p_selected={true} //Вибрати всі+ інвормація про к-сть вибраних рядків
             p_fonts={true} //чи треба зміні фонтів(величина шрифтів)(true/false)
             p_filtered={true} //чи треба Фільтр по всіх полях-не обов'язково(true/false)
             p_sumRow={true} //Підсумковий рядок(true/false)

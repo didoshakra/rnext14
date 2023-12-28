@@ -37,15 +37,16 @@
 // 20231120 // Добавив вікна фільтрів по заданих полях:DropdownFilter.js+DroopFifterForm.js
 // 20231127 // Фільтрування по багатьох полях/Відновлення БД до фільтрування/ При фівльтруванні для порівняння дані перетворюються у ті типи, які задані в initialСolumns.type
 // 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: number+boolean=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
-// 20231215 // ВІдмітити(зняти) всі/
-// 20231217 ////<th>i<td>-whitespace-nowrap-щоб текст у комірці таблиці не переносився(довгий рядок)
-// 20231222 //Нижній рядок сумування/Працює на основі параметрів initialСolumns(sum: "sum","max","min","mean" \\можна відключити (p_sum=false)-небуде ні нижньоо рядка ні кнопки обчислення Sum
-//---------------------------------------------------------------------------------------------------------
-//!! Доробити:    table: Фільтри по даті / Суми по стовбцях
+// 20231215 -  ВІдмітити(зняти) всі/
+// 20231217 - <th>i<td>-whitespace-nowrap-щоб текст у комірці таблиці не переносився(довгий рядок)
+// 20231222 - Cуми по стовбцях:Нижній рядок сумування/Працює на основі параметрів initialСolumns(sum: "sum","max","min","mean" \\можна відключити (p_sum=false)-небуде ні нижньоо рядка ні кнопки обчислення Sum
+// 20231226 Налаштування ф-цій таблиці:/вибрати всі/шрифти/фільтр/швидкий пошук/підсумковий рядок/
+// 20231227 Відображення в таблиціобєктів "img"(посилання на картинку) і"boolean"(галочка-іконка)
+// 20231228 Доробив: Фільтри по даті/ щоб працювало фільтрування по date, з SQL запиту треба пмовертати чистий тип дати в фортаті yyyy-mm-ddT00:00:0000 а не перетворювати в запиті  char типу COALESCE(to_char(date_create, 'MM-DD-YYYY'), '') AS datecreate,
 //--------------------------------------------------------------------------------------------------------------------
 
 //*** Типи даних ******* */(string,number,boolean,img,date-це об'єкт,але треба вказувати)
-// Для кращого відображення і фільтрування потрібно вказувати такі
+// Для кращого відображення і фільтрування потрібно вказувати типи даних
 // Якщо тип не вказаний, то він прирівнюється до (string)
 
 "use client"
@@ -63,11 +64,11 @@ export default function Rtable({
   initialData, //початкові дані (з БД) - обов'язково
   initialСolumns, //поля(задаються в ...) - обов'язково
   title = "", //(значення)заголовок - не обов'язково
-  //   p_selected, //???Завжди(true/false)вибір рядків-не обов'язково
-  p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
+  p_selected, //Вибрати всі+ інвормація про к-сть вибраних рядків
   p_fonts, //чи треба зміні фонтів(величина шрифтів)(true/false)
   p_filtered, //чи треба Фільтр по всіх полях-не обов'язково(true/false)
   p_sumRow, //чи треба Підсумковий рядок(true/false)
+  p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [action, setAction] = useState(false) //дані про вибрані події???
@@ -75,9 +76,10 @@ export default function Rtable({
   const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //чи активовано меню налаштування
   const [isDropdownFilter, setIsDropdownFilter] = useState(false) //чи активовано вікно фільтру
   const [pSeting, setPSeting] = useState({
-    pSumRow: p_sumRow,
+    pSelected: p_selected,
     pFonts: p_fonts,
     pFiltered: p_filtered,
+    pSumRow: p_sumRow,
     pSearchAllRows: p_searchAllRows,
   })
   //   console.log("RTable.js/pSeting=", pSeting)
@@ -757,25 +759,27 @@ export default function Rtable({
         <div className="flex flex-wrap items-center justify-start">
           {/*Інформація про вибрані рядки  */}
           {/* {typeof p_selected !== "undefined" && p_selected && ( */}
-          <button
-            className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
-            onClick={onSelectAll}
-            title="Вибрати всі"
-          >
-            {/* галочка */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="h-5 w-5 text-iconT dark:text-iconTD"
+          {typeof (pSeting.pSelected !== "undefined") && pSeting.pSelected && (
+            <button
+              className="ml-1 flex items-center rounded-lg border border-tabThBorder dark:border-tabThBorderD bg-tabTrBg text-tabTrText dark:text-tabTrTextD p-1 dark:bg-tabTrBgD"
+              onClick={onSelectAll}
+              title="Вибрати всі"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
+              {/* галочка */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="h-5 w-5 text-iconT dark:text-iconTD"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
 
-            <p title="Відмічено">: {selectedAllRows ? workData.length : selectedRows.length}</p>
-          </button>
+              <p title="Відмічено">: {selectedAllRows ? workData.length : selectedRows.length}</p>
+            </button>
+          )}
 
           {/* Вибір шрифта */}
           {typeof (pSeting.pFonts !== "undefined") && pSeting.pFonts && (
@@ -1104,7 +1108,7 @@ export default function Rtable({
                       </div>
                     ) : type === "img" ? (
                       tImg
-                    ) : type === "date" && row[accessor] !=  undefined ? (
+                    ) : type === "date" && row[accessor] != undefined ? (
                       row[accessor].substring(0, 10)
                     ) : (
                       row[accessor]

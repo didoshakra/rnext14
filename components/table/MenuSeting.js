@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 
-export default function MenuSeting({ pSeting, setPSeting,tableFontSize, setTableFontSize }) {
+export default function MenuSeting({ pSeting, setPSeting, tableFontSize, setTableFontSize }) {
   const onChange = () => {
     console.log("MenuSeting.js/onChange/")
     setPSeting({ ...pSeting, ["pSumRow"]: !pSeting.pSumRow })
@@ -9,6 +9,18 @@ export default function MenuSeting({ pSeting, setPSeting,tableFontSize, setTable
   return (
     <fieldset>
       <legend className="font-semibold">Опції інтерфейсу таблиці</legend>
+      {/* Фонт/шрифт */}
+      <div className="m-1 space-x-2 md:flex justify-start hidden items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
+        <input
+          className=""
+          type="checkbox"
+          id="selected"
+          name="selectedselected1"
+          onChange={() => setPSeting({ ...pSeting, ["pSelected"]: !pSeting.pSelected })}
+          checked={pSeting.pSelected ? true : false}
+        />
+        <label htmlFor="selected">Вибрати всі</label>
+      </div>
       {/* Фонт/шрифт */}
       <div className="m-1 space-x-2 md:flex justify-start hidden items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
         <input
