@@ -56,7 +56,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
   const onClick = (e) => {
     // console.lg("MenuItems/onClick/id=", e.currentTarget.id);
     setDropdown(true)
-    console.log("MenuItems/onClick/id=", e.currentTarget.id)
+    // console.log("MenuItems/onClick/id=", e.currentTarget.id)
     setCurrentID(e.currentTarget.id)
   }
 
