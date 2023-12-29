@@ -171,4 +171,5 @@ import tailwindConfig from "@/tailwind.config"; //отримання змінн�
     mpm i file-saver //файл-зберігач
     npm install xlsx
 
+//--Чи треба print, якщо є EXELL??? react-to-print //https://medium.com/@aiska.basnet/print-in-react-437b78b257d3
 //--------------------------------------------------
