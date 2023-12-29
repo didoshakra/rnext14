@@ -4,7 +4,7 @@
 "use client"
 import { useRef, useEffect, useState } from "react"
 
-const TableMenuDroopAction = ({setAction}) => {
+const TableMenuDroopAction = ({ fAction }) => {
   const [tableMenuDroopAction, setTableMenuDroopAction] = useState(false)
 
   //*************Для клацання поза обєктом
@@ -29,8 +29,8 @@ const TableMenuDroopAction = ({setAction}) => {
   //
 
   const onAction = (action) => {
-    setAction(action)
-    closeDroop
+    fAction(action)
+    setTableMenuDroopAction(false)
   }
 
   //випадаюче меню

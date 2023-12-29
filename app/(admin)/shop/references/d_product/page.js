@@ -30,7 +30,6 @@ export default function Products() {
       accessor: "_nrow",
       //   sortable: false,
       sum: "mean",
-      minWith: "15px",
       with: "20px",
     },
     {

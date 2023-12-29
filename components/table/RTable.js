@@ -53,11 +53,12 @@
 import { useState, useMemo, useCallback } from "react"
 // import Image from "next/image"
 import { useRouter } from "next/navigation"
+import * as XLSX from "xlsx" //Екпорт в EXELL
+import { saveAs } from "file-saver" //Для запису файлів/Екпорт в EXELL
 import TableFooter from "./TableFooter"
 import useTable from "./useTable"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
-
 // import TableMenuDroop from "./TableMenuDroopSeting"
 
 export default function Rtable({
@@ -71,9 +72,8 @@ export default function Rtable({
   p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
-  const [action, setAction] = useState(false) //дані про вибрані події???
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
-//   const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //налаштування(шестерня)(НЕ БУДЕ)чи активовано меню налаштування
+  //   const [isMenuSetingDrop, setIsMenuSetingDrop] = useState(false) //налаштування(шестерня)(НЕ БУДЕ)чи активовано меню налаштування
   const [isDropdownFilter, setIsDropdownFilter] = useState(false) //чи активовано вікно фільтру
   const [pSeting, setPSeting] = useState({
     pSelected: p_selected,
@@ -485,8 +485,7 @@ export default function Rtable({
     setSumRow({}) //очистка нихнього рядка
   }
 
-  //-- рядок сумування
-  //--Обчислення сум
+  //-- Підсумковий рядок /сум,середнє,max,min
   const applySum = () => {
     // console.log("FRtable.js/applySum/")
     let tRow = {} //об'єкт
@@ -516,30 +515,12 @@ export default function Rtable({
         // console.log("RTable.js/applySum/accessor", item.accessor + "/tSum=", tSum)
         tRow[item.accessor] = tSum //Додавання нової властивості до оь'якту
       }
-      //******************************
     })
     // console.log("RTable.js/applySum/tRow=", tRow)
     setSumRow(tRow)
   }
 
-  //   const onDropSeting = (seting) => {
-  //     // console.log("RTable.js/onDropSeting/seting=", seting + "/pSumRow=", pSumRow + "/filteredState=", filteredState)
-  //     switch (seting) {
-  //       case "filter":
-  //         console.log("RTable.js/onDropSeting/seting=filter")
-  //         setFilteredState(!filteredState)
-  //         break
-  //       case "sumr":
-  //         console.log("RTable.js/onDropSeting/seting=sumr")
-  //         // setPSumRow(!pSumRow)
-  //         setPSumRow(false)
-  //         break
-  //       default:
-  //         break
-  //     }
-  //   }
-
-  // Вихід з форми
+  //-- Вихід з форми
   const onCancel = () => {
     //якщо не довідник
     router.push("/") //перехід на сторінку
@@ -548,6 +529,38 @@ export default function Rtable({
     // else setDovActive("")
   }
 
+  //=========================================================
+  //--Export в EXELL(Роб)/sheetjs-style   //https://codesandbox.io/p/devbox/alkira-sfubt5?file=%2Fsrc%2Fcomponents%2Fexcelexport%2FExcelExport.tsx%3A2%2C1-3%2C37
+
+  const exportToExcel = (filedata) => {
+    const fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
+    const ws = XLSX.utils.json_to_sheet(filedata)
+    const wb = { Sheets: { data: ws }, SheetNames: ["data"] }
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" })
+    const data = new Blob([excelBuffer], { type: fileType })
+    return data
+  }
+
+  //-- Дії типу/Export/Import/Друк,,,,
+  const fAction = (action) => {
+    switch (action) {
+      case "toExell":
+         saveAs(exportToExcel(workData), "workData" + ".xlsx")
+        break
+      case "sumr":
+        console.log("RTable.js/onDropSeting/seting=sumr")
+        // setPSumRow(!pSumRow)
+        setPSumRow(false)
+        break
+      default:
+        break
+    }
+  }
+  //--------------------------------------------------------
+
+  //--------------------------------------------------------
+
+  //-- Права частина голови таблиці (кнопки дій/+,del,edit,exit,,,)
   const HeadRight = () => {
     return (
       <>
@@ -556,7 +569,8 @@ export default function Rtable({
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+            // onClick={() => exportToExcel()}
+            onClick={() => fAction("toExell")}
             title="Додати"
           >
             {/* Додати */}
@@ -698,6 +712,7 @@ export default function Rtable({
       </>
     )
   }
+
   //-------------------------------------------------
   return (
     //align-middle-текст по вертикалі посередині
@@ -952,7 +967,7 @@ export default function Rtable({
       {isTableMenuDroop && (
         <TableMenuDroop
           setIsTableMenuDroop={setIsTableMenuDroop}
-          setAction={setAction}
+          fAction={fAction}
           setPSeting={setPSeting}
           pSeting={pSeting}
           tableFontSize={tableFontSize}
@@ -970,7 +985,7 @@ export default function Rtable({
         style={{ "--sH": "calc(100vh - 200px)" }} //Створення style для h-
       >
         {/*border-collapse- обєднання границь ячейок "> */}
-        <table className=" w-full table-auto">
+        <table id="example" className=" w-full table-auto">
           <thead
             className={`${styleTableText} sticky top-0  border-b border-tabThBorder bg-tabThBg text-tabThText dark:border-tabThBorderD dark:bg-tabThBgD dark:text-tabThTextD`}
           >
@@ -1163,7 +1178,7 @@ export default function Rtable({
                     <td
                       id={row._nrow}
                       key={accessor}
-                      ///whitespace-nowrap-щоб текст у комірці таблиці не переносився
+                      //whitespace-nowrap-щоб текст у комірці таблиці не переносився
                       className={`${styleTableText} ${clasTextAlign} text-tabTrText dark:text-tabTrTextD  whitespace-nowrap`}
                     >
                       {tData}
