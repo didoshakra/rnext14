@@ -768,7 +768,7 @@ export default function Rtable({
         </button> */}
 
         {/* мобільного меню */}
-        {/* <button
+        <button
           className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
           title="меню"
@@ -787,10 +787,10 @@ export default function Rtable({
             <line x1="8" y1="18" x2="21" y2="18" /> <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
             <line x1="3" y1="12" x2="3.01" y2="12" /> <line x1="3" y1="18" x2="3.01" y2="18" />
           </svg>
-        </button> */}
+        </button>
 
         {/*відмова(помножити)  */}
-        {/* <button
+        <button
           className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={onCancel}
           title="Вийти"
@@ -807,7 +807,7 @@ export default function Rtable({
             {" "}
             <line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-        </button> */}
+        </button>
       </>
     )
   }
