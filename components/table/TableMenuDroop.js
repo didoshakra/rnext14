@@ -30,14 +30,6 @@ const TableMenuDroop = ({ setIsTableMenuDroop, fAction, setPSeting, pSeting, tab
   }, [ref_TableMenuDroop, setIsTableMenuDroop])
   //
 
-  const onAdd = () => {
-    console.log("TableMenuDroop.js/onAdd")
-  }
-  const closeDroop = () => {
-    setTableMenuDroopSeting(false)
-    setTableMenuDroopAction(false)
-  }
-
   return (
     <div
       ref={ref_TableMenuDroop}

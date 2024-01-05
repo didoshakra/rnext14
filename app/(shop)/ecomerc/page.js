@@ -6,7 +6,7 @@ export const metadata = {
   description: "Продукти харчування",
 }
 
-export default async function Home() {
+export default async function Home() { 
   const products = await getAllProducts()
   return (
     <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText dark:text-hTextD">

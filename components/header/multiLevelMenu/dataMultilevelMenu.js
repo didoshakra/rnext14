@@ -18,12 +18,12 @@ export const menuAdmin = [
           {
             id: 4,
             title: "Бренди",
-            // url: "/shop/references/d_brand",
+            url: "/shop/references/d_brand",
           },
           {
             id: 5,
             title: "Категорії товарів",
-            // url: "/shop/references/d_category",
+            url: "/shop/references/d_category",
           },
           {
             id: 6,
@@ -48,7 +48,7 @@ export const menuAdmin = [
         ],
       },
 
-    
+
     ],
   },
 ]

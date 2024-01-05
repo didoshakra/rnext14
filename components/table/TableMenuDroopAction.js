@@ -28,8 +28,8 @@ const TableMenuDroopAction = ({ fAction }) => {
   }, [ref_TableMenuDroopAction, setTableMenuDroopAction])
   //
 
-  const onAction = (action) => {
-    fAction(action)
+  const onAction = (e,action) => {
+    fAction(e,action)
     setTableMenuDroopAction(false)
   }
 
@@ -110,6 +110,63 @@ const TableMenuDroopAction = ({ fAction }) => {
           </svg>
           <p>Видалити</p>
         </div> */}
+        {/* експорт в Exell */}
+        <div
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+          title="експорт в Exel"
+          onClick={(e) => onAction(e,"toExell")}
+        >
+          {/* експорт */}
+          <svg
+            className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" /> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />{" "}
+            <polyline points="7 9 12 4 17 9" /> <line x1="12" y1="4" x2="12" y2="16" />
+          </svg>
+          <p>експорт в Exel</p>
+        </div>
+
+        {/*імпорт з Exel */}
+        <div
+          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+          title="імпорт з Exel"
+          //   onClick={(e) => onAction(e,"importExel")}
+        >
+          {/* імпорт*/}
+
+          <svg
+            className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" /> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />{" "}
+            <polyline points="7 11 12 16 17 11" /> <line x1="12" y1="4" x2="12" y2="16" />
+          </svg>
+          <p>імпорт з Exel</p>
+          <input
+            title="Імпорт з Exell"
+            type="file"
+            name="file"
+            onChange={(e) => fAction(e, "importExel")}
+            accept=".xlsx"
+          />
+        </div>
 
         {/* Друкувати */}
         <div
@@ -135,56 +192,6 @@ const TableMenuDroopAction = ({ fAction }) => {
             <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /> <rect x="7" y="13" width="10" height="8" rx="2" />
           </svg>
           <p>Друкувати</p>
-        </div>
-
-        {/* експорт в Exell */}
-        <div
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-          title="експорт в Exel"
-          onClick={() => onAction("toExell")}
-        >
-          {/* експорт */}
-          <svg
-            className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" /> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />{" "}
-            <polyline points="7 9 12 4 17 9" /> <line x1="12" y1="4" x2="12" y2="16" />
-          </svg>
-          <p>експорт в Exel</p>
-        </div>
-
-        {/*імпорт з Exel */}
-        <div
-          className="m-1 space-x-2 flex list-none flex-nowrap  items-center text-base font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
-          title="імпорт з Exel"
-          onClick={() => onAction("withExel")}
-        >
-          {/* імпорт*/}
-          <svg
-            className="h-6 w-6  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" /> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />{" "}
-            <polyline points="7 11 12 16 17 11" /> <line x1="12" y1="4" x2="12" y2="16" />
-          </svg>
-          <p>імпорт з Exel</p>
         </div>
       </>
     )

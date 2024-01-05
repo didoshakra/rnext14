@@ -52,7 +52,7 @@
 import { useState, useMemo, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import TableFooter from "./TableFooter"
-import useTable from "./useTable"
+import useTable from "./TablePageRows"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
 // import TableMenuDroop from "./TableMenuDroopSeting"
@@ -673,7 +673,7 @@ export default function Rtable({
         <div className="flex justify-end">
           <button
             className="relative h-6 w-6 flex mx-1 justify-between dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold bg-hBg text-hText  dark:bg-hBgD hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={()=>setIsDropMenuSeting(!isDropMenuSeting)}
+            onClick={() => setIsDropMenuSeting(!isDropMenuSeting)}
             title="Вийти"
           >
             {/* налаштування(шестерня) */}

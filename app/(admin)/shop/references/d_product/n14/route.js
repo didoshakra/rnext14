@@ -1,7 +1,7 @@
 //pages/api/d_product/select-all.js
 import { conn } from "@/config/dbConfig";
 import { NextResponse } from "next/server";
- 
+
 export async function GET() {
   //   console.log("app/api/shop/references/d_product/route.js");
   let data = [];

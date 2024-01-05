@@ -50,13 +50,13 @@
 // Якщо тип не вказаний, то він прирівнюється до (string)
 
 "use client"
-import { useState, useMemo, useCallback } from "react"
+import { useState, useMemo, useCallback, useRef } from "react"
 // import Image from "next/image"
 import { useRouter } from "next/navigation"
 import * as XLSX from "xlsx" //Екпорт в EXELL
 import { saveAs } from "file-saver" //Для запису файлів/Екпорт в EXELL
 import TableFooter from "./TableFooter"
-import useTable from "./useTable"
+import useTable from "./TablePageRows"
 import DropdownFilter from "./DropdownFilter"
 import TableMenuDroop from "./TableMenuDroop"
 // import TableMenuDroop from "./TableMenuDroopSeting"
@@ -94,6 +94,7 @@ export default function Rtable({
   const [beforSeachData, setBeforSeachData] = useState([]) //Зберігається БД перед пошуком (Для відкату пошуку)
   const [beforFilterData, setBeforFilterData] = useState([]) //Зберігається БД перед фільтруванням (Для відкату)
   const [filteredState, setFilteredState] = useState(0) //Стан фільтрування (0-незаповнений фільтр і не було фільтрування/ 1-заповнений фільтр, але не було фільтрування / 2- було фільтрування)
+  const dataJson = useRef([]) // для convertToJson з EXELL/зберігає до renderingy
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -488,7 +489,7 @@ export default function Rtable({
   //-- Підсумковий рядок /сум,середнє,max,min
   const applySum = () => {
     // console.log("FRtable.js/applySum/")
-    let tRow = {} //об'єкт
+    let tRowSum = {} //об'єкт
     const temp1 = initialСolumns.map((item) => {
       //   let tempSumRow = { ...sumRow }
       // console.log("RTable.js/applySum/ workData.map/accessor=", item.accessor + "/знач:", trow[item.accessor])
@@ -513,11 +514,11 @@ export default function Rtable({
           tSum = tSum / kZap
         }
         // console.log("RTable.js/applySum/accessor", item.accessor + "/tSum=", tSum)
-        tRow[item.accessor] = tSum //Додавання нової властивості до оь'якту
+        tRowSum[item.accessor] = tSum //Додавання нової властивості до оь'якту
       }
     })
-    // console.log("RTable.js/applySum/tRow=", tRow)
-    setSumRow(tRow)
+    // console.log("RTable.js/applySum/tRowSum=", tRowSum)
+    setSumRow(tRowSum)
   }
 
   //-- Вихід з форми
@@ -541,16 +542,114 @@ export default function Rtable({
     return data
   }
 
+  //***  Імпорт з EXELL в PostgreSQL ******************************** */
+  //--   Функція для перетворення даних файлу Excel у формат JSON
+  const convertToJson = async (headers, data) => {
+    // console.log("exell_eventfile_table.js/convertToJson/data=", data)
+    const rows = []
+    //forEach-цикл
+    data.forEach(async (row) => {
+      let rowData = {}
+      row.forEach(async (element, index) => {
+        rowData[headers[index]] = element
+      })
+      //   console.log("exell_eventfile_table.js/convertToJson/rowData=", rowData)
+      rows.push(rowData)
+    })
+
+    //
+    dataJson.current = rows //dataJson = useRef([])-бо useState не мінялось?
+    console.log("Rtable.js/convertToJson/dataJson.current=", dataJson.current)
+
+    // setDataJson(rows) //збереження даних\не зберігає до renderingy
+    // console.log("exell_eventfile_table.js/convertToJson/rows=", rows)
+    return rows
+  }
+  //-- Зчитування і перетворення з EXELL в формат Json/dataJson
+  const importExell = async (e) => {
+    const file = e.target.files[0] //для читання файлу.
+    const reader = new FileReader()
+    //імпорт з EXELL в файл fileData
+    reader.onload = async (event) => {
+      const bstr = event.target.result
+      const workBook = XLSX.read(bstr, { type: "binary" }) //читання файлу excel
+      const workSheetNane = workBook.SheetNames[0] //читання назви аркуша.
+      const workSheet = workBook.Sheets[workSheetNane]
+      const fileData = XLSX.utils.sheet_to_json(workSheet, { header: 1 }) //читання даних файлу.
+      const headers = fileData[0] //читання першого рядка як заголовка
+      //   const heads = headers.map((head) => ({ tittle: head, field: head }))
+      fileData.splice(0, 1)
+
+      //*** Перетворення в формат Json в dataJson
+      const jData = await convertToJson(headers, fileData)
+      //   console.log("RTable.js/handleImportExell/rr=", jData)
+
+      //*** Загрузка даних в PjstgreSQL
+      const insertZap = await insertDB(jData) //Загрузка даних в PjstgreSQL
+      //   console.log("RTable.js/handleImportExell/insertZap=", insertZap)
+    }
+    reader.readAsBinaryString(file)
+  }
+
+  //--- Загрузка даних в DB PostgreSQL/ В циклі .map по 1-му запису
+  const insertDB = async () => {
+    // console.log("d_product.js/insertDB//dataJson.current=", dataJson.current)
+
+    let insertZap = 0
+    try {
+      //Цикл по rowData(запис в БД (doc_check_products)
+      const addToDB = await dataJson.current.map((row, index) => {
+        console.log("RTab.js/insertDB/row=", row)
+        //
+        rowAdd(row) //Запис в БД(select)
+        //
+        insertZap = insertZap + 1
+      })
+    } finally {
+      //   console.log("d_product.js/insertDB/finally/insertRows.current=", insertRows.current)
+      await alert(`finally:Добавленo ${insertZap}`)
+      //   insertRows.current=0
+    }
+    return insertZap
+  }
+
+  //--- Добавалення(create) запису(запит)
+  const rowAdd = async (tRow) => {
+    console.log("/RTable/rowAdd/tRow=", tRow)
+    const url = "/api/shop/references/d_product" //працює
+    const options = {
+      method: "POST",
+      body: JSON.stringify(tRow), //Для запитів до серверів використовувати формат JSON
+      headers: {
+        "Content-Type": "application/json", //Вказує на тип контенту
+      },
+    }
+    const response = await fetch(url, options)
+    if (response.ok) {
+      // якщо HTTP-статус в диапазоне 200-299
+      const resRow = await response.json() //повертає тіло відповіді json
+      console.log(`Запис успішно добавленo`)
+      //   console.log("Product.js/rowAdd/try/esponse.ok/resRow=", resRow)
+      //   alert(`Запис успішно добавленo`)
+      return resRow
+    } else {
+      const err = await response.json() //повертає тіло відповіді json
+      //   alert(`Запис не добавлено! ${err.message} / ${err.stack}`)
+      console.log(`Product.js/rowAdd/try/else/\ Помилка при добавленні запису\ ${err.message} / ${err.stack} `)
+    }
+  }
+  //--------------------------------------------------
+
   //-- Дії типу/Export/Import/Друк,,,,
-  const fAction = (action) => {
+  const fAction = (e, action) => {
+    // console.log("RTable.js/fAction/e=", e)
     switch (action) {
       case "toExell":
-         saveAs(exportToExcel(workData), "workData" + ".xlsx")
+        saveAs(exportToExcel(workData), "workData" + ".xlsx")
         break
-      case "sumr":
-        console.log("RTable.js/onDropSeting/seting=sumr")
-        // setPSumRow(!pSumRow)
-        setPSumRow(false)
+      case "importExel":
+        // console.log("RTable.js/fAction/importExel/e=", e)
+        importExell(e)
         break
       default:
         break
@@ -1080,6 +1179,7 @@ export default function Rtable({
                       className="flex justify-center"
                       //   className={`${styleTableImg} flex justify-cente border border-3`}
                     >
+                      {/* Щоб використовувати Image з зовнішніми url Потрібно налаштовувати next.config на кожний сайт з якого тягнуться картинки */}
                       {/* <Image
                         id={row._nrow}
                         alt="image"
@@ -1134,33 +1234,12 @@ export default function Rtable({
                       </div>
                     ) : type === "img" ? (
                       tImg
-                    ) : type === "date" && row[accessor] != undefined ? (
-                      row[accessor].substring(0, 10)
+                    // ) : type === "date" && row[accessor] != null && row[accessor] != undefined ? (
+                    //     // row[accessor].substring(0, 10)
+                    //     row[accessor]
                     ) : (
                       row[accessor]
                     )
-                  //   const tData = accessor === "index" ? rowIndex : nData
-                  //   const tData = nData
-                  //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
-
-                  //   const clasTextAlign =
-                  //     align == "right"
-                  //       ? "text-right"
-                  //       : align == "center"
-                  //       ? "text-center"
-                  //       : align == "left"
-                  //       ? "text-left"
-                  //       : type == "number"
-                  //       ? "text-right"
-                  //       : type == "date"
-                  //       ? "text-center"
-                  //       : "text-left"
-                  //   const clasTextAlign =
-                  //     align == "right" || type == "number"
-                  //       ? "text-right"
-                  //       : align == "center" || type == "date" || type == "boolean" || type == "img"
-                  //       ? "text-center"
-                  //       : "text-left"
                   const clasTextAlign =
                     align == "right"
                       ? "text-right"

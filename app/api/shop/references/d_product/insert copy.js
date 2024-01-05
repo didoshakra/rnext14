@@ -1,4 +1,3 @@
-//https://nextjs.org/docs/pages/building-your-application/routing/api-routes
 //api/d_product/insert.js
 
 // import { pool } from "@/config/dbConfig"
