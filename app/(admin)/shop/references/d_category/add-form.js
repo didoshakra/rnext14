@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-dom"
 import { useFormStatus } from "react-dom"
-import { createTodo } from "./actions"
+import { insertBrand } from "./actionsactions"
 
 const initialState = {
   message: "",
@@ -19,7 +19,7 @@ function SubmitButton() {
 }
 
 export function AddForm() {
-  const [state, formAction] = useFormState(createTodo, initialState)
+  const [state, formAction] = useFormState(insertBrand, initialState)
 
   return (
     <form action={formAction}>

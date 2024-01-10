@@ -1,64 +1,26 @@
-'use server'
+//d_brand/action.js //https://github.com/porsager/postgres?tab=readme-ov-file#connection-details
 
-import { revalidatePath } from 'next/cache'
-import postgres from 'postgres'
-import { z } from 'zod'
+"use server"
 
-let sql = postgres(process.env.DATABASE_URL , {
-  ssl: 'allow',
-})
+import { sql } from "@/config/dbConfig"
+import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
-// СТВОРИТИ ТАБЛИЦЮ todos (
-// id SERIAL PRIMARY KEY,
-// текст TEXT NOT NULL
-// );
-
-export async function createTodo({message,formData}){
-  const schema = z.object({
-    todo: z.string().min(1),
-  })
-  const parse = schema.safeParse({
-    todo: formData.get('todo'),
-  })
-
-  if (!parse.success) {
-    return { message: 'Failed to create todo' }
+//передаєм параметр formData, а там реструктурезуємо в
+export async function addBrand(formData) {
+//   console.log("formData=", formData)
+  const data = {
+    name: formData.get("name"),
   }
-
-  const data = parse.data
 
   try {
-    await sql`
-      INSERT INTO todos (text)
-      VALUES (${data.todo})
-    `
+    const brands = await sql`INSERT INTO d_brand (name) VALUES (${data.name}) RETURNING name`
 
-    revalidatePath('/')
-    return { message: `Added todo ${data.todo}` }
+    //    return brands
+    // return { message: `Added todo ${data.name}` }
   } catch (e) {
-    return { message: 'Failed to create todo' }
+    // return { message: "Failed to create todo" }
   }
-}
-
-export async function deleteTodo({message,ormData}) {
-  const schema = z.object({
-    id: z.string().min(1),
-    todo: z.string().min(1),
-  })
-  const data = schema.parse({
-    id: formData.get('id'),
-    todo: formData.get('todo'),
-  })
-
-  try {
-    await sql`
-      DELETE FROM todos
-      WHERE id = ${data.id};
-    `
-
-    revalidatePath('/')
-    return { message: `Deleted todo ${data.todo}` }
-  } catch (e) {
-    return { message: 'Failed to delete todo' }
-  }
+   revalidatePath("/shop/references/d_brand") //revalidate-повторно перевірити
+   redirect(`/shop/references/d_brand`)
 }

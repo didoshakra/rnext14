@@ -2,13 +2,14 @@
 
 import { useFormState } from "react-dom"
 import { useFormStatus } from "react-dom"
-import { createTodo } from "@/app/actions"
+// import { createTodo } from "@/app/actions"
 
 const initialState = {
   message: "",
 }
 
 function SubmitButton() {
+  // pending- в очікуванні
   const { pending } = useFormStatus()
 
   return (
@@ -19,15 +20,16 @@ function SubmitButton() {
 }
 
 export function AddForm() {
-  const [state, formAction] = useFormState(createTodo, initialState)
+//   const [state, formAction] = useFormState(createTodo, initialState)
 
   return (
-    <form action={formAction}>
-      <label htmlFor="todo">Enter Task</label>
+    // <form action={formAction}>
+    <form >
+      <label htmlFor="todo">Введіть завдання</label>
       <input type="text" id="todo" name="todo" required />
       <SubmitButton />
       <p aria-live="polite" className="sr-only" role="status">
-        {state?.message}
+        {/* {state?.message} */}
       </p>
     </form>
   )

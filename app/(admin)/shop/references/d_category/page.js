@@ -1,5 +1,4 @@
-import postgres from "postgres"
-//d_category
+//d_cateory
 import { sql } from "@/config/dbConfig"
 
 // import { AddForm } from './add-form'

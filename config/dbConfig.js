@@ -14,15 +14,15 @@ export let sql = postgres({
 })
 
 //  pg(npm) //Старе/Підключення до PosgreSQL//https://www.simplenextjs.com/posts/next-postgresql
-// import { Pool } from "pg"
-// export let conn
-// if (!conn) {
-//   conn = new Pool({
-//     user: process.env.PGSQL_USER,
-//     password: process.env.PGSQL_PASSWORD,
-//     host: process.env.PGSQL_HOST,
-//     port: process.env.PGSQL_PORT,
-//     database: process.env.PGSQL_DATABASE,
-//     ssl: "allow", //дозволяють/Secure Sockets Layer — рівень захищених сокетів- криптографічний протокол, який забезпечує встановлення безпечного з'єднання між клієнтом і сервером
-//   })
-// }
+import { Pool } from "pg"
+export let conn
+if (!conn) {
+  conn = new Pool({
+    user: process.env.PGSQL_USER,
+    password: process.env.PGSQL_PASSWORD,
+    host: process.env.PGSQL_HOST,
+    port: process.env.PGSQL_PORT,
+    database: process.env.PGSQL_DATABASE,
+    // ssl: "allow", //дозволяють/Secure Sockets Layer — рівень захищених сокетів- криптографічний протокол, який забезпечує встановлення безпечного з'єднання між клієнтом і сервером
+  })
+}

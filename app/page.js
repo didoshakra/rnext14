@@ -3,6 +3,8 @@
 import StHomePage from "@/components/mstan/StHomePage";
 import OurProducts from "@/app/(shop)/product/OurProducts";
 import Promotion from "@/app/(shop)/product/Promotion";
+// import { AddForm } from "@/app/(admin)/shop/references/d_brand/add-form"
+import { AddForm } from "@/app/add-form"
 
 export default function Home() {
   return (
@@ -12,5 +14,5 @@ export default function Home() {
       <OurProducts />
       <Promotion />
     </main>
-  );
+  )
 }

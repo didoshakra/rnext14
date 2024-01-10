@@ -32,7 +32,7 @@ export default function DropdownFilter({
   }
 
   return (
-    <div
+    <div 
       style={{ "--sW": "calc(100vw - 10px)" }} //
       className="absolute left-0 mx-1 z-10 max-w-[--sW] rounded-lg border border-fBorder bg-fBg dark:border-fBorderD dark:bg-fBgD md:left-auto w-full md:w-[40%] p-2"
     >

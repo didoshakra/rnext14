@@ -7,20 +7,6 @@ export default async function DProducts() {
   let resData =
     await sql`SELECT d_product.id,d_product.name,category_id,price,brand_id,img,ov_id,skod,uktzed,pdv,akcuz,is_discount,date_create,COALESCE(to_char(date_create, 'YYYY-MM-DD'), '') AS datecreate,d_category.name AS category,d_brand.name AS brand,d_ov.name AS ov FROM d_product JOIN d_category ON d_category.id = d_product.category_id   JOIN d_brand ON d_brand.id = d_product.brand_id JOIN d_ov ON d_ov.kod = d_product.ov_id  ORDER BY id`
 
-  //   let resData = []
-  //   const query =
-  //     // "COALESCE(to_char(date_create, 'MM-DD-YYYY'), '') AS datecreate,"-перетворення date в to_char
-  //     "SELECT d_product.id,d_product.name,category_id,price,brand_id,img,ov_id,skod,uktzed,pdv,akcuz,is_discount,date_create,COALESCE(to_char(date_create, 'YYYY-MM-DD'), '') AS datecreate,d_category.name AS category,d_brand.name AS brand,d_ov.name AS ov FROM d_product JOIN d_category ON d_category.id = d_product.category_id   JOIN d_brand ON d_brand.id = d_product.brand_id JOIN d_ov ON d_ov.kod = d_product.ov_id  ORDER BY id LIMIT 20"
-  //   //   const query = "select * from d_product ORDER BY id DESC LIMIT 100";
-
-  //   try {
-  //     const result = await conn.query(query) // conn.query-команда виконнання запиту(.query)
-  //     console.log("getDataAll/result=", result.rows)
-  //     resData = result.rows
-  //   } catch (error) {
-  //     data = "DProducts/Помилка запиту! 1.query =" + query + " 2.Помилка:" + error
-  //   }
-
   // Колонки, що показуються
   const columns = [
     // {
@@ -132,7 +118,7 @@ export default async function DProducts() {
         <RTable
           initialData={resData}
           initialСolumns={columns}
-          title={"DProducts"}
+          p_title={"DProducts"}
           p_selected={true} //Вибрати всі+ інвормація про к-сть вибраних рядків
           p_fonts={true} //чи треба зміні фонтів(величина шрифтів)(true/false)
           p_filtered={true} //чи треба Фільтр по всіх полях-не обов'язково(true/false)
