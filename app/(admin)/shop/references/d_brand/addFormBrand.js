@@ -3,15 +3,9 @@ const fields = [
   { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
   { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
   { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
-  { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
-  { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
-  { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
-  { name: "fullName", label: "Full Name", placeholder: "Enter Full name" },
   { name: "username", placeholder: "Enter Username" },
   /** We can ue zod to validate that our value is of type email */
   { name: "email", label: "Почта", placeholder: "Enter email", type: "email" },
-  { name: "email", placeholder: "Enter email", type: "email" },
-  { name: "email", placeholder: "Enter email", type: "email" },
   { name: "email", placeholder: "Enter email", type: "email" },
   { name: "password", placeholder: "Enter password", type: "password" },
 ]

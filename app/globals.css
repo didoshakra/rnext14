@@ -24,6 +24,7 @@
 @layer base {
   html {
     /* Slate 80-900*/
+
     --color-pCol: #ffffff;
     --color-pCol0: #f8fafc;
     --color-pCol1: #f1f5f9;

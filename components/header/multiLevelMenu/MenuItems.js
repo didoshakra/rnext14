@@ -102,7 +102,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
                   strokeWidth="2"
                   stroke="currentColor"
                   fill="none"
-                  strokeWinecap="round"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                 >
                   {" "}

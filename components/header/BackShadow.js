@@ -3,7 +3,7 @@
 export default function BackShadow({ setDrawerOpen }) {
   return (
     <div
-      className="bg-bodyeclipseBg fixed inset-0 z-20"
+      className="bg-eclipseBg fixed inset-0 z-20"
       aria-hidden="true"
       onClick={(e) => setDrawerOpen(false)}
     ></div>

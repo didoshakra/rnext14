@@ -101,7 +101,7 @@ const TableFooter = ({
           title="Попередня"
         >
           {/* Стрілка вліво */}
-          <svg
+          {/* <svg
             className="mr-2 h-5 w-5"
             aria_hidden="true"
             xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +115,20 @@ const TableFooter = ({
               strokeWidth="2"
               d="M13 5H1m0 0 4 4M1 5l4-4"
             />
+          </svg> */}
+          <svg
+            class="h-5 w-5"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="15 6 9 12 15 18" />
           </svg>
           {/* Previous */}
         </p>
@@ -158,7 +172,7 @@ const TableFooter = ({
           title="Наступна"
         >
           {/* Next /Стрілка вправо */}
-          <svg
+          {/* <svg
             className="ml-2 h-5 w-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
@@ -172,6 +186,20 @@ const TableFooter = ({
               strokeWidth="2"
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
+          </svg> */}
+          <svg
+            class="h-5 w-5"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" /> <polyline points="9 6 15 12 9 18" />
           </svg>
         </p>
       </div>

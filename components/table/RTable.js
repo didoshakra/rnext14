@@ -70,6 +70,8 @@ export default function Rtable({
   p_filtered, //чи треба Фільтр по всіх полях-не обов'язково(true/false)
   p_sumRow, //чи треба Підсумковий рядок(true/false)
   p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
+  //
+  setIsAddForm,//Для відкриття форми додавання
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
@@ -97,6 +99,8 @@ export default function Rtable({
   const [beforFilterData, setBeforFilterData] = useState([]) //Зберігається БД перед фільтруванням (Для відкату)
   const [filteredState, setFilteredState] = useState(0) //Стан фільтрування (0-незаповнений фільтр і не було фільтрування/ 1-заповнений фільтр, але не було фільтрування / 2- було фільтрування)
   const dataJson = useRef([]) // для convertToJson з EXELL/зберігає до renderingy
+  //** Сторінки */ //https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
+  const [page, setPage] = useState(1) //Номер текучої сторінки
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -142,6 +146,7 @@ export default function Rtable({
 
   //== Підготовка робочої структури workData */   //https://habr.com/ru/companies/otus/articles/696610/
   const preparedData = useMemo(() => {
+    console.log("FRtable.js/preparedData= useMemo")
     // console.log("FRtable.js/preparedData/initialData=/", initialData)
     // const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
@@ -164,6 +169,7 @@ export default function Rtable({
 
   //== Підготовка масиву фільтрів по полях (filterData) */
   const preparedFilterData = useMemo(() => {
+    console.log("FRtable.js/preparedFilterData = useMemo/")
     // console.log("FRtable.js/preparedFilterData = useMemo/")
     let resData = [] //масив об'єктів
     let nR = -1
@@ -188,18 +194,13 @@ export default function Rtable({
     // return resData
   }, [initialСolumns]) //Змінюється тільки при зміні 2-го аргумента
 
-  //   const [filterData, setFilterData] = useState(preparedFilterData) //Фільтер для всіх полів
-
-  //** Сторінки */ //https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
-  const [page, setPage] = useState(1) //Номер текучої сторінки
-  //slice: кусок масиву рядків (сторінка/відфільтроване і...)
-  //range: к-сть сторінок:
-  const { slice, range } = TablePageRows(workData, page, rowsPerPage) //
-  //   console.log("RTable/slice=", slice);
+  //--- Формування масиву рядків текучої сторінки: slice, range: к-сть сторінок у всій БД
+  //--- workData-БД, page-№ текучої сторінки, rowsPerPage-к-сть рядків на сторінці
+  const { slice, range } = TablePageRows(workData, page, rowsPerPage) //Формування сторінок
 
   //==*п Сортування */
   const handleSorting = (sortField, sortOrder) => {
-    // console.log("FRtable.js/handleSorting/")
+    console.log("FRtable.js/handleSorting/")
     //--- Для встановлення початкового сортування
     if (sortOrder === "default") {
       sortOrder = "asc"
@@ -674,9 +675,9 @@ export default function Rtable({
         {selectedRows.length === 0 && (
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            className="relative p-1 flex mx-1 justify-end dark:text-hTextD   align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             // onClick={() => exportToExcel()}
-            onClick={() => fAction("toExell")}
+            onClick={() => setIsAddForm(true)}
             title="Додати"
           >
             {/* Додати */}
@@ -697,12 +698,13 @@ export default function Rtable({
             </svg>
           </button>
         )}
-
+        
+        {/* Якщо вибрано тільки один запис */}
         {selectedRows.length === 1 && (
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+            className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            onClick={() => setIsAddForm(true)}
             title="меню"
           >
             {/* Редагувати */}
@@ -722,10 +724,12 @@ export default function Rtable({
             </svg>
           </button>
         )}
+
+        {/* Якщо вибрано хоч один запис */}
         {selectedRows.length > 0 && (
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+            className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
             title="меню"
           >
@@ -752,7 +756,7 @@ export default function Rtable({
 
         {/* налаштування(шестерня) */}
         {/* <button
-          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+           className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={() => setIsMenuSetingDrop(!isMenuSetingDrop)}
           title="Вийти"
         >
@@ -776,7 +780,7 @@ export default function Rtable({
 
         {/* мобільного меню */}
         <button
-          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
           title="меню"
         >
@@ -798,7 +802,7 @@ export default function Rtable({
 
         {/*відмова(помножити)  */}
         <button
-          className="relative p-1 flex mx-1 justify-end dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
+          className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
           onClick={onCancel}
           title="Вийти"
         >

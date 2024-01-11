@@ -7,10 +7,11 @@ import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 
 //передаєм параметр formData, а там реструктурезуємо в
-export async function addBrand(formData) {
-//   console.log("formData=", formData)
+export async function addBrand(inData) {
+  //   console.log("inData=", inData)
   const data = {
-    name: formData.get("name"),
+    // name: inData.get("name"),//якщо прийшло formData
+    name: inData.name, //якщо прийшов об'єкт з перевірки
   }
 
   try {
@@ -21,6 +22,6 @@ export async function addBrand(formData) {
   } catch (e) {
     // return { message: "Failed to create todo" }
   }
-   revalidatePath("/shop/references/d_brand") //revalidate-повторно перевірити
-   redirect(`/shop/references/d_brand`)
+  revalidatePath("/shop/references/d_brand") //revalidate-повторно перевірити
+  redirect(`/shop/references/d_brand`)
 }

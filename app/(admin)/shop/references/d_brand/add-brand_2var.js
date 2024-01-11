@@ -1,4 +1,5 @@
-//https://codereviewvideos.com/nextjs-14-crud-forms-example/#Postgres_Database_Connectivity_From_NextJS
+//Кожне поле описується окремо
+//2-а варіанти стилю(простий бордюр і materialUI) // https://flowbite.com/docs/components/forms/
 
 "use client"
 // import { useFormState } from "react-dom"//Для повідомлення клієнту про перевірку полів на сервері
@@ -27,7 +28,7 @@ function SubmitButton() {
   )
 }
 
-export function AddBrand() {
+export function AddBrand({ setIsAddForm }) {
   //-- Вихід з форми
   const onCancel = () => {
     //якщо не довідник
@@ -36,8 +37,10 @@ export function AddBrand() {
     // // if (!isDovidnuk) router.back() //повернутись
     // else setDovActive("")
   }
+
   return (
-    <div className="bg-bodyeclipseBg absolute inset-0 z-20 mx-2 max-w-full">
+    //Затемнення екрану
+    <div className="bg-eclipseBg absolute inset-0 z-20 mx-2 max-w-full">
       <form
         className="absolute left-0 bottom-1 z-10  rounded-xl border border-fBorder bg-fBg1 dark:border-fBorderD dark:bg-fBg1D md:left-auto  p-2  mx-auto"
         action={addBrand}
@@ -66,12 +69,14 @@ export function AddBrand() {
             </svg>
           </button>
           {/*  */}
+
           <SubmitButton />
 
           {/*відмова(помножити)  */}
           <button
+            type="button"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={onCancel}
+            onClick={() => setIsAddForm(false)}
             title="Вийти"
           >
             <svg
@@ -89,7 +94,7 @@ export function AddBrand() {
           </button>
         </div>
         <div className="flex flex-wrap">
-          {/* <h1 className="text-xl mb-2 text-center">Бренд / марка товару</h1> */}
+          {/* В1-простий бардюр */}
           <label>Name:</label>
           <input
             name="name"
@@ -97,8 +102,24 @@ export function AddBrand() {
             required
             className=" block w-full  items-center rounded border border-fBorder bg-fInputBg p-1  align-middle leading-tight  text-fText dark:border-fBorderD dark:bg-fInputBgD dark:text-fTextD"
           />
-          {/* <SubmitButton /> */}
-          {/* <button type="submit">Додати запис</button> */}
+          {/* В2-типу materialUI */}
+          {/* <div class="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+            />
+            <label
+              for="name"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Name:
+            </label>
+          </div> */}
+          {/*  */}
         </div>
       </form>
     </div>
