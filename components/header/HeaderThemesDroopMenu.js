@@ -195,7 +195,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
               <svg
                 // className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHovD"
                 className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHovD"
-                // class="h-8 w-8 text-red-500"
+                // className="h-8 w-8 text-red-500"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -212,7 +212,7 @@ const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
               </svg>
               {/* іконка фарби */}
               {/* <svg
-                class="h-8 w-8 text-red-500"
+                className="h-8 w-8 text-red-500"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"

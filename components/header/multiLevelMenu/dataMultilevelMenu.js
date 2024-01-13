@@ -28,7 +28,7 @@ export const menuAdmin = [
           {
             id: 6,
             title: "Клієнти",
-            // url: "/shop/references/d_client",
+            url: "/shop/references/d_client",
           },
           {
             id: 7,
@@ -43,7 +43,7 @@ export const menuAdmin = [
           {
             id: 9,
             title: "Користувачі",
-            // url: "/shop/references/d_user",
+            url: "/shop/references/d_user",
           },
         ],
       },

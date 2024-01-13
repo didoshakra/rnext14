@@ -1,26 +1,26 @@
 //========================================================			====================
-// <div class="central wraper"
+// <div className="central wraper"
 // <rz-top-page-baner
 // <div style="order:1"
-// <rz-header class="app-header" //шапка
+// <rz-header className="app-header" //шапка
 //*********************************************** */
 //Rozetka-структура
-// <rz-super-portal  class="ng-star-inserted"//все нижче шапки
-//  <div class="central-wreaper"
-//      <main class="layout"
-//          <section class="content" //весь контент нижче шапки
-//              <rz-breadcrumbs class="ng-star-inserted"
-//                  <ul class="breadcrumbs ng-star-inserted" // 1-й рядок /одяг,взуття та аксесуари
-//              <div class="ng-star-inserted" //2-й рядок Fashion
+// <rz-super-portal  className="ng-star-inserted"//все нижче шапки
+//  <div className="central-wreaper"
+//      <main className="layout"
+//          <section className="content" //весь контент нижче шапки
+//              <rz-breadcrumbs className="ng-star-inserted"
+//                  <ul className="breadcrumbs ng-star-inserted" // 1-й рядок /одяг,взуття та аксесуари
+//              <div className="ng-star-inserted" //2-й рядок Fashion
 //                  <h1 portal_heading >Fashion</h1>
-//              <div class="ng-star-inserted" //Рещта контенту до footer
-//                  <rz-dynamic-widgets class="ng-star-inserted"
-//                      <rz-widget-tabs class="ng-star-inserted"//1-й рядок меню(Жінкам Чоловікам ...)
-//                      <rz-widget-tabs class="ng-star-inserted"//2-й рядок меню(одяг ...)
-//                      <rz-widget-slider class="ng-star-inserted"//2-й рядок меню(одяг ...)
-//                          <section class="portal-section" //слайдер+ популярні категорії
-//                              <div class="top-widget__slider"
-//                              <div class="top-widget__categories"
+//              <div className="ng-star-inserted" //Рещта контенту до footer
+//                  <rz-dynamic-widgets className="ng-star-inserted"
+//                      <rz-widget-tabs className="ng-star-inserted"//1-й рядок меню(Жінкам Чоловікам ...)
+//                      <rz-widget-tabs className="ng-star-inserted"//2-й рядок меню(одяг ...)
+//                      <rz-widget-slider className="ng-star-inserted"//2-й рядок меню(одяг ...)
+//                          <section className="portal-section" //слайдер+ популярні категорії
+//                              <div className="top-widget__slider"
+//                              <div className="top-widget__categories"
 //                      <rz-widget-image //жінкам...
 //                          <section
 //                      <rz-widget-image //Актуально...
@@ -34,5 +34,5 @@
 //                      <rz-widget-image //Дитячий одяг...
 //                          <section
 //****************************************************** */
-// <rz-lazy  class="app-footer"//
+// <rz-lazy  className="app-footer"//
 //============================================================================

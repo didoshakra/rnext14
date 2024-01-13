@@ -1,10 +1,6 @@
 //d_brand/page.js
-// "use client"
-// import { useState } from "react"
-import { revalidatePath } from "next/cache"
 import { sql } from "@/config/dbConfig"
 import RTable from "@/components/table/RTable"
-// import { AddBrand } from "./add-brand"
 
 
 export default async function DBrand() {

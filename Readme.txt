@@ -179,6 +179,9 @@ import tailwindConfig from "@/tailwind.config"; //отримання змінн�
   //https://github.com/vercel/next.js/tree/canary/examples/next-forms  \\Home.js
 
 //-- 20240105 // ПРи роботі з PostgreSQL замість pg(npm) почав використовувати postgres(npm) https://github.com/porsager/postgres?tab=readme-ov-file#connection-details
-    - переробив рядок пвдключення в 
+    - переробив рядок пвдключення в
+
+//--- 202401010 //Доробив форми вводу даних
+//--- 20240112 /Rtable- добавив щоб вікмітка багатьох записів буда тільки Ctrl+ЛКМ
 
 

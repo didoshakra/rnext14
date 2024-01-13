@@ -7,21 +7,21 @@ import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 
 //передаєм параметр formData, а там реструктурезуємо в
-export async function addBrand(inData) {
-  //   console.log("inData=", inData)
-  const data = {
-    // name: inData.get("name"),//якщо прийшло formData
-    name: inData.name, //якщо прийшов об'єкт з перевірки
-  }
+export async function addBrand({ message, formData }) {
+  console.log("formData=", formData)
+//   const data = formData //З перевіркою через onSubmit (без <form  action={addClient}....)
+  //   для formData // Без перевірки прямо з <form  action={addClient}....
+    const data = {
+      name: formData.get("name"), //якщо прийшло з formData
+    }
 
   try {
-    const brands = await sql`INSERT INTO d_brand (name) VALUES (${data.name}) RETURNING name`
+    await sql`INSERT INTO d_brand (name) VALUES (${data.name}) RETURNING name`
 
-    //    return brands
-    // return { message: `Added todo ${data.name}` }
+    revalidatePath("/shop/references/d_brand") //revalidate-повторно перевірити
+    return { message: `Доданоно: ${data.id}` }
   } catch (e) {
-    // return { message: "Failed to create todo" }
+    return { message: "Не вдалося виконити завдання" }
   }
-  revalidatePath("/shop/references/d_brand") //revalidate-повторно перевірити
-  redirect(`/shop/references/d_brand`)
+  //   redirect(`/shop/references/d_brand`)
 }

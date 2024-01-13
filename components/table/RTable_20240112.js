@@ -72,8 +72,6 @@ export default function Rtable({
   p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
   //
   setIsAddForm, //Для відкриття форми додавання
-//   setUpdateData,//дані для
-  fDelete, //Ф-ція для видалення записів(прийлає масив rows БД)
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
@@ -90,7 +88,7 @@ export default function Rtable({
   const [workData, setWorkData] = useState([]) //РОбоча таьлиця
   const [filterData, setFilterData] = useState([]) //Фільтер для всіх полів
   const [sumRow, setSumRow] = useState({}) //Підсумковий рядок(дані)
-  const [selectedRows, setSelectedRows] = useState([]) //Вибрані рядки(дані{1,2,...})
+  const [selectedRows, setSelectedRows] = useState([]) //Пибрані рядки(дані{1,2,...})
   const [selectedAllRows, setSelectedAllRows] = useState(false) //Чи була подія вибрані всі
   const [sortField, setSortField] = useState("") //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc") //Сортування в яку сторону(верх/вниз)
@@ -148,7 +146,7 @@ export default function Rtable({
 
   //== Підготовка робочої структури workData */   //https://habr.com/ru/companies/otus/articles/696610/
   const preparedData = useMemo(() => {
-    // console.log("FRtable.js/preparedData= useMemo")
+    console.log("FRtable.js/preparedData= useMemo")
     // console.log("FRtable.js/preparedData/initialData=/", initialData)
     // const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
@@ -171,7 +169,7 @@ export default function Rtable({
 
   //== Підготовка масиву фільтрів по полях (filterData) */
   const preparedFilterData = useMemo(() => {
-    // console.log("FRtable.js/preparedFilterData = useMemo/")
+    console.log("FRtable.js/preparedFilterData = useMemo/")
     // console.log("FRtable.js/preparedFilterData = useMemo/")
     let resData = [] //масив об'єктів
     let nR = -1
@@ -202,7 +200,7 @@ export default function Rtable({
 
   //==*п Сортування */
   const handleSorting = (sortField, sortOrder) => {
-    // console.log("FRtable./js/handleSorting/")
+    console.log("FRtable.js/handleSorting/")
     //--- Для встановлення початкового сортування
     if (sortOrder === "default") {
       sortOrder = "asc"
@@ -277,17 +275,16 @@ export default function Rtable({
 
   //== Вибір/Selected / Записуємо селект(true/false) в _selected роточого масиву(workData) */
   const selectRows = (e) => {
-    // if (selectedRows.length > 0) return //Якщо виділена хоч одна запис
     // if (e.altKey && e.shiftKey&&e.ctrlKey) {
-    // if (e.ctrlKey) {
-    //   alert("RTable/selectRows/ctrlKey")
-    // }
+    if (e.ctrlKey) {
+      alert("RTable/selectRows/ctrlKey")
+    }
     // console.log("FRtable.js/selectRows/")
     const nRow = Number(e.target.id) //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
     //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
     let copyArray = ([] = [...selectedRows]) //Копія робочого масиву обєктів
 
-    // //Скидаємо виділення з усіх, якщо було загальне виділення
+    //Скидаємо виділення з усіх, якщо було загальне виділення
     if (selectedAllRows) {
       onSelectAll()
       copyArray = [] //скидаємо масив
@@ -295,12 +292,8 @@ export default function Rtable({
 
     //шукаємо в масиві
     const selectIndex = copyArray.findIndex((item) => item === nRow) //індекс нашого масиву це id HTML DOM елемента (в нашому випадку:id={_nrow})
-    // console.log("RTable.js.js/selectRows/selectedRows.length=", selectedRows.length)
-    // console.log("RTable.js.js/selectRows/selectedRows=", selectedRows)
     // console.log("RTable.js.js/selectRows/selectIndex=", selectIndex);
     if (selectIndex === -1) {
-      //Якщо виділена хоч одна запис
-      if (selectedRows.length > 0 && !e.ctrlKey) return //Якщо виділена хоч одна запис
       copyArray.push(nRow) //якщо нема то додаємо в масив
       //   console.log("RTable.js.js/addSelecrToRbTable/nRow=", nRow);
     } else copyArray.splice(selectIndex, 1) //Якщо вже є в масиві то видаляємо(знімаємо виділення)
@@ -583,7 +576,7 @@ export default function Rtable({
 
     //
     dataJson.current = rows //dataJson = useRef([])-бо useState не мінялось?
-    // console.log("Rtable.js/convertToJson/dataJson.current=", dataJson.current)
+    console.log("Rtable.js/convertToJson/dataJson.current=", dataJson.current)
 
     // setDataJson(rows) //збереження даних\не зберігає до renderingy
     // console.log("exell_eventfile_table.js/convertToJson/rows=", rows)
@@ -623,7 +616,7 @@ export default function Rtable({
     try {
       //Цикл по rowData(запис в БД (doc_check_products)
       const addToDB = await dataJson.current.map((row, index) => {
-        // console.log("RTab.js/insertDB/row=", row)
+        console.log("RTab.js/insertDB/row=", row)
         //
         rowAdd(row) //Запис в БД(select)
         //
@@ -639,7 +632,7 @@ export default function Rtable({
 
   //--- Добавалення(create) запису(запит)
   const rowAdd = async (tRow) => {
-    // console.log("/RTable/rowAdd/tRow=", tRow)
+    console.log("/RTable/rowAdd/tRow=", tRow)
     const url = "/api/shop/references/d_product" //працює
     const options = {
       method: "POST",
@@ -652,14 +645,14 @@ export default function Rtable({
     if (response.ok) {
       // якщо HTTP-статус в диапазоне 200-299
       const resRow = await response.json() //повертає тіло відповіді json
-    //   console.log(`Запис успішно добавленo`)
+      console.log(`Запис успішно добавленo`)
       //   console.log("Product.js/rowAdd/try/esponse.ok/resRow=", resRow)
       //   alert(`Запис успішно добавленo`)
       return resRow
     } else {
       const err = await response.json() //повертає тіло відповіді json
       //   alert(`Запис не добавлено! ${err.message} / ${err.stack}`)
-    //   console.log(`Product.js/rowAdd/try/else/\ Помилка при добавленні запису\ ${err.message} / ${err.stack} `)
+      console.log(`Product.js/rowAdd/try/else/\ Помилка при добавленні запису\ ${err.message} / ${err.stack} `)
     }
   }
   //--------------------------------------------------
@@ -680,20 +673,7 @@ export default function Rtable({
     }
   }
   //--------------------------------------------------------
-  const onDelete = () => {
-    // console.log("RTable.js/onDelete/e=")
-    let selRow = {}
-    let selRows = []
-    const temp = workData.map((item) => {
-      if (item._selected) {
-        selRow["id"] = item.id
-        selRow["_nRow"] = item._nrow
-        selRows.push(selRow)
-      } //Додаємо в масив
-    })
-    // console.log("FRtable.js/onDelete/selRows=", selRows)
-      fDelete(selRows)
-  }
+
   //--------------------------------------------------------
 
   //-- Права частина голови таблиці (кнопки дій/+,del,edit,exit,,,)
@@ -734,7 +714,7 @@ export default function Rtable({
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             onClick={() => setIsAddForm(true)}
-            title="Редагувати"
+            title="меню"
           >
             {/* Редагувати */}
             <svg
@@ -759,8 +739,8 @@ export default function Rtable({
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => onDelete()}
-            title="Видалити"
+            onClick={() => setIsTableMenuDroop(!isTableMenuDroop)}
+            title="меню"
           >
             {/* Видалити */}
             <svg

@@ -68,7 +68,8 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
     <li
       key={domId}
       id={domId}
-      className="duration-300 ease-in-out text-base w-full border border-2 border-l-pink-600"
+    //   className="duration-300 ease-in-out text-base w-full border border-2 border-l-pink-600"
+      className="duration-300 ease-in-out text-base w-full "
       //   className="relative bg-orange-300 text-base text-${depthLevel}"
       //   className="text-${depthLevel} relative text-base"
       ref={ref}

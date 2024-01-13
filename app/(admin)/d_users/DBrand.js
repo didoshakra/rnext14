@@ -3,7 +3,7 @@
 "use client"
 import { useState } from "react"
 import RTable from "@/components/table/RTable"
-import { AddBrandForm } from "./add-brandForm"
+import { AddUsersForm } from "./add-usersForm"
 
 export default function DBrand({ resData }) {
   const [isAddForm, setIsAddForm] = useState(false) //РОбоча таьлиця
@@ -16,8 +16,26 @@ export default function DBrand({ resData }) {
       sortable: false,
     },
     {
-      label: "Назва",
+      label: "Ім'я",
       accessor: "name",
+      sortable: true,
+      filtered: true,
+    },
+    {
+      label: "Прізвище",
+      accessor: "last_name",
+      sortable: true,
+      filtered: true,
+    },
+    {
+      label: "Пароль",
+      accessor: "password",
+      sortable: true,
+      filtered: true,
+    },
+    {
+      label: "Профіль",
+      accessor: "profile",
       sortable: true,
       filtered: true,
     },
@@ -29,7 +47,7 @@ export default function DBrand({ resData }) {
       <RTable
         initialData={resData}
         initialСolumns={columns}
-        p_title={"DBrands"}
+        p_title={"DUsers"}
         p_selected={true} //Вибрати всі+ інвормація про к-сть вибраних рядків
         p_fonts={true} //чи треба зміні фонтів(величина шрифтів)(true/false)
         p_filtered={true} //чи треба Фільтр по всіх полях-не обов'язково(true/false)
@@ -38,7 +56,7 @@ export default function DBrand({ resData }) {
         //
         setIsAddForm={setIsAddForm}
       />
-      {isAddForm && <AddBrandForm setIsAddForm={setIsAddForm} />}
+      {isAddForm && <AddUsersForm setIsAddForm={setIsAddForm} />}
     </main>
   )
 }

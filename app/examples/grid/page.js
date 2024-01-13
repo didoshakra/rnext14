@@ -22,7 +22,7 @@ export default function Grid() {
           container m-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3
         </h1>
         <div className="container m-auto text-white grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-          {/* <div class="tile bg-teal-500"> */}
+          {/* <div className="tile bg-teal-500"> */}
           <div className="text-center bg-teal-500">ONE</div>
           <div className="text-center bg-amber-500">TWO</div>
           <div className="text-center bg-yellow-500">THREE</div>
@@ -43,7 +43,7 @@ export default function Grid() {
           Загальний:grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3
         </h1>
         <div className="container m-auto text-white grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-          {/* <div class="tile bg-teal-500"> */}
+          {/* <div className="tile bg-teal-500"> */}
           <div className="text-center bg-teal-500 col-span-2 md:col-span-4 lg:col-span-8">
             +++ (на весь екран) (ONE)
             <span className="text-orange-100"> col-span-2 md:col-span-4 lg:col-span-8</span>
@@ -78,7 +78,7 @@ export default function Grid() {
           Загальний:grid grid-cols-2 grid-rows-5 md:grid-cols-4 lg:grid-cols-8 gap-3
         </h1>
         <div className="container m-auto text-white grid grid-cols-2 grid-rows-5 md:grid-cols-4 lg:grid-cols-8 gap-3">
-          {/* <div class="tile bg-teal-500"> */}
+          {/* <div className="tile bg-teal-500"> */}
           <div className="text-center bg-teal-500 col-span-2 md:col-span-4 lg:col-span-8">
             +++ (на весь екран) (ONE)
             <span className="text-orange-100"> col-span-2 md:col-span-4 lg:col-span-8</span>
