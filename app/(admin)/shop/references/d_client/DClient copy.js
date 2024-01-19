@@ -3,20 +3,16 @@
 "use client"
 import { useState } from "react"
 import RTable from "@/components/table/RTable"
-import { FormAddClient } from "./form_addClient"
-import { FormDeleteClient } from "./form-deleteClient"
+import { AddClientForm } from "./form_addClient"
 import handler from "@/app/api/shop/references/d_client/delete"
 import { deleteClient } from "./actions_pg"
 
 export default function DClient({ resData }) {
-  const [isFormAdd, setIsFormAdd] = useState(false) //Форма додавання запису
-  const [isFormDelete, setIsFormDelete] = useState(false) //Форма додавання запису
+  const [isAddForm, setIsAddForm] = useState(false) //Форма додавання запису
   const [updateData, setUpdateData] = useState([]) //Рядки з БД для(видалення/коигування)
 
   //--- Вилучення записів(запит)
   const fDelete = async (rows) => {
-    setIsFormDelete(true)
-    //
     // console.log("+++++f2-flex-table-psql.js/App/onDelete/rowDelete/rows=", rows);
     const url = "/api/shop/references/d_client/delete" //працює
     const options = {
@@ -105,13 +101,11 @@ export default function DClient({ resData }) {
         p_sumRow={true} //Підсумковий рядок(true/false)
         p_searchAllRows={true} //чи треба пошук по всіх полях-не обов'язково(true/false)
         //
-        setUpdateData={setUpdateData} //Шнформація для зміни в форма
-        setIsFormAdd={setIsFormAdd}
-        setIsFormDelete={setIsFormDelete}
-        // fDelete={fDelete}
+        setIsAddForm={setIsAddForm}
+        fDelete={fDelete}
+        // setUpdateData={setUpdateData}
       />
-      {isFormAdd && <FormAddClient setIsFormAdd={setIsFormAdd} />}
-      {isFormDelete && <FormDeleteClient updateData={updateData} setIsFormDelete={setIsFormDelete} />}
+      {isAddForm && <AddClientForm setIsAddForm={setIsAddForm} />}
     </main>
   )
 }

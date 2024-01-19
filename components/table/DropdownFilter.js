@@ -32,9 +32,9 @@ export default function DropdownFilter({
   }
 
   return (
-    <div 
+    <div
       style={{ "--sW": "calc(100vw - 10px)" }} //
-      className="absolute left-0 mx-1 z-10 max-w-[--sW] rounded-lg border border-fBorder bg-fBg dark:border-fBorderD dark:bg-fBgD md:left-auto w-full md:w-[40%] p-2"
+      className="absolute left-0 mx-1 z-10 max-w-[--sW] rounded-lg drop-shadow-md border border-fBorder bg-fBg dark:border-fBorderD dark:bg-fBgD md:left-auto w-full md:w-[40%] p-2"
     >
       <div className="mt-1 px-1 w-full overflow-auto">
         <div className="h-7 flex justify-between items-center mb-2">

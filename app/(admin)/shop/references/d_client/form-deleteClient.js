@@ -2,11 +2,10 @@
 //2-а варіанти стилю(простий бордюр і materialUI) // https://flowbite.com/docs/components/forms/
 
 "use client"
-import { useFormState } from "react-dom"//Для повідомлення клієнту про перевірку полів на сервері
+import { useFormState } from "react-dom" //Для повідомлення клієнту про перевірку полів на сервері
 import { useFormStatus } from "react-dom" //для визначення стану очікування Form
-import { styleInputBoot, styleInputMaterial, styleLabelMaterial } from "@/styles/tw_styles"
-import { addBrand } from "./actions"
-import { useForm } from "react-hook-form"
+// import { deleteClient } from "./actions"//(postgres)
+import { deleteClient } from "./actions_pg"//(pg)
 
 function SubmitButton() {
   const status = useFormStatus()
@@ -17,7 +16,7 @@ function SubmitButton() {
       disabled={status.pending} //Якщо запит в очікуванні, то кнопка відключена
     >
       {status.pending && <p>Ваша форма очікує на розгляд...</p>}
-      {!status.pending && <p>Надіслати/надіслано</p>}
+      {!status.pending && <p>Видалити/надіслано</p>}
     </button>
   )
 }
@@ -26,30 +25,15 @@ const initialState = {
   message: "До відправки",
 }
 
-export function AddBrandForm({ setIsAddForm, toFormData = { name: "" } }) {
-    const [state, formAction] = useFormState(addBrand, initialState)
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm({ defaultValues: toFormData })
-
-//   const onSubmit = (data) => {
-//     // addBrand(data)
-//     addBrand(formAction)
-//   }
+export function FormDeleteClient({ setIsFormDelete, updateData }) {
+  const [state, formAction] = useFormState(deleteClient, initialState)
 
   return (
     //Затемнення екрану
     <div className="bg-eclipseBg absolute inset-0 z-20 mx-2 max-w-full">
       <form
-        // onSubmit={handleSubmit(onSubmit)}//з перевіркою і без useFormState/на виході date
-        onSubmit={handleSubmit(formAction)} //з перевіркою і з useFormState/на виході date
         className="absolute left-0 bottom-1 z-10  rounded-xl border border-fBorder bg-fBg1 dark:border-fBorderD dark:bg-fBg1D md:left-auto  p-2  mx-auto"
-        // action={addBrand} //без перевірки і з useFormState/на виході formDate
-        // action={addClient}  //без перевірки і без useFormState/на виході formDate
+        action={formAction} //без перевірки і з useFormState/на виході formDate
       >
         <div className="flex justify-between mb-2">
           <button
@@ -83,7 +67,7 @@ export function AddBrandForm({ setIsAddForm, toFormData = { name: "" } }) {
           <button
             type="button"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsAddForm(false)}
+            onClick={() => setIsFormDelete(false)}
             title="Вийти"
           >
             <svg
@@ -100,37 +84,15 @@ export function AddBrandForm({ setIsAddForm, toFormData = { name: "" } }) {
             </svg>
           </button>
         </div>
-        <div className="flex flex-wrap">
-          {/* Стиль <input> типу bootstrap */}
-          {/* <div className="grid w-full">
-            <label className="text-sm">Назва бренду товару</label>
-            <input
-              className={`${styleInputBoot}`}
-              {...register("name", { minLength: 3, maxLength: 30 })}
-              required
-              placeholder="Введіть назву бренду"
-            />
-            <p className="text-errorMsg font-bold">{errors.name?.type === "maxLength" && "Назва >30симв."}</p>
-            <p className="text-errorMsg font-bold">{errors.name?.type === "minLength" && "Назва <3симв."}</p>
-          </div> */}
-          {/* В2-типу materialUI */}
-          <div className="relative z-0 w-full my-2 group">
-            <input
-              className={`${styleInputMaterial}`}
-              {...register("name", { minLength: 3, maxLength: 30 })}
-              placeholder=" "
-              required
-            />
-            <label htmlFor="name" className={`${styleLabelMaterial}`}>
-              Name:
-            </label>
-            <p className="text-errorMsg font-bold">{errors.name?.type === "maxLength" && "Назва >30симв."}</p>
-            <p className="text-errorMsg font-bold">{errors.name?.type === "minLength" && "Назва <3симв."}</p>
-          </div>
-          {/*  */}
-          {/* <p aria-live="polite" className="sr-only"> */}
-          <p className="text-infoMsg text-xs font-sans">{state?.message}</p>
-        </div>
+
+        {/* Тіло форми */}
+        <input type="hidden" name="ids" value={updateData} />
+        {/* <input type="hidden" name="todo" value={todo} /> */}
+        {/* <DeleteButton /> */}
+        {/* <p aria-live="polite" className="sr-only" role="status">
+          {state?.message}
+        </p> */}
+        <p className="text-infoMsg text-xs font-sans">{state?.message}</p>
       </form>
     </div>
   )

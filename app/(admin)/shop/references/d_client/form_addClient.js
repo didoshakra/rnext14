@@ -2,13 +2,12 @@
 //2-а варіанти стилю(простий бордюр і materialUI) // https://flowbite.com/docs/components/forms/
 
 "use client"
-// import { useFormState } from "react-dom"//Для повідомлення клієнту про перевірку полів на сервері
+import { useFormState } from "react-dom" //Для повідомлення клієнту про перевірку полів на сервері
 import { useFormStatus } from "react-dom" //для визначення стану очікування Form
 import { styleInputBoot, styleInputMaterial, styleLabelMaterial } from "@/styles/tw_styles"
-import { addClient } from "./actions"
+// import { addClient } from "./actions"
+import { addClient } from "./actions_pg"
 import { useForm } from "react-hook-form"
-
-
 
 function SubmitButton() {
   const status = useFormStatus()
@@ -24,10 +23,15 @@ function SubmitButton() {
   )
 }
 
-export function AddClientForm({
-  setIsAddForm,
+const initialState = {
+  message: "До відправки",
+}
+
+export function FormAddClient({
+  setIsFormAdd,
   toFormData = { name: "", last_name: "", email: "", skod: "", discount_proc: "" },
 }) {
+  const [state, formAction] = useFormState(addClient, initialState)
   const {
     reset,
     register,
@@ -36,18 +40,20 @@ export function AddClientForm({
     setValue,
   } = useForm({ defaultValues: toFormData })
 
-  const onSubmit = (data) => {
-    console.log("add-clientForm.js/onSubmit/data=", data)
-    addClient(data)
-  }
+  //   const onSubmit = (data) => {
+  //     console.log("add-clientForm.js/onSubmit/data=", data)
+  //     // addClient(data)
+  //   }
 
   return (
     //Затемнення екрану
     <div className="bg-eclipseBg absolute inset-0 z-20 mx-2 max-w-full">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        // onSubmit={handleSubmit(onSubmit)}//з перевіркою і без useFormState/на виході date
+        onSubmit={handleSubmit(formAction)} //з перевіркою і з useFormState/на виході date
         className="absolute left-0 bottom-1 z-10  rounded-xl border border-fBorder bg-fBg1 dark:border-fBorderD dark:bg-fBg1D md:left-auto  p-2  mx-auto"
-        // action={addClient}
+        // action={formAction} //без перевірки і з useFormState/на виході formDate
+        // action={addClient}  //без перевірки і без useFormState/на виході formDate
       >
         <div className="flex justify-between mb-2">
           <button
@@ -81,7 +87,7 @@ export function AddClientForm({
           <button
             type="button"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsAddForm(false)}
+            onClick={() => setIsFormAdd(false)}
             title="Вийти"
           >
             <svg
@@ -140,14 +146,11 @@ export function AddClientForm({
               placeholder=" "
               required
             />
-            <label
-              htmlFor="last_name"
-              className={`${styleLabelMaterial}`}
-            >
+            <label htmlFor="last_name" className={`${styleLabelMaterial}`}>
               Прізвище:
             </label>
-            <p className="text-errorMsg font-bold">{errors.name?.type === "maxLength" && "Прізвище >30симв."}</p>
-            <p className="text-errorMsg font-bold">{errors.name?.type === "minLength" && "Прізвище <3симв."}</p>
+            <p className="text-errorMsg font-bold">{errors.last_name?.type === "maxLength" && "Прізвище >30симв."}</p>
+            <p className="text-errorMsg font-bold">{errors.last_name?.type === "minLength" && "Прізвище <3симв."}</p>
           </div>
           {/*  */}
 
@@ -166,10 +169,7 @@ export function AddClientForm({
               placeholder=" "
             />
 
-            <label
-              htmlFor="email"
-              className={`${styleLabelMaterial}`}
-            >
+            <label htmlFor="email" className={`${styleLabelMaterial}`}>
               email:
             </label>
             <p className="text-errorMsg font-bold">{errors.email?.type === "pattern" && "Не формат email"}</p>
@@ -178,13 +178,10 @@ export function AddClientForm({
           {/* В2-типу materialUI */}
           <div className="mx-1 relative z-0  my-2 group">
             <input className={`${styleInputMaterial}`} {...register("skod", { maxLength: 14 })} placeholder=" " />
-            <label
-              htmlFor="skod"
-              className={`${styleLabelMaterial}`}
-            >
+            <label htmlFor="skod" className={`${styleLabelMaterial}`}>
               ШКод:
             </label>
-            <p className="text-errorMsg font-bold">{errors.name?.type === "maxLength" && "Назва >14симв."}</p>
+            <p className="text-errorMsg font-bold">{errors.skod?.type === "maxLength" && "Назва >14симв."}</p>
           </div>
 
           {/* В2-типу materialUI */}
@@ -200,10 +197,7 @@ export function AddClientForm({
               })}
               placeholder=" "
             />
-            <label
-              htmlFor="discount_proc"
-              className={`${styleLabelMaterial}`}
-            >
+            <label htmlFor="discount_proc" className={`${styleLabelMaterial}`}>
               Знижка(%):
             </label>
             <p className="text-errorMsg font-bold">{errors.discount_proc?.type === "pattern" && "Не: .XX"}</p>
@@ -211,6 +205,7 @@ export function AddClientForm({
           </div>
           {/*  */}
         </div>
+        <p className="text-infoMsg text-xs font-sans">{state?.message}</p>
       </form>
     </div>
   )

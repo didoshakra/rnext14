@@ -33,8 +33,8 @@ module.exports = {
         //0-- Загальні
         bodyBg: "var(--color-pCol0)",
         bodyBgD: "#334155", // --color-pCol7: #334155;
-        infoMsg: "#13ff11",
-        infoMsgD: "#13ff11",
+        infoMsg: "#8c92f8",
+        infoMsgD: "#8c92f8",
         errorMsg: "#f21e08",
         errorMsgD: "#f21e08",
         eclipseBg: "rgba(36, 12, 12, 0.3)", //Затемнення екрану

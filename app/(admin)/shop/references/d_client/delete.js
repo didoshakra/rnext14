@@ -1,9 +1,9 @@
 //pages/api/references/d_client/delete.js
 
-// import { pool } from "@/config/dbShopOld"
+import { pool } from "../../../../../config/dbShop"
+
 
 export default function handler(req, resp) {
-  console.log("api/d_client/delete/")
   const rowsid = JSON.parse(req.body) //Для запитів до серверів використовувати формат JSON
   const sql = `DELETE FROM d_client WHERE id IN (${rowsid})`
 

@@ -71,9 +71,10 @@ export default function Rtable({
   p_sumRow, //чи треба Підсумковий рядок(true/false)
   p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
   //
-  setIsAddForm, //Для відкриття форми додавання
-//   setUpdateData,//дані для
-  fDelete, //Ф-ція для видалення записів(прийлає масив rows БД)
+  setIsFormAdd, //Для відкриття форми додавання
+  setIsFormDelete,
+  setUpdateData, //дані для
+//   fDelete, //Ф-ція для видалення записів(прийлає масив rows БД)
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
@@ -300,7 +301,7 @@ export default function Rtable({
     // console.log("RTable.js.js/selectRows/selectIndex=", selectIndex);
     if (selectIndex === -1) {
       //Якщо виділена хоч одна запис
-      if (selectedRows.length > 0 && !e.ctrlKey) return //Якщо виділена хоч одна запис
+      //   if (selectedRows.length > 0 && !e.ctrlKey) return //Якщо виділена хоч одна запис
       copyArray.push(nRow) //якщо нема то додаємо в масив
       //   console.log("RTable.js.js/addSelecrToRbTable/nRow=", nRow);
     } else copyArray.splice(selectIndex, 1) //Якщо вже є в масиві то видаляємо(знімаємо виділення)
@@ -652,14 +653,14 @@ export default function Rtable({
     if (response.ok) {
       // якщо HTTP-статус в диапазоне 200-299
       const resRow = await response.json() //повертає тіло відповіді json
-    //   console.log(`Запис успішно добавленo`)
+      //   console.log(`Запис успішно добавленo`)
       //   console.log("Product.js/rowAdd/try/esponse.ok/resRow=", resRow)
       //   alert(`Запис успішно добавленo`)
       return resRow
     } else {
       const err = await response.json() //повертає тіло відповіді json
       //   alert(`Запис не добавлено! ${err.message} / ${err.stack}`)
-    //   console.log(`Product.js/rowAdd/try/else/\ Помилка при добавленні запису\ ${err.message} / ${err.stack} `)
+      //   console.log(`Product.js/rowAdd/try/else/\ Помилка при добавленні запису\ ${err.message} / ${err.stack} `)
     }
   }
   //--------------------------------------------------
@@ -682,17 +683,20 @@ export default function Rtable({
   //--------------------------------------------------------
   const onDelete = () => {
     // console.log("RTable.js/onDelete/e=")
-    let selRow = {}
+    // let selRow = {}
     let selRows = []
+    // let selRows = {}
     const temp = workData.map((item) => {
       if (item._selected) {
-        selRow["id"] = item.id
-        selRow["_nRow"] = item._nrow
-        selRows.push(selRow)
+        // selRow["id"] = item.id
+        // selRow["_nRow"] = item._nrow
+        selRows.push(item.id)
       } //Додаємо в масив
     })
-    // console.log("FRtable.js/onDelete/selRows=", selRows)
-      fDelete(selRows)
+    console.log("FRtable.js/onDelete/selRows=", selRows)
+    // fDelete(selRows)//ф-ція
+    setUpdateData(selRows) //дані для зміни форми
+    setIsFormDelete(true)
   }
   //--------------------------------------------------------
 
@@ -706,7 +710,7 @@ export default function Rtable({
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             // onClick={() => exportToExcel()}
-            onClick={() => setIsAddForm(true)}
+            onClick={() => setIsFormAdd(true)}
             title="Додати"
           >
             {/* Додати */}
@@ -733,7 +737,7 @@ export default function Rtable({
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsAddForm(true)}
+            onClick={() => setIsFormAdd(true)}
             title="Редагувати"
           >
             {/* Редагувати */}
