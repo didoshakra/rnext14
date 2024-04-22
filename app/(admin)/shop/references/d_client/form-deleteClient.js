@@ -5,7 +5,7 @@
 import { useFormState } from "react-dom" //Для повідомлення клієнту про перевірку полів на сервері
 import { useFormStatus } from "react-dom" //для визначення стану очікування Form
 // import { deleteClient } from "./actions"//(postgres)
-import { deleteClient } from "./actions_pg"//(pg)
+import { deleteClient } from "./actions_pgrrr" //(pg)
 
 function SubmitButton() {
   const status = useFormStatus()

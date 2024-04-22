@@ -5,7 +5,7 @@ import { useState } from "react"
 import RTable from "@/components/table/RTable"
 import { AddClientForm } from "./form_addClient"
 import handler from "@/app/api/shop/references/d_client/delete"
-import { deleteClient } from "./actions_pg"
+import { deleteClient } from "./actions_pgrrr"
 
 export default function DClient({ resData }) {
   const [isAddForm, setIsAddForm] = useState(false) //Форма додавання запису

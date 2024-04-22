@@ -6,104 +6,69 @@
 import { conn } from "@/config/dbConfig"
 import { revalidatePath } from "next/cache"
 
-// //передаєм параметр formData, а там реструктурезуємо в
-// export async function addClient(message, formData) {
-//   //   console.log("message=", message)
-//   //   console.log("action_pg/formData=", formData)
-//   const data1 = formData
-//   console.log("action_pg/data1=", data1)
-//   //   для formData // Без перевірки прямо з <form  action={addClient}....
-//   // const data = {
-//   //   name: formData.get("name"), //якщо прийшло formData
-//   //   last_name: formData.get("last_name"), //якщо прийшло formData
-//   //   email: formData.get("email"), //якщо прийшло formData
-//   //   skod: formData.get("skod"), //якщо прийшло formData
-//   //   discount_proc: formData.get("discount_proc"), //якщо прийшло formData
-//   // }
-//   // const name = formData["name"] //якщо прийшло formData
-//   //  const  last_name= formData["last_name"] //якщо прийшло formData
-//   //  const   email= formData.email //якщо прийшло formData
-//   const skod = formData.skod //якщо прийшло formData
-//   const discount_proc = formData.discount_proc //якщо прийшло formData
-//   //   }
-//   //
-//   //(postgresg)
-//   //   await sql`insert into d_client(name,last_name,email,skod,discount_proc) VALUES(${data.name},${data.last_name},${data.email},${data.skod},${data.discount_proc}) RETURNING *`
-
-//   //   const sql = `insert into d_client(name,last_name,email,skod,discount_proc) VALUES(${data.name},${data.last_name},${data.email},${data.skod},${data.discount_proc}) RETURNING *`
-//   // const sql = "insert into d_client(skod) VALUES(${data.skod}) RETURNING *"
-//   // const sql = "insert into d_client(skod) VALUES(${skod}) RETURNING *"
-//   // onst sql =
-//   //   const skod = "22222"
-//   //   const discount_proc = "15"
-//     const name1 = "11111"
-//   //   const sql = `insert into d_client(skod,discount_proc) VALUES(${skod},${discount_proc}) RETURNING *`
-//   const sql = `insert into d_client(skod,discount_proc,name) VALUES(${data1.skod},${data1.discount_proc},${data1.name}) RETURNING *`
-//   //(pg)
-//   //   try {
-//   conn.query(sql, (err, result) => {
-//     if (err) {
-//       console.log("**** d_client/action.js/insert/err/Помилка запиту до posgreSQL", err.stack)
-//       let error = {
-//         stack: err.stack,
-//         message: "Помилка запиту до БД posgreSQL",
-//       }
-//       return "Помилка виконання запиту до БД", error
-//     } else {
-//       //   console.log(`try1/Доданоно: ${result.name} ${result.last_name} ...`)
-//       console.log(`**** try1/Доданоно:  ...`)
-//       // revalidatePath("/shop/references/d_client") //revalidate-повторно перевірити
-//       // return { message: `Доданоно: ${result.name} ${result.last_name} ... ` }
-//       return { message: `+++Доданоно:  ` }
-//     }
-//   })
-//   //
-//   console.log(`*** try2/Доданоно1: `)
-//   revalidatePath("/shop/references/d_client") //revalidate-повторно перевірити
-//   // return { message: `Доданоно: ${data.name} ${data.last_name} ... ` }
-//   //   } catch (e) {
-//   //     console.log(`catch2/Не вдалося виконити завдання`)
-//   //     return { message: "Не вдалося виконити завдання" }
-//   //   }
-// }
-////////////////
 //передаєм параметр formData, а там реструктурезуємо в
 export async function addClient(message, formData) {
-  const data = formData
+  //   console.log("message=", message)
+  //   console.log("action_pg/formData=", formData)
+  const data1 = formData
+  console.log("action_pg/data1=", data1)
+  //   для formData // Без перевірки прямо з <form  action={addClient}....
   // const data = {
   //   name: formData.get("name"), //якщо прийшло formData
   //   last_name: formData.get("last_name"), //якщо прийшло formData
-  //}
-  const sql = "insert into d_client(name,last_name,email,skod,discount_proc) VALUES($1,$2,$3,$4,$5) RETURNING *"
-  const sqlvalues = [data.name, data.last_name, data.email, data.skod, data.discount_proc]
-//   try {
-    //--- pool(promise)
-    conn.connect().then((client) => {
-      return (
-        client
-          .query(sql, sqlvalues) // your query string here
-          //   .query(sql) // your query string here
-          .then((result) => {
-            // client.release() //звільнення
-            // resp.status(200).json(result.rows[0])
-              return {message: result.rows[0]}
-          }) // your callback here
-          .catch((err) => {
-            // client.release() //звільнення
-            console.log(err.stack) // your callback here
-            // resp.status(500).json({ message: err.message })
-          })
-      )
-    })
-    revalidatePath("/shop/references/d_client") //revalidate-повторно перевірити
-    // console.log("*********** result:", result)
-    return { message: `Добпвлено запис:` }
-    // return { message: "Добпвлено запис:" + resp.rows[0] }
-//   } catch (e) {
-//     console.log(`catch2/Не вдалося виконити завдання`)
-//     return { message: "Не вдалося виконити завдання: " + e }
-//   }
+  //   email: formData.get("email"), //якщо прийшло formData
+  //   skod: formData.get("skod"), //якщо прийшло formData
+  //   discount_proc: formData.get("discount_proc"), //якщо прийшло formData
+  // }
+  // const name = formData["name"] //якщо прийшло formData
+  //  const  last_name= formData["last_name"] //якщо прийшло formData
+  //  const   email= formData.email //якщо прийшло formData
+  const skod = formData.skod //якщо прийшло formData
+  const discount_proc = formData.discount_proc //якщо прийшло formData
+  //   }
+  //
+  //(postgresg)
+  //   await sql`insert into d_client(name,last_name,email,skod,discount_proc) VALUES(${data.name},${data.last_name},${data.email},${data.skod},${data.discount_proc}) RETURNING *`
+
+  //   const sql = `insert into d_client(name,last_name,email,skod,discount_proc) VALUES(${data.name},${data.last_name},${data.email},${data.skod},${data.discount_proc}) RETURNING *`
+  // const sql = "insert into d_client(skod) VALUES(${data.skod}) RETURNING *"
+  // const sql = "insert into d_client(skod) VALUES(${skod}) RETURNING *"
+  // onst sql =
+  //   const skod = "22222"
+  //   const discount_proc = "15"
+    const name1 = "11111"
+  //   const sql = `insert into d_client(skod,discount_proc) VALUES(${skod},${discount_proc}) RETURNING *`
+  const sql = `insert into d_client(skod,discount_proc,name) VALUES(${data1.skod},${data1.discount_proc},${data1.name}) RETURNING *`
+  //(pg)
+  //   try {
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.log("**** d_client/action.js/insert/err/Помилка запиту до posgreSQL", err.stack)
+      let error = {
+        stack: err.stack,
+        message: "Помилка запиту до БД posgreSQL",
+      }
+      return "Помилка виконання запиту до БД", error
+    } else {
+      //   console.log(`try1/Доданоно: ${result.name} ${result.last_name} ...`)
+      console.log(`**** try1/Доданоно:  ...`)
+      // revalidatePath("/shop/references/d_client") //revalidate-повторно перевірити
+      // return { message: `Доданоно: ${result.name} ${result.last_name} ... ` }
+      return { message: `+++Доданоно:  ` }
+    }
+  })
+  //
+  console.log(`*** try2/Доданоно1: `)
+  revalidatePath("/shop/references/d_client") //revalidate-повторно перевірити
+  // return { message: `Доданоно: ${data.name} ${data.last_name} ... ` }
+  //   } catch (e) {
+  //     console.log(`catch2/Не вдалося виконити завдання`)
+  //     return { message: "Не вдалося виконити завдання" }
+  //   }
 }
+
+
+
 
 //**************************************************** */
 export async function deleteClient(message, formData, resp) {
