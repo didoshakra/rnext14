@@ -20,11 +20,11 @@ export const menuAdmin = [
             title: "Бренди",
             url: "/shop/references/d_brand",
           },
-        //   {
-        //     id: 5,
-        //     title: "Категорії товарів",
-        //     url: "/shop/references/d_category",
-        //   },
+          {
+            id: 5,
+            title: "Категорії товарів",
+            url: "/shop/references/d_category",
+          },
           {
             id: 6,
             title: "Клієнти",
