@@ -39,7 +39,7 @@ export async function addClient(message, formData) {
     const name1 = "11111"
   //   const sql = `insert into d_client(skod,discount_proc) VALUES(${skod},${discount_proc}) RETURNING *`
   const sql = `insert into d_client(skod,discount_proc,name) VALUES(${data1.skod},${data1.discount_proc},${data1.name}) RETURNING *`
-  //(pg)
+  //(pg) 
   //   try {
   conn.query(sql, (err, result) => {
     if (err) {

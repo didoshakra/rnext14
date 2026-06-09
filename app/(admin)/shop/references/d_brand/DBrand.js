@@ -3,10 +3,15 @@
 "use client"
 import { useState } from "react"
 import RTable from "@/components/table/RTable"
-import { AddBrandForm } from "./add-brandForm"
+import { FormAddBrand } from "./FormAddBrand"
+import { FormDeleteBrand } from "./FormDeleteBrand"
 
 export default function DBrand({ resData }) {
-  const [isAddForm, setIsAddForm] = useState(false) //РОбоча таьлиця
+  const [isFormAdd, setIsFormAdd] = useState(false) //Форма додавання запису
+  const [isFormEdit, setIsFormEdit] = useState(false) //Форма коригування запису
+  const [isFormDelete, setIsFormDelete] = useState(false) //Форма вилучення записів
+  const [deleteData, setDeleteData] = useState([]) //Масив id записів для вилучення(1,5,8)
+  const [editData, setEditData] = useState({}) //Об'єкт даних рядка для коригування
 
   // Колонки, що показуються
   const columns = [
@@ -36,9 +41,14 @@ export default function DBrand({ resData }) {
         p_sumRow={true} //Підсумковий рядок(true/false)
         p_searchAllRows={true} //чи треба пошук по всіх полях-не обов'язково(true/false)
         //
-        setIsAddForm={setIsAddForm}
+        setDeleteData={setDeleteData}
+        setEditData={setEditData}
+        setIsFormAdd={setIsFormAdd}
+        setIsFormEdit={setIsFormEdit}
+        setIsFormDelete={setIsFormDelete}
       />
-      {isAddForm && <AddBrandForm setIsAddForm={setIsAddForm} />}
+      {isFormAdd && <FormAddBrand setIsFormAdd={setIsFormAdd} isFormEdit={isFormEdit} toFormData={editData} />}
+      {isFormDelete && <FormDeleteBrand deleteData={deleteData} setIsFormDelete={setIsFormDelete} />}
     </main>
   )
 }

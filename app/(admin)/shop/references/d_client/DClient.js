@@ -11,7 +11,7 @@ import { deleteClient } from "./actions_pgrrr"
 export default function DClient({ resData }) {
   const [isFormAdd, setIsFormAdd] = useState(false) //Форма додавання запису
   const [isFormDelete, setIsFormDelete] = useState(false) //Форма додавання запису
-  const [updateData, setUpdateData] = useState([]) //Рядки з БД для(видалення/коигування)
+  const [deleteData, setDeleteData] = useState([]) //Рядки з БД для(видалення/коигування)
 
   //--- Вилучення записів(запит)
   const fDelete = async (rows) => {
@@ -105,13 +105,13 @@ export default function DClient({ resData }) {
         p_sumRow={true} //Підсумковий рядок(true/false)
         p_searchAllRows={true} //чи треба пошук по всіх полях-не обов'язково(true/false)
         //
-        setUpdateData={setUpdateData} //Шнформація для зміни в форма
+        setDeleteData={setDeleteData} //Шнформація для зміни в форма
         setIsFormAdd={setIsFormAdd}
         setIsFormDelete={setIsFormDelete}
         // fDelete={fDelete}
       />
       {isFormAdd && <FormAddClient setIsFormAdd={setIsFormAdd} />}
-      {isFormDelete && <FormDeleteClient updateData={updateData} setIsFormDelete={setIsFormDelete} />}
+      {isFormDelete && <FormDeleteClient deleteData={deleteData} setIsFormDelete={setIsFormDelete} />}
     </main>
   )
 }

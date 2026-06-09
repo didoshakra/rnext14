@@ -4,8 +4,8 @@
 "use client"
 import { useFormState } from "react-dom" //Для повідомлення клієнту про перевірку полів на сервері
 import { useFormStatus } from "react-dom" //для визначення стану очікування Form
-// import { deleteClient } from "./actions"//(postgres)
-import { deleteClient } from "./actions_pgrrr" //(pg)
+import { deleteClient } from "./actions" //(postgres)
+// import { deleteClient } from "./actions_pgrrr" //(pg)
 
 function SubmitButton() {
   const status = useFormStatus()
@@ -25,7 +25,7 @@ const initialState = {
   message: "До відправки",
 }
 
-export function FormDeleteClient({ setIsFormDelete, updateData }) {
+export function FormDeleteClient({ setIsFormDelete, deleteData }) {
   const [state, formAction] = useFormState(deleteClient, initialState)
 
   return (
@@ -86,12 +86,7 @@ export function FormDeleteClient({ setIsFormDelete, updateData }) {
         </div>
 
         {/* Тіло форми */}
-        <input type="hidden" name="ids" value={updateData} />
-        {/* <input type="hidden" name="todo" value={todo} /> */}
-        {/* <DeleteButton /> */}
-        {/* <p aria-live="polite" className="sr-only" role="status">
-          {state?.message}
-        </p> */}
+        <input type="hidden" name="ids" value={deleteData} />
         <p className="text-infoMsg text-xs font-sans">{state?.message}</p>
       </form>
     </div>

@@ -3,5 +3,5 @@
 export const changeTheme = (theme) => {
     // console.log("changeTheme/theme=", theme);
     // console.log("changeTheme/document.querySelector(html)?.=", document.querySelector("html"));
-  document.querySelector("html")?.setAttribute("data-theme", theme);
+  document.querySelector("html")?.setAttribute("data-theme", theme); 
 };

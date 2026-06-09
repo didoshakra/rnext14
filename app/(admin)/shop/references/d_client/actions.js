@@ -36,16 +36,16 @@ export async function addClient(message, formData) {
 export async function deleteClient(message, formData) {
   const selRows = formData.get("ids") //якщо прийшло formData
   console.log("actoins.js/deleteClient/selRows+++=", selRows)
-  //   const data = formData
 
   try {
-    // await sql`DELETE FROM d_client WHERE id IN (${selRows}) RETURNING count`
     await sql`DELETE FROM d_client WHERE id IN (${selRows})`
+    // let resData = await sql`DELETE FROM d_client WHERE id IN (${selRows}) RETURNING count`
     // await sql`DELETE FROM d_client WHERE id = (${selRows})`
+    console.log("actoins.js/deleteClient/selRows=", selRows)
 
     revalidatePath("/shop/references/d_client") //revalidate-повторно перевірити
-    return { message: `Видалено: ` }
+    return { message: `Видалено записів: ${resData}` }
   } catch (e) {
-    return { message: "Не вдалося виконити завдання" }
+    return { message: "Не вдалося виконити завдання111" }
   }
 }

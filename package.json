@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "file-saver": "^2.0.5",
-    "next": "14.0.4",
+    "next": "^15.2.0",
     "next-themes": "^0.2.1",
     "pg": "^8.11.3",
     "postgres": "^3.4.3",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-hook-form": "^7.49.3",
     "xlsx": "^0.18.5",
     "zod": "^3.22.4"

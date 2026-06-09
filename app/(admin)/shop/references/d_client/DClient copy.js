@@ -9,7 +9,7 @@ import { deleteClient } from "./actions_pgrrr"
 
 export default function DClient({ resData }) {
   const [isAddForm, setIsAddForm] = useState(false) //Форма додавання запису
-  const [updateData, setUpdateData] = useState([]) //Рядки з БД для(видалення/коигування)
+  const [deleteData, setDeleteData] = useState([]) //Рядки з БД для(видалення/коигування)
 
   //--- Вилучення записів(запит)
   const fDelete = async (rows) => {
@@ -103,7 +103,7 @@ export default function DClient({ resData }) {
         //
         setIsAddForm={setIsAddForm}
         fDelete={fDelete}
-        // setUpdateData={setUpdateData}
+        // setDeleteData={setDeleteData}
       />
       {isAddForm && <AddClientForm setIsAddForm={setIsAddForm} />}
     </main>

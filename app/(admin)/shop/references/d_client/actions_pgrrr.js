@@ -156,6 +156,4 @@ export async function deleteClient(message, formData, resp) {
     return { message: ` rMess Видалено: записів.` }
   })
   return { message: rMess }
-  //   })
-  return { message: rMess }
-}
+ }

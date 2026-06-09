@@ -37,7 +37,7 @@ const ThemesMenuDroop = ({
 
   const togleTheme = (theme) => {
     // const theme = theme1.trim()
-    console.log("ThemesMenuDroop.js/togleTheme/theme=:", theme + ":")
+    // console.log("ThemesMenuDroop.js/togleTheme/theme=:", theme + ":")
     changeTheme(theme)
     setSetingThemesMenuOpen(false)
     setThemesMenuOpen(false)

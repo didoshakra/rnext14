@@ -19,7 +19,7 @@ const Dropdown = ({ submenus, dropdown, depthLevel, setDrawerOpen }) => {
     // 1: "text-[#0c6983]",
     // 5: "text-[#0c696c]",
     5: "text-[#0e6955]",
-  }; 
+  };
   const colorStyle = colorLevel[depthLevel];
 
   return (
@@ -27,7 +27,7 @@ const Dropdown = ({ submenus, dropdown, depthLevel, setDrawerOpen }) => {
     // <ul className={`dropdown ${dropdownClass} ${dropdown ? "show" : ""}`}>
     <ul
       className={`${dropdownClass0} ${dropdownClass} ${
-        dropdown ? "block" : "hidden"
+        dropdown ? "block" : "hidden" 
       } ${colorStyle}`}
     >
       {submenus.map((submenu, index) => (

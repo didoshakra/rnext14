@@ -72,9 +72,11 @@ export default function Rtable({
   p_searchAllRows, //чи треба пошук по всіх полях-не обов'язково(true/false)
   //
   setIsFormAdd, //Для відкриття форми додавання
+  setIsFormEdit,
   setIsFormDelete,
-  setUpdateData, //дані для
-//   fDelete, //Ф-ція для видалення записів(прийлає масив rows БД)
+  setEditData, //дані для коригування
+  setDeleteData, //дані для вилучення
+  //   fDelete, //Ф-ція для видалення записів(прийлає масив rows БД)
 }) {
   const router = useRouter() //для виходу із сторінок і переходу на інші сторінки
   const [isTableMenuDroop, setIsTableMenuDroop] = useState(false) //чи активовано drawer налаштування і подій
@@ -614,6 +616,7 @@ export default function Rtable({
       //   console.log("RTable.js/handleImportExell/insertZap=", insertZap)
     }
     reader.readAsBinaryString(file)
+    // reader.readAsDataURL(file)
   }
 
   //--- Загрузка даних в DB PostgreSQL/ В циклі .map по 1-му запису
@@ -683,20 +686,35 @@ export default function Rtable({
   //--------------------------------------------------------
   const onDelete = () => {
     // console.log("RTable.js/onDelete/e=")
-    // let selRow = {}
     let selRows = []
-    // let selRows = {}
     const temp = workData.map((item) => {
       if (item._selected) {
         // selRow["id"] = item.id
         // selRow["_nRow"] = item._nrow
-        selRows.push(item.id)
-      } //Додаємо в масив
+        selRows.push(item.id) //Додаємо в масив
+      }
     })
-    console.log("FRtable.js/onDelete/selRows=", selRows)
+    // console.log("FRtable.js/onDelete/selRows=", selRows)
     // fDelete(selRows)//ф-ція
-    setUpdateData(selRows) //дані для зміни форми
+    setDeleteData(selRows) //дані вилучення
     setIsFormDelete(true)
+  } 
+  //--------------------------------------------------------
+  const onEdit = () => {
+    const temp = workData.map((item) => {
+      if (item._selected) {
+        // console.log("RTable.js/onEdit/item._selected=", item)
+        setEditData(item) //дані для зміни форми
+      }
+    })
+    setIsFormAdd(true)
+    setIsFormEdit(true)
+  }
+  //--------------------------------------------------------
+  const onAdd = () => {
+    setIsFormAdd(true)
+    setIsFormEdit(false)
+    setEditData({})
   }
   //--------------------------------------------------------
 
@@ -710,7 +728,8 @@ export default function Rtable({
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
             // onClick={() => exportToExcel()}
-            onClick={() => setIsFormAdd(true)}
+            // onClick={() => setIsFormAdd(true)}
+            onClick={onAdd}
             title="Додати"
           >
             {/* Додати */}
@@ -737,7 +756,8 @@ export default function Rtable({
           <button
             // className="flex h-5 w-5 items-center justify-center rounded-full align-middle    transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
             className="mx-1 h-7 w-7 relative  flex justify-center items-center dark:text-hTextD rounded-3xl align-middle border border-tabThBorder dark:border-tabThBorderD font-bold  text-hText   hover:bg-hBgHov dark:hover:bg-hBgHovD"
-            onClick={() => setIsFormAdd(true)}
+            // onClick={() => setIsFormAdd(true)}
+            onClick={() => onEdit()}
             title="Редагувати"
           >
             {/* Редагувати */}
